@@ -1,0 +1,9 @@
+html{
+    height: 100%;
+}
+
+body{
+    background: url('../../media/index-image.png') no-repeat right center fixed;
+    background-size: 150vh;
+
+}
