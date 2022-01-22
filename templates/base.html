@@ -60,10 +60,9 @@
             <div class="col-12 col-lg-4 my-auto py-1 py-lg-0">
                 <ul class="list-inline list-unstyled text-center text-lg-end my-0">
                     <li class="list-inline-item dropdown">
-                        <a class="nav-link dropdown-toggle ms-1" href="#" id="my-account" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <div class="d-flex align-items-center">
-                                <i class="fas fa-user me-1"></i>
-                                My Account
+                        <a class="nav-link  ms-1" href="#" id="my-account" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <div class="text-center">
+                                <p class="my-0"> My Account</p>
                             </div>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="my-account">
@@ -82,7 +81,6 @@
                     <li class="list-inline-item">
                         <a class="{% if grand_total %}font-weight-bold{% endif %} nav-link" href="#">
                             <div class="text-center">
-                                <div><i class="fas fa-shopping-bag fa-lg"></i></div>
                                 <p class="my-0">
                                     {% if grand_total %}
                                         £{{ grand_total|floatformat:2 }}
