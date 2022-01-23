@@ -8,6 +8,8 @@
 ## Tech used
 
 *  Allauth - command: `django-allauth` - used for authentication
+* [Glassmorphism](https://hype4.academy/tools/glassmorphism-generator) - used to achieve frosted effects gor navigation
+* [Bootstrap](https://getbootstrap.com/) - for grid and some styling
 
 
 ## Difficulties faced

@@ -1,9 +1,82 @@
+/* Google fonts */
+@import url('https://fonts.googleapis.com/css2?family=Bungee+Shade&display=swap');
+
+/* Main styling */
 html{
     height: 100%;
+    width: 100%;
+    margin: 0 auto;
 }
 
 body{
-    background: url('../../media/index-image.png') no-repeat right center fixed;
-    background-size: 150vh;
+    background: url('../../media/index-image1.jpg') no-repeat right center fixed;
+    background-size: cover;
+}
 
+/* Navigation */
+.frost-bg{
+    background: rgba( 255, 255, 255, 0.50 );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 2.5px );
+    -webkit-backdrop-filter: blur( 2.5px );
+    border: 1px solid rgba( 255, 255, 255, 0.25 );
+}
+
+.logo-font{
+    font-family: 'Bungee Shade', serif;
+}
+
+.main-header-link,
+.main-header-link h2,
+.main-header-link p,
+.main-header-link a{
+    color: #000;
+    text-decoration: none;
+}
+
+.nav-link,
+.nav-link i{
+    color: #000;
+}
+
+.menu-icon,
+.main-header-link h2{
+    font-size: 2rem;
+}
+
+.grand-total span{
+    font-size: .85rem;
+}
+
+/* Home page */
+.container-welcome{
+    height: calc(100vh - 127px);;
+    position: relative;
+}
+
+.vert-align{
+    margin: 0;
+    position: absolute;
+    top: 40%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.order-now-btn{
+    border: 1px solid #000;
+}
+
+/* ======= */
+/* Fixed top navbar only on medium screens */
+@media (max-width: 768px) {
+    .mobile-bg{
+        background: rgba( 255, 255, 255, 0.50 );
+        box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+        backdrop-filter: blur( 2.5px );
+        -webkit-backdrop-filter: blur( 2.5px );
+        border: 1px solid rgba( 255, 255, 255, 0.25 );
+        height: 60vh;
+        width: 100%;
+        margin: 0;
+    }
 }

@@ -45,31 +45,29 @@
 </head>
 
 <body>
-    <header>
+    <header class="frost-bg px-5">
         <div class="row">
-            <div class="col-12 col-lg-4 my-auto py-1 py-lg-0 text-center text-lg-start">
-                <a href="{% url 'home' %}" class="nav-link main-logo-link">
+            <div class="col-12 col-md-4 my-auto py-1 py-md-0 text-center text-md-start">
+                <a href="{% url 'home' %}" class="nav-link main-header-link">
                     <h2 class="logo-font my-0 text-uppercase">Pizza Time</h2>
                 </a>
             </div>
-            <div class="col-12 col-lg-4 my-auto py-1 py-lg-0 d-flex justify-content-center align-items-center">
-                <a href="#" class="address my-auto">
+            <div class="col-12 col-md-4 my-auto py-1 py-md-0 text-center">
+                <a href="#" class="main-header-link">
                     <i class="fas fa-map-marker-alt address-icon me-1"></i>
                     Street Name 123, City, P057 C0D3, Country
                 </a>
             </div>
-            <div class="col-12 col-lg-4 my-auto py-1 py-lg-0">
-                <ul class="list-inline list-unstyled text-center text-lg-end my-0">
+            <div class="col-12 col-md-4 my-auto py-1 py-md-0">
+                <ul class="list-inline list-unstyled text-center text-md-end my-0">
                     <li class="list-inline-item dropdown">
-                        <a class="nav-link  ms-1" href="#" id="my-account" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <div class="text-center">
-                                <p class="my-0"> My Account</p>
-                            </div>
+                        <a class="nav-link ms-1 main-header-link" href="#" id="my-account" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="far fa-user-circle menu-icon"></i>
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="my-account">
+                        <div class="dropdown-menu text-center" aria-labelledby="my-account">
                             {% if request.user.is_authenticated %}
                                 {% if request.user.is_superuser %}
-                                    <a href="" class="dropdown-item">Admin</a>
+                                    <a href="{% url 'admin' %}" class="dropdown-item">Admin</a>
                                 {% endif %}
                                 <a href="#" class="dropdown-item">My Profile</a>
                                 <a href="{% url 'account_logout' %}" class="dropdown-item">Logout</a>
@@ -79,24 +77,25 @@
                             {% endif %}
                         </div>
                     </li>
-                    <li class="list-inline-item">
-                        <a class="{% if grand_total %}font-weight-bold{% endif %} nav-link" href="#">
-                            <div class="text-center">
-                                <p class="my-0">
-                                    {% if grand_total %}
-                                        £ {{ grand_total|floatformat:2 }}
-                                    {% else %}
-                                        £ 0.00
-                                    {% endif %}
-                                </p>
-                            </div>
+                    <li class="list-inline-item main-header-link">
+                        <a class="nav-link position-relative grand-total" href="#">
+                            <i class="fas fa-shopping-basket menu-icon"></i>
+                            <span class="position-absolute top-100 translate-middle badge rounded-pill bg-success">
+                                {% if grand_total %}
+                                    £ {{ grand_total|floatformat:2 }} 
+                                {% else %}
+                                    £
+                                {% endif %}
+                                <span class="visually-hidden"></span>
+                            </span>
+
                         </a>
                     </li>
                 </ul>
             </div>
         </div>
 
-        <nav class="navbar navbar-expand-lg navbar-light">
+        <nav class="navbar navbar-expand-md navbar-light">
             <div class="container-fluid">
                 <!-- Toggle burger button -->
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
