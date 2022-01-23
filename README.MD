@@ -7,14 +7,20 @@
 
 ## Tech used
 
-*  Allauth - command: `django-allauth` - used for authentication
+* Allauth - command: `django-allauth` - used for authentication
 * [Glassmorphism](https://hype4.academy/tools/glassmorphism-generator) - used to achieve frosted effects gor navigation
 * [Bootstrap](https://getbootstrap.com/) - for grid and some styling
+
+## Sources
+
+* Homepage image was taken from [Unsplash](https://unsplash.com/) and then removed background with [Inpixio](https://www.inpixio.com/remove-background/) for higher resolution outcome, as [removebg](www.removebg.com) has poor quality in their free service.
 
 
 ## Difficulties faced
 
 1. Project folder settings.py had automatically generated SECRET KEY, I pushed it accidentally with Initial Commit. Resolved by: Changed secret key and moving it to env.py file. Env.py file was added to .gitignore and SECRET_KEY variable linked to Env.py in project's settings.py file.
+
+2. 
 
 
 
