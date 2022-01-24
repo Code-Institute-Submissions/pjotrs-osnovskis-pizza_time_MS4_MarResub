@@ -2,8 +2,13 @@ from sre_parse import CATEGORIES
 from django.db import models
 
 class Category(models.Model):
+    """ 
+    Category model, includes name and full name in case needed
+    Returns both, name and full name.
+    """
 
     class Meta:
+        """ Spelling correction for admin page"""
         verbose_name_plural = 'Categories'
 
     name = models.CharField(max_length=254)
@@ -17,6 +22,11 @@ class Category(models.Model):
 
 
 class Product(models.Model):
+    """
+    Products model, is assigned to category model via ForeignKey.
+    Includes: name, ingredients, price for small, medium and large sizes, rating, image
+    Returns name.
+    """
     category = models.ForeignKey('Category', null=True, blank=True, on_delete=models.SET_NULL)
     name = models.CharField(max_length=254)
     ingredients = models.TextField()

@@ -3,6 +3,10 @@ from .models import Category, Product
 
 
 class ProductAdmin(admin.ModelAdmin):
+    """
+    Admin customization for Products section to show relevan information
+    for users convenience.
+    """
     list_display = (
         'name',
         'category',
