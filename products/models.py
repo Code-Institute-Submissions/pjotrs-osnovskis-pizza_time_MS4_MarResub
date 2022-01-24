@@ -1,6 +1,11 @@
+from sre_parse import CATEGORIES
 from django.db import models
 
 class Category(models.Model):
+
+    class Meta:
+        verbose_name_plural = 'Categories'
+
     name = models.CharField(max_length=254)
     full_name = models.CharField(max_length=254, null=True, blank=True)
 
