@@ -10,11 +10,38 @@
 {% endblock %}
 
 {% block content %}
+<div class="overlay"></div>
 <div class="container">
     <div class="row">
-        <div class="col-12 col-md-3">
-            {{ products }}
+        <div class="col text-center my-5">
+            <h2 class="display-4">It's Pizza Time!</h2>
         </div>
+    </div>
+    <div class="row">
+        <div class="product-container col-10 offset-1">
+            <div class="row mt-1 mb-2"></div>
+            <div class="row">
+                {% for product in products %}
+                    <div class="col-12 col-lg-4">
+                        <div class="card bg-transparent h-100 border-0 text-center">
+                            <a href="">
+                                <img src="{{ product.image.url }}" alt="{{ product.name }}" class="card-img-top img-fluid">
+                            </a>
+                            <div class="card-body py-0">
+                                <h4 class="m-0">{{ product.name }}</h4>
+                                <p class="m-0">{{ product.ingredients }}</p>
+                            </div>
+                            <div class="card-footer bg-transparent border-0 py-0 my-0">
+                                <p class="m-0 p-0">
+                                    £{{ product.price_s }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
     </div>
 </div>
 {% endblock %}

@@ -13,6 +13,18 @@ body{
     background-size: cover;
 }
 
+/* Overlay */
+
+.overlay{
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    position: fixed;
+    background: #ffffff80;
+    z-index: -1;
+}
+
 /* Navigation */
 .frost-bg{
     background: rgba( 255, 255, 255, 0.50 );
