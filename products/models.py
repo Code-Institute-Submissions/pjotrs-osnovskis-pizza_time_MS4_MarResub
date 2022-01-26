@@ -29,6 +29,7 @@ class Product(models.Model):
     """
     category = models.ForeignKey('Category', null=True, blank=True, on_delete=models.SET_NULL)
     name = models.CharField(max_length=254)
+    full_name = models.CharField(max_length=254, null=True)
     ingredients = models.TextField()
     price_s = models.DecimalField(max_digits=4, decimal_places=2)
     price_m = models.DecimalField(max_digits=4, decimal_places=2)
