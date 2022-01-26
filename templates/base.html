@@ -110,10 +110,9 @@
                 <!-- Desktop navigation -->
                 <div class="collapse navbar-collapse justify-content-center" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
-                        <a class="nav-link" href="#">Home</a>
-                        <a class="nav-link" href="#">Pizzas</a>
-                        <a class="nav-link" href="#">Sides</a>
-                        <a class="nav-link" href="#">Drinks</a>
+                        <a class="nav-link" href="{% url 'home' %}">Home</a>
+                        <a class="nav-link" href="{% url 'products' %}?category=pizza">Pizzas</a>
+                        <a class="nav-link" href="{% url 'products' %}?category=drink">Drinks</a>
                         <a class="nav-link" href="#">Delivery</a>
                         <a class="nav-link" href="#">Allergy Advice</a>
                         <a class="nav-link" href="#">About</a>
