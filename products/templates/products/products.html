@@ -22,18 +22,39 @@
             <div class="row mt-1 mb-2"></div>
             <div class="row">
                 {% for product in products %}
-                    <div class="col-12 col-lg-4">
+                    <div class="col-12 col-md-6 col-lg-4">
                         <div class="card bg-transparent h-100 border-0 text-center">
-                            <a href="">
-                                <img src="{{ product.image.url }}" alt="{{ product.name }}" class="card-img-top img-fluid">
-                            </a>
+                            <img src="{{ product.image.url }}" alt="{{ product.name }}" class="card-img-top img-fluid">
                             <div class="card-body py-0">
-                                <h4 class="m-0">{{ product.name }}</h4>
+                                <h4 class="m-0">{{ product.full_name }}</h4>
                                 <p class="m-0">{{ product.ingredients }}</p>
                             </div>
+                            <form>
+                                <input type="radio" id="{{ product.name }}_1" name="{{ product.name }}" value="22cm" checked/>
+                                <label for="{{ product.name }}_1">22cm</label>
+                                <input type="radio" id="{{ product.name }}_2" name="{{ product.name }}" value="32cm"/>
+                                <label for="{{ product.name }}_2">32cm</label>
+                                <input type="radio" id="{{ product.name }}_3" name="{{ product.name }}" value="40cm"/>
+                                <label for="{{ product.name }}_3">40cm</label>
+                            </form>
+<script>
+    $(document).ready(function(){
+        $('input[name={{ product.name }}]').on('change', function(){
+            if (this.value == '22cm') {
+                $('#{{ product.name }}').html("{{ product.price_s }}");
+            }
+            else if (this.value == '32cm') {
+                $('#{{ product.name }}').html("{{ product.price_m }}");
+            }
+            else if (this.value == '40cm') {
+                $('#{{ product.name }}').html("{{ product.price_l }}");
+            }
+        });
+    });
+</script>
                             <div class="card-footer bg-transparent border-0 py-0 my-0">
-                                <p class="m-0 p-0">
-                                    £{{ product.price_s }}
+                                <p class="m-0 p-0" id="{{ product.name }}">
+                                    {{ product.price_s }}
                                 </p>
                             </div>
                         </div>

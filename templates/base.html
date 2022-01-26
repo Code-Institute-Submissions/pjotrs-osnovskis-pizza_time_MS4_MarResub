@@ -34,6 +34,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
     </script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     {% endblock %}
 
     {% block extra_js %}
@@ -61,19 +64,20 @@
             <div class="col-12 col-md-4 my-auto py-1 py-md-0">
                 <ul class="list-inline list-unstyled text-center text-md-end my-0">
                     <li class="list-inline-item dropdown">
-                        <a class="nav-link ms-1 main-header-link" href="#" id="my-account" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link ms-1 main-header-link" href="#" id="my-account" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="far fa-user-circle menu-icon"></i>
                         </a>
                         <div class="dropdown-menu text-center" aria-labelledby="my-account">
                             {% if request.user.is_authenticated %}
-                                {% if request.user.is_superuser %}
-                                    <a href="{% url 'admin' %}" class="dropdown-item">Admin</a>
-                                {% endif %}
-                                <a href="#" class="dropdown-item">My Profile</a>
-                                <a href="{% url 'account_logout' %}" class="dropdown-item">Logout</a>
+                            {% if request.user.is_superuser %}
+                            <a href="{% url 'admin' %}" class="dropdown-item">Admin</a>
+                            {% endif %}
+                            <a href="#" class="dropdown-item">My Profile</a>
+                            <a href="{% url 'account_logout' %}" class="dropdown-item">Logout</a>
                             {% else %}
-                                <a href="{% url 'account_signup' %}" class="dropdown-item">Register</a>
-                                <a href="{% url 'account_login' %}" class="dropdown-item">Login</a>
+                            <a href="{% url 'account_signup' %}" class="dropdown-item">Register</a>
+                            <a href="{% url 'account_login' %}" class="dropdown-item">Login</a>
                             {% endif %}
                         </div>
                     </li>
@@ -82,9 +86,9 @@
                             <i class="fas fa-shopping-basket menu-icon"></i>
                             <span class="position-absolute top-100 translate-middle badge rounded-pill bg-success">
                                 {% if grand_total %}
-                                    £ {{ grand_total|floatformat:2 }} 
+                                £ {{ grand_total|floatformat:2 }}
                                 {% else %}
-                                    £
+                                £
                                 {% endif %}
                                 <span class="visually-hidden"></span>
                             </span>
