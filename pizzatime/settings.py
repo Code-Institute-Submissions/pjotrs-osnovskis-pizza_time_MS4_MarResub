@@ -29,7 +29,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 ### CRITICAL ###
-DEBUG = True
+DEBUG = os.environ.get('DEBUG')
 ### CRITICAL ###
 
 
@@ -111,7 +111,7 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 ACCOUNT_SIGNUP_EMAIL_ENTER_TWICE = True
 ACCOUNT_USERNAME_MIN_LENGTH = 4
-LOGIN_URL = '/accounts/login/'
+LOGIN_URL = os.environ.get('LOGIN_URL')
 LOGIN_REDIRECT_URL = '/'
 
 
