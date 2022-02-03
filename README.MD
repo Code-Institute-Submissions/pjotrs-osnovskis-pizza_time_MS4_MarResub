@@ -77,6 +77,8 @@ I used [drawSQL](https://drawsql.app/) to structure database for this project. S
 
 * Homepage image was taken from [Unsplash](https://unsplash.com/) and then removed background with [Inpixio](https://www.inpixio.com/remove-background/) for higher resolution outcome, as [removebg](www.removebg.com) has poor quality in their free service.
 
+* https://docs.djangoproject.com/en/4.0/topics/db/models/
+
 
 ## Difficulties faced
 

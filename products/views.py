@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Product, Category
+from .models import Product, Category, Pizza, Topping
 
 def products(request):
     """ A view to return a products page, including sorting and searching """

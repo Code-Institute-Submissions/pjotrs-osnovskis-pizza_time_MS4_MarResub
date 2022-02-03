@@ -30,13 +30,45 @@ class Product(models.Model):
     category = models.ForeignKey('Category', null=True, blank=True, on_delete=models.SET_NULL)
     name = models.CharField(max_length=254)
     full_name = models.CharField(max_length=254, null=True)
-    ingredients = models.TextField()
-    price_s = models.DecimalField(max_digits=4, decimal_places=2)
-    price_m = models.DecimalField(max_digits=4, decimal_places=2)
-    price_l = models.DecimalField(max_digits=4, decimal_places=2)
+    ingredients = models.ForeignKey('Pizza', null=True, blank=True, on_delete=models.CASCADE)
+    price = models.DecimalField(max_digits=4, decimal_places=2)
+    size = models.CharField(max_length=8)
     rating = models.DecimalField(max_digits=4, decimal_places=1, null=True, blank=True)
     image_url = models.URLField(max_length=1024, null=True, blank=True)
     image = models.ImageField(null=True, blank=True)
 
     def __str__(self):
         return self.name
+
+class Topping(models.Model):
+    """
+    Toppings model
+    """
+    name = models.CharField(max_length=32)
+    price = models.DecimalField(max_digits=4, decimal_places=2)
+
+    def __str__(self):
+        return self.name
+
+
+class Pizza(models.Model):
+    """
+    Pizza model
+    """
+    PIZZA_SIZES = (
+        ('S', '22 CM'),
+        ('M', '32 CM'),
+        ('L', '40 CM'),
+    )
+
+    name = models.CharField(max_length=254)
+    full_name = models.CharField(max_length=254, null=True)
+    toppings = models.ManyToManyField(Topping)
+    price = models.DecimalField(max_digits=4, decimal_places=2)
+    size = models.CharField(max_length=1, choices=PIZZA_SIZES)
+    date_added = models.DateTimeField(auto_now_add=True)
+    image_url = models.URLField(max_length=1024, null=True, blank=True)
+    image = models.ImageField(null=True, blank=True)
+
+    def __str__(self):
+        return self.full_name
