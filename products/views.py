@@ -5,6 +5,7 @@ def products(request):
     """ A view to return a products page, including sorting and searching """
 
     products = Product.objects.all()
+    pizzas = Pizza.objects.all()
     categories = None
 
     if request.GET:
@@ -15,6 +16,7 @@ def products(request):
 
     context = {
         'products': products,
+        'pizzas': pizzas,
         'current_category': categories,
     }
 

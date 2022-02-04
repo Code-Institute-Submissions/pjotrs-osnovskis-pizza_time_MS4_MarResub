@@ -1,4 +1,3 @@
-from sre_parse import CATEGORIES
 from django.db import models
 
 class Category(models.Model):
@@ -28,47 +27,35 @@ class Product(models.Model):
     Returns name.
     """
     category = models.ForeignKey('Category', null=True, blank=True, on_delete=models.SET_NULL)
-    name = models.CharField(max_length=254)
-    full_name = models.CharField(max_length=254, null=True)
-    ingredients = models.ForeignKey('Pizza', null=True, blank=True, on_delete=models.CASCADE)
-    price = models.DecimalField(max_digits=4, decimal_places=2)
-    size = models.CharField(max_length=8)
+    pizza = models.ForeignKey('Pizza', on_delete=models.CASCADE)
+    total_price = models.DecimalField(max_digits=4, decimal_places=2)
     rating = models.DecimalField(max_digits=4, decimal_places=1, null=True, blank=True)
-    image_url = models.URLField(max_length=1024, null=True, blank=True)
-    image = models.ImageField(null=True, blank=True)
 
     def __str__(self):
-        return self.name
+        return self.pizza.name
 
 class Topping(models.Model):
     """
     Toppings model
     """
     name = models.CharField(max_length=32)
-    price = models.DecimalField(max_digits=4, decimal_places=2)
+    display_name = models.CharField(max_length=32)
+    price = models.DecimalField(max_digits=4, decimal_places=2, default='0.99')
 
     def __str__(self):
-        return self.name
+        return self.display_name
 
 
 class Pizza(models.Model):
     """
-    Pizza model
+    Pizza model - to add Pizzas to DB
     """
-    PIZZA_SIZES = (
-        ('S', '22 CM'),
-        ('M', '32 CM'),
-        ('L', '40 CM'),
-    )
-
     name = models.CharField(max_length=254)
-    full_name = models.CharField(max_length=254, null=True)
+    display_name = models.CharField(max_length=254, null=True)
     toppings = models.ManyToManyField(Topping)
     price = models.DecimalField(max_digits=4, decimal_places=2)
-    size = models.CharField(max_length=1, choices=PIZZA_SIZES)
+    image_path = models.ImageField(null=True, blank=True)
     date_added = models.DateTimeField(auto_now_add=True)
-    image_url = models.URLField(max_length=1024, null=True, blank=True)
-    image = models.ImageField(null=True, blank=True)
 
     def __str__(self):
-        return self.full_name
+        return self.display_name

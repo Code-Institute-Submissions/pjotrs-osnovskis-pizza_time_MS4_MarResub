@@ -8,14 +8,12 @@ class ProductAdmin(admin.ModelAdmin):
     for users convenience.
     """
     list_display = (
-        'name',
-        'full_name',
+        'pizza',
         'category',
-        'price',
-        'image',
+        'total_price',
     )
 
-    ordering = ('name',)
+    ordering = ('pizza',)
 
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Category)
