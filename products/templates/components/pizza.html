@@ -1,0 +1,42 @@
+{% for pizza in pizzas %}
+
+<div class="col-12 col-md-6 col-lg-4">
+    <div class="card bg-transparent h-100 border-0 text-center">
+        <img src="{{ pizza.image_path.url }}" alt="{{ pizza.name }}" class="card-img-top img-fluid">
+        <div class="card-body py-0">
+            <h4 class="m-0 display-name">{{ pizza.display_name }}</h4>
+            <div class="toppings-list">
+                {% for topping in pizza.toppings.all|dictsort:"display_name" %}
+                    {{ topping.display_name }}{% if not forloop.last %}, {% else %}.{% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        <form>
+            <input type="radio" id="{{ pizza.name }}_1" name="{{ pizza.name }}" value="22cm" checked />
+            <label for="{{ pizza.name }}_1">22cm</label>
+            <input type="radio" id="{{ pizza.name }}_2" name="{{ pizza.name }}" value="32cm" />
+            <label for="{{ pizza.name }}_2">32cm</label>
+            <input type="radio" id="{{ pizza.name }}_3" name="{{ pizza.name }}" value="40cm" />
+            <label for="{{ pizza.name }}_3">40cm</label>
+        </form>
+        <script>
+            $(document).ready(function () {
+                $('input[name={{ pizza.name }}]').on('change', function () {
+                    if (this.value == '22cm') {
+                        $('#{{ pizza.name }}').html("{{ pizza.price_s }}");
+                    } else if (this.value == '32cm') {
+                        $('#{{ pizza.name }}').html("{{ pizza.price_m }}");
+                    } else if (this.value == '40cm') {
+                        $('#{{ pizza.name }}').html("{{ pizza.price_l }}");
+                    }
+                });
+            });
+        </script>
+        <div class="card-footer bg-transparent border-0 py-0 my-0">
+            <p class="m-0 p-0" id="{{ pizza.name }}">
+                {{ pizza.price_s }}
+            </p>
+        </div>
+    </div>
+</div>
+{% endfor %}
