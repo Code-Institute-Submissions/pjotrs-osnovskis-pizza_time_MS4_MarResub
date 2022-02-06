@@ -13,35 +13,36 @@
         </div>
         <form action="{% url 'add_to_order' pizza.id %}" method="POST">
             {% csrf_token %}
-            <input type="radio" id="{{ pizza.name }}_1" name="{{ pizza.name }}" value="s" checked />
-            <label for="{{ pizza.name }}_1">22cm</label>
-            <input type="radio" id="{{ pizza.name }}_2" name="{{ pizza.name }}" value="m" />
-            <label for="{{ pizza.name }}_2">32cm</label>
-            <input type="radio" id="{{ pizza.name }}_3" name="{{ pizza.name }}" value="l" />
-            <label for="{{ pizza.name }}_3">40cm</label>
+            <input type="radio" id="{{ pizza.name }}_s" name="{{ pizza.name }}" value="s" checked />
+            <label for="{{ pizza.name }}_s">22cm</label>
+            <input type="radio" id="{{ pizza.name }}_m" name="{{ pizza.name }}" value="m" />
+            <label for="{{ pizza.name }}_m">32cm</label>
+            <input type="radio" id="{{ pizza.name }}_l" name="{{ pizza.name }}" value="l" />
+            <label for="{{ pizza.name }}_l">40cm</label>
         
-            <script>
-                // This script stays inside the html file for django templating to work.
-                $(document).ready(function () {
-                    $('input[name={{ pizza.name }}]').on('change', function () {
-                        if (this.value == 's') {
-                            $('#{{ pizza.name }}').val("{{ pizza.price_s }}");
-                        } else if (this.value == 'm') {
-                            $('#{{ pizza.name }}').val("{{ pizza.price_m }}");
-                        } else if (this.value == 'l') {
-                            $('#{{ pizza.name }}').val("{{ pizza.price_l }}");
-                        }
-                    });
-                });
-            </script>
             
             <div class="card-footer bg-transparent border-0 py-0 my-0">
                 <input type="number" class="m-0 p-0" id="{{ pizza.name }}" name="size" value="{{ pizza.price_s }}" readonly>
-
+                <input type="number" name="qty" value="1" min="1" max="99" data-item_id="{{ product.id }}" id="id_qty_{{ product.id }}">
                 <input type="submit" value="Add to Order">
             </div>
             <input type="hidden" name="redirect_url" value="{{ request.path }}">
         </form>
     </div>
 </div>
+<script>
+    // This script stays inside the html file for django templating to work.
+    $(document).ready(function () {
+        $('input[name={{ pizza.name }}]').on('change', function () {
+            if (this.value == 's') {
+                $('#{{ pizza.name }}').val("{{ pizza.price_s }}");
+            } else if (this.value == 'm') {
+                $('#{{ pizza.name }}').val("{{ pizza.price_m }}");
+            } else if (this.value == 'l') {
+                $('#{{ pizza.name }}').val("{{ pizza.price_l }}");
+            }
+        });
+    });
+</script>
+
 {% endfor %}
