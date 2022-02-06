@@ -20,7 +20,7 @@
                 <div class="dropdown-menu text-center" aria-labelledby="my-account">
                     {% if request.user.is_authenticated %}
                     {% if request.user.is_superuser %}
-                    <a href="{% url 'admin' %}" class="dropdown-item">Admin</a>
+                    <a href="#" class="dropdown-item">Admin</a>
                     {% endif %}
                     <a href="#" class="dropdown-item">My Profile</a>
                     <a href="{% url 'account_logout' %}" class="dropdown-item">Logout</a>

@@ -22,7 +22,34 @@
         <div class="col">
             {% if order_items %}
                 <div class="table-responsive rounded-0">
-                    {{ order_items }}
+                    <table class="table-borderless">
+                        <thead>
+                            <tr>
+                                <th scope="col">Product Info</th>
+                                <th scope="col"></th>
+                                <th scope="col">Price</th>
+                                <th scope="col">Qty</th>
+                                <th scope="col">Subtotal</th>
+                            </tr>
+                        </thead>
+                        {% for item in order_items %}
+                            <tr>
+                                <td>
+                                    <img src="{{ item.product.image_path.url }}" alt="{{ item.product.name }}">
+                                </td>
+                                <td>
+                                    <p>{{ item.product.display_name }}</p>
+                                </td>
+                                <td>
+                                    <p>{{ item.price }}</p>
+                                </td>
+                                <td>
+                                    <p>{{ item.qty }}</p>
+                                </td>
+
+                            </tr>
+                        {% endfor %}
+                    </table>
                 </div>
             {% else %}
             <div class="col-12 col-md-6 mobile-bg vert-align text-center ms-5 py-3">

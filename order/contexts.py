@@ -1,5 +1,5 @@
 from django.shortcuts import get_object_or_404
-from products.models import Pizza
+from products.models import Product
 
 def order_contents(request):
 
@@ -9,21 +9,35 @@ def order_contents(request):
     order = request.session.get('order', {})
 
     for item_id, qty in order.items():
-        product = get_object_or_404(Pizza, pk=item_id)
+        product = get_object_or_404(Product, pk=item_id)
         if product.price_s:
             total += qty * float(product.price_s)
-        elif product.size_m:
+        elif product.price_m:
             total += qty * float(product.price_m)
-        elif product.size_l:
-            total += qty * float(product.price_L)
-
+        elif product.price_l:
+            total += qty * float(product.price_l)
 
         product_count += qty
+
         order_items.append({
             'item_id': item_id,
             'qty': qty,
             'product': product,
         })
+
+    for item_id, price in order.items():
+        product = get_object_or_404(Product, pk=item_id)
+        if product.price_s:
+            price = product.price_s
+        elif product.price_m:
+            price = product.price_m
+        elif product.price_l:
+            price = product.price_l
+
+        order_items.append({
+            'price': price,
+        })
+
 
     grand_total = total # will keep this simple for now, will add delivery logic later
 

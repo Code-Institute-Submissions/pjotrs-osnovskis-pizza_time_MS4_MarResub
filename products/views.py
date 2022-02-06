@@ -1,26 +1,23 @@
 from django.shortcuts import render
-from .models import Category, Pizza, Drink
+from .models import Category, Product
 
 def products(request):
     """ A view to return a products page, including sorting and searching """
 
-    all_pizzas = Pizza.objects.all()
-    all_drinks = Drink.objects.all()
+    all_products = Product.objects.all()
     categories = None
-    pizzas = None
-    drinks = None
+    products = None
 
     if request.GET:
         if 'category' in request.GET:
             categories = request.GET['category']
-            pizzas = all_pizzas.filter(category__name=categories)
-            drinks = all_drinks.filter(category__name=categories)
+            products = all_products.filter(category__name=categories)
+            print(f'PRODUCTS: {products}')
             categories = Category.objects.filter(name=categories)
-        
+            print(f'CATEGORIES: {categories}')
 
     context = {
-        'pizzas': pizzas,
-        'drinks': drinks,
+        'products': products,
         'current_category': categories,
     }
 

@@ -1,8 +1,12 @@
 from django.contrib import admin
-from .models import Category, Product, Pizza, Topping, Drink
+from .models import Category, Product, Topping
+
+class ToppingAdmin(admin.ModelAdmin):
+    list_display = (
+        'display_name',
+    )
+
 
 admin.site.register(Product)
 admin.site.register(Category)
-admin.site.register(Drink)
-admin.site.register(Pizza)
-admin.site.register(Topping)
+admin.site.register(Topping, ToppingAdmin)
