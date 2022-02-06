@@ -15,6 +15,7 @@
             <label for="{{ drink.name }}_3">2 Litre</label>
         </form>
         <script>
+            // This script stays inside the html file for django templates to work.
             $(document).ready(function () {
                 $('input[name={{ drink.name }}]').on('change', function () {
                     if (this.value == '0.5L') {

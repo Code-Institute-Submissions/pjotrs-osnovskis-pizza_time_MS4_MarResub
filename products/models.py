@@ -52,11 +52,8 @@ class Pizza(models.Model):
 
 class Product(models.Model):
     """
-    Products model, is assigned to category model via ForeignKey.
-    Includes: name, ingredients, price for small, medium and large sizes, rating, image
-    Returns name.
+    Products model. Will be used to POST as a new order item
     """
-    pizza = models.ForeignKey('Pizza', null=True, on_delete=models.SET_NULL)
     total_price = models.DecimalField(max_digits=4, decimal_places=2)
     rating = models.DecimalField(max_digits=4, decimal_places=1, null=True, blank=True)
 

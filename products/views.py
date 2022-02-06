@@ -7,6 +7,8 @@ def products(request):
     all_pizzas = Pizza.objects.all()
     all_drinks = Drink.objects.all()
     categories = None
+    pizzas = None
+    drinks = None
 
     if request.GET:
         if 'category' in request.GET:

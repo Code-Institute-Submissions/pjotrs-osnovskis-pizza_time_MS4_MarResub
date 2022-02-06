@@ -11,32 +11,37 @@
                 {% endfor %}
             </div>
         </div>
-        <form>
-            <input type="radio" id="{{ pizza.name }}_1" name="{{ pizza.name }}" value="22cm" checked />
+        <form action="{% url 'add_to_order' pizza.id %}" method="POST">
+            {% csrf_token %}
+            <input type="radio" id="{{ pizza.name }}_1" name="{{ pizza.name }}" value="s" checked />
             <label for="{{ pizza.name }}_1">22cm</label>
-            <input type="radio" id="{{ pizza.name }}_2" name="{{ pizza.name }}" value="32cm" />
+            <input type="radio" id="{{ pizza.name }}_2" name="{{ pizza.name }}" value="m" />
             <label for="{{ pizza.name }}_2">32cm</label>
-            <input type="radio" id="{{ pizza.name }}_3" name="{{ pizza.name }}" value="40cm" />
+            <input type="radio" id="{{ pizza.name }}_3" name="{{ pizza.name }}" value="l" />
             <label for="{{ pizza.name }}_3">40cm</label>
-        </form>
-        <script>
-            $(document).ready(function () {
-                $('input[name={{ pizza.name }}]').on('change', function () {
-                    if (this.value == '22cm') {
-                        $('#{{ pizza.name }}').html("{{ pizza.price_s }}");
-                    } else if (this.value == '32cm') {
-                        $('#{{ pizza.name }}').html("{{ pizza.price_m }}");
-                    } else if (this.value == '40cm') {
-                        $('#{{ pizza.name }}').html("{{ pizza.price_l }}");
-                    }
+        
+            <script>
+                // This script stays inside the html file for django templating to work.
+                $(document).ready(function () {
+                    $('input[name={{ pizza.name }}]').on('change', function () {
+                        if (this.value == 's') {
+                            $('#{{ pizza.name }}').val("{{ pizza.price_s }}");
+                        } else if (this.value == 'm') {
+                            $('#{{ pizza.name }}').val("{{ pizza.price_m }}");
+                        } else if (this.value == 'l') {
+                            $('#{{ pizza.name }}').val("{{ pizza.price_l }}");
+                        }
+                    });
                 });
-            });
-        </script>
-        <div class="card-footer bg-transparent border-0 py-0 my-0">
-            <p class="m-0 p-0" id="{{ pizza.name }}">
-                {{ pizza.price_s }}
-            </p>
-        </div>
+            </script>
+            
+            <div class="card-footer bg-transparent border-0 py-0 my-0">
+                <input type="number" class="m-0 p-0" id="{{ pizza.name }}" name="size" value="{{ pizza.price_s }}" readonly>
+
+                <input type="submit" value="Add to Order">
+            </div>
+            <input type="hidden" name="redirect_url" value="{{ request.path }}">
+        </form>
     </div>
 </div>
 {% endfor %}
