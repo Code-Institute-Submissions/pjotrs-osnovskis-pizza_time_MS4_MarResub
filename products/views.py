@@ -12,9 +12,7 @@ def products(request):
         if 'category' in request.GET:
             categories = request.GET['category']
             products = all_products.filter(category__name=categories)
-            print(f'PRODUCTS: {products}')
             categories = Category.objects.filter(name=categories)
-            print(f'CATEGORIES: {categories}')
 
     context = {
         'products': products,

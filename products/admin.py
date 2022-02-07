@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Category, Product, Topping
+from .models import Category, Product, Topping, Size
 
 class ToppingAdmin(admin.ModelAdmin):
     list_display = (
@@ -8,5 +8,6 @@ class ToppingAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Product)
+admin.site.register(Size)
 admin.site.register(Category)
 admin.site.register(Topping, ToppingAdmin)

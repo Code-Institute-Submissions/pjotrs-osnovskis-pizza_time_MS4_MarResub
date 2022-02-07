@@ -8,8 +8,7 @@ def add_to_order(request, item_id):
     """ Add selected product to order"""
 
     quantity = int(request.POST.get('qty'))
-    price = float(request.POST.get('size'))
-    print(price)
+    price = float(request.POST.get('price'))
     redirect_url = request.POST.get('redirect_url')
     order = request.session.get('order', {})
 
@@ -18,5 +17,9 @@ def add_to_order(request, item_id):
     else:
         order[item_id] = quantity
 
+    
+
+    # print(price)
+    print(request.POST)
     request.session['order'] = order
     return redirect(redirect_url)
