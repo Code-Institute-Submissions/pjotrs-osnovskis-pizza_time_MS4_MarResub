@@ -1,4 +1,4 @@
-
+{% load static %}
 <!doctype html>
 <html lang="en">
 
@@ -22,6 +22,7 @@
     {% endblock %}
 
     {% block postload_js %}
+        <script type="text/javascript" src="{% static 'js/postload_scripts.js' %}"></script> 
     {% endblock %}
 
 </body>

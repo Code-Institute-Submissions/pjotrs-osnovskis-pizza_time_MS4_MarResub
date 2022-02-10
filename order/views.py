@@ -31,7 +31,6 @@ def add_to_order(request, item_id):
         else:
             order[item_id] = qty    
 
-    # print(price)
     print(f"POST: {request.POST}")
     request.session['order'] = order
     return redirect(redirect_url)

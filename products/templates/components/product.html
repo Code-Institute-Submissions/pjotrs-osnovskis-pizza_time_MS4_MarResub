@@ -5,7 +5,6 @@
         <img src="{{ product.image_path.url }}" alt="{{ product.name }}" class="card-img-top img-fluid">
         <div class="card-body py-0">
             <h4 class="m-0 display-name">{{ product.display_name }}</h4>
-            {{ product.category }}
             {% if product.toppings %}
             <div class="toppings-list">
                 {% for topping in product.toppings.all|dictsort:"display_name" %}
@@ -16,15 +15,17 @@
         </div>
         <form action="{% url 'add_to_order' product.id %}" method="POST">
             {% csrf_token %}
-            <input type="radio" id="{{ product.name }}_s" name="size" value="s" checked />
+            <input type="radio" id="{{ product.name }}_s" class="{{ product.name }}" name="size" value="s" checked />
             <label for="{{ product.name }}_s">{% if product.category.name == 'pizza' %}22cm{% elif product.category.name == 'drink' %}0.5 Litre{% endif %}</label>
-            <input type="radio" id="{{ product.name }}_m" name="size" value="m" />
+            <input type="radio" id="{{ product.name }}_m" class="{{ product.name }}" name="size"" value="m" />
             <label for="{{ product.name }}_m">{% if product.category.name == 'pizza' %}32cm{% elif product.category.name == 'drink' %}1 Litre{% endif %}</label>
-            <input type="radio" id="{{ product.name }}_l" name="size" value="l" />
+            <input type="radio" id="{{ product.name }}_l" class="{{ product.name }}" name="size"" value="l" />
             <label for="{{ product.name }}_l">{% if product.category.name == 'pizza' %}40cm{% elif product.category.name == 'drink' %}2 Litre{% endif %}</label>
 
             <div class="card-footer bg-transparent border-0 py-0 my-0">
-                <input type="number" class="m-0 p-0" id="{{ product.name }}" name="price" value="{{ product.price_s }}" readonly>
+                <div class="row">
+                <input type="number" class="m-0 p-0 product-price" id="{{ product.name }}" name="price" value="{{ product.price_s }}" readonly>
+                </div>
                 <input type="number" name="qty" value="1" min="1" max="99" data-item_id="{{ product.id }}" id="id_qty_{{ product.id }}">
                 <input type="submit" value="Add to Order">
             </div>
@@ -34,17 +35,17 @@
 </div>
 <script>
     // This script stays inside the html file for django templating to work.
-    $(document).ready(function () {
-        $('input[name=size]').on('change', function () {
-            if (this.value == 's') {
-                $('#{{ product.name }}').val("{{ product.price_s }}");
-            } else if (this.value == 'm') {
-                $('#{{ product.name }}').val("{{ product.price_m }}");
-            } else if (this.value == 'l') {
-                $('#{{ product.name }}').val("{{ product.price_l }}");
-            }
+        $(document).ready(function () {
+            $('input[class={{ product.name }}]').on('change', function () {
+                if (this.value == 's') {
+                    $('#{{ product.name }}').val("{{ product.price_s }}");
+                } else if (this.value == 'm') {
+                    $('#{{ product.name }}').val("{{ product.price_m }}");
+                } else if (this.value == 'l') {
+                    $('#{{ product.name }}').val("{{ product.price_l }}");
+                }
+            });
         });
-    });
 </script>
 
 {% endfor %}
