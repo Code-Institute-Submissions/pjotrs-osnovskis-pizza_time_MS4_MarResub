@@ -49,19 +49,17 @@
                                         {% csrf_token %}
                                         <input name="size" value="{{ item.size }}">
 
-                                        <input class="" type="number"
+                                        <input class="item-qty" type="number"
                                             name="qty" value="{{ item.qty }}" min="1" max="99"
                                             data-item_id="{{ item.id }}"
                                             id="id_qty_{{ item.id }}">
                                     </form>
-                                    <a class="update-link"><small>Update</small></a>
 
                                 </td>
                                 <td>
                                     <p>{{ item.total }}</p>
                                 </td>
                                 <td>
-                                    <a class="update-link"><small>Update</small></a>
                                     <a class="remove-item float-right" id="remove_{{ item.item_id }}" data-product_size="{{ item.size }}"><small>Remove</small></a>
                                 </td>
                             </tr>
@@ -80,8 +78,8 @@
 
 <script type="text/javascript">
     // Update quantity on click
-    $('.update-link').click(function(e) {
-        var form = $(this).prev('.update-form');
+    $('.update-form').change(function(e) {
+        var form = $(this);
         form.submit();
     })
 
