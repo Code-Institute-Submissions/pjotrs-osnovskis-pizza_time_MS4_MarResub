@@ -5,6 +5,9 @@ class ToppingAdmin(admin.ModelAdmin):
     list_display = (
         'display_name',
     )
+    exclude = (
+        'name',
+    )
 
 
 admin.site.register(Product)

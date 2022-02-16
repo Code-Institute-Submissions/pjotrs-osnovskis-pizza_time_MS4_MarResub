@@ -7,7 +7,7 @@ class Category(models.Model):
     """
 
     class Meta:
-        """ Spelling correction for admin page"""
+        """ Spelling correction for admin page """
         verbose_name_plural = 'Categories'
 
     name = models.CharField(max_length=254)
@@ -25,16 +25,18 @@ class Size(models.Model):
 
 
 class Topping(models.Model):
-    """
-    Toppings model
-    """
+    """ Toppings model """
     name = models.CharField(max_length=32)
     display_name = models.CharField(max_length=32)
     price = models.DecimalField(max_digits=4, decimal_places=2, default='0.99')
 
+    def save(self, *args, **kwargs):
+        self.name = self.display_name.lower().replace(' ', '_')
+        self.display_name = self.display_name.title()
+        return super(Topping, self).save(*args, **kwargs)
+
     def __str__(self):
         return self.display_name
-
 
 
 class Product(models.Model):
