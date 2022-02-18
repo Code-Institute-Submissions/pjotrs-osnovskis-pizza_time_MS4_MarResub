@@ -50,5 +50,4 @@ def order_contents(request):
         'grand_total': grand_total,
         'item_count': item_count,
     }
-    print(f"CONTEXT: {context}")
     return context

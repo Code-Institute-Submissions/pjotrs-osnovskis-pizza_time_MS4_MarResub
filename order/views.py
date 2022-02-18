@@ -1,4 +1,5 @@
 from django.shortcuts import redirect, render, reverse, HttpResponse
+from django.http import HttpResponseRedirect
 
 def order(request):
     """ A view for an order """
@@ -8,7 +9,7 @@ def add_to_order(request, item_id):
     """ Add selected product to order"""
 
     qty = int(request.POST.get('qty'))
-    redirect_url = request.POST.get('redirect_url')
+    # redirect_url = request.POST.get('redirect_url')
     size = None
 
     if 'size' in request.POST:
@@ -31,8 +32,9 @@ def add_to_order(request, item_id):
             order[item_id] = qty    
     
     request.session['order'] = order
-    return redirect(redirect_url)
-
+    # After submitting "Add to order", stays on the same page. Idea taken from here:
+    # https://stackoverflow.com/questions/39560175/redirect-to-same-page-after-post-method-using-class-based-views
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 def change_order(request, item_id):
     """ Change selected product in the order"""

@@ -6,26 +6,29 @@
                 <img src="{{ item.product.image_path.url }}" alt="{{ item.product.name }}" class="card-img-top img-fluid">
                 <p>{{ item.product.display_name }}</p>
                 {% if item.product.toppings %}
-                <div class="toppings-list">
-                    {% for topping in item.product.toppings.all|dictsort:"display_name" %}
-                        {{ topping.display_name }}{% if not forloop.last %}, {% else %}.{% endif %}
-                    {% endfor %}
-                </div>
+                    <div class="toppings-list">
+                        {% for topping in item.product.toppings.all|dictsort:"display_name" %}
+                            {{ topping.display_name }}{% if not forloop.last %}, {% else %}.{% endif %}
+                        {% endfor %}
+                    </div>
                 {% endif %}
-    
-                <p>{{ item.price }}</p>
-
+                <p>Price: {{ item.price }}</p>
                 <form class="form update-form" action="{% url 'change_order' item.item_id %}" method="POST">
                     {% csrf_token %}
-                    <input class="remove-input-formatting" style="display:none;" name="size" value="{{ item.size }}" readonly>
-                    <p>{{ item.size|title }}</p>
+                    <input class="display-none"  name="size" value="{{ item.size }}">
+                    <p>Size: 
+                        {% if item.size == "s" %}Small
+                        {% elif item.size == "m" %}Medium
+                        {% elif item.size == "l" %}Large
+                        {% else %}No Size Available
+                        {% endif %}
+                    </p>
                     <input class="item-qty" type="number"
                         name="qty" value="{{ item.qty }}" min="1" max="99"
                         data-item_id="{{ item.id }}"
                         id="id_qty_{{ item.id }}">
                 </form>
-                <p>{{ item.total }}</p>
-
+                <p>Total Price: {{ item.total }}</p>
             </div>
             <div class="card-footer bg-transparent border-0 py-0 my-0">
                 <a class="remove-item float-right" id="remove_{{ item.item_id }}" data-product_size="{{ item.size }}"><small>Remove</small></a>
