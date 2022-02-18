@@ -39,7 +39,7 @@
 
             <div class="card-footer bg-transparent border-0 py-0 my-0">
                 <div class="row">
-                <input type="number" class="m-0 p-0 product-price" id="{{ product.name }}" name="price" value="{{ product.price_s }}" readonly>
+                <input type="number" class="m-0 p-0 product-price remove-input-formatting" id="{{ product.name }}" name="price" value="{{ product.price_s }}" readonly>
                 </div>
                 <input type="number" name="qty" value="1" min="1" max="99" data-item_id="{{ product.id }}" id="id_qty_{{ product.id }}">
                 <input type="submit" value="Add to Order">

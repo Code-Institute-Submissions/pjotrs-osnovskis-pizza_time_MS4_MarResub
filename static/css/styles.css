@@ -121,24 +121,21 @@ input[type="radio"]:checked + label{
 /* Product */
 
 .product-price{
+    font-size: 2rem;
+}
+
+.remove-input-formatting{
     border: 0;
     outline: none;
     text-align: center;
     background-color: transparent;
-    font-size: 2rem;
 }
 
 /* ======= */
 /* Fixed top navbar only on medium screens */
 @media (max-width: 768px) {
-    .mobile-bg{
-        background: rgba( 255, 255, 255, 0.50 );
-        box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
-        backdrop-filter: blur( 2.5px );
-        -webkit-backdrop-filter: blur( 2.5px );
-        border: 1px solid rgba( 255, 255, 255, 0.25 );
-        height: 60vh;
-        width: 100%;
-        margin: 0;
+    .overlay{
+        background: #ffffff;
     }
+    
 }

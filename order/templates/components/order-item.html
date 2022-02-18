@@ -1,0 +1,41 @@
+{% if order_items %}
+{% for item in order_items %}
+    <div class="col-12 col-md-6 col-lg-4">
+        <div class="card bg-transparent h-100 border-0 text-center">
+            <div class="card-body py-0">
+                <img src="{{ item.product.image_path.url }}" alt="{{ item.product.name }}" class="card-img-top img-fluid">
+                <p>{{ item.product.display_name }}</p>
+                {% if item.product.toppings %}
+                <div class="toppings-list">
+                    {% for topping in item.product.toppings.all|dictsort:"display_name" %}
+                        {{ topping.display_name }}{% if not forloop.last %}, {% else %}.{% endif %}
+                    {% endfor %}
+                </div>
+                {% endif %}
+    
+                <p>{{ item.price }}</p>
+
+                <form class="form update-form" action="{% url 'change_order' item.item_id %}" method="POST">
+                    {% csrf_token %}
+                    <input class="remove-input-formatting" style="display:none;" name="size" value="{{ item.size }}" readonly>
+                    <p>{{ item.size|title }}</p>
+                    <input class="item-qty" type="number"
+                        name="qty" value="{{ item.qty }}" min="1" max="99"
+                        data-item_id="{{ item.id }}"
+                        id="id_qty_{{ item.id }}">
+                </form>
+                <p>{{ item.total }}</p>
+
+            </div>
+            <div class="card-footer bg-transparent border-0 py-0 my-0">
+                <a class="remove-item float-right" id="remove_{{ item.item_id }}" data-product_size="{{ item.size }}"><small>Remove</small></a>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+{% else %}
+    <div class="text-center">
+        <h2>Oops, you didn't order anything yet!</h2>
+        <a href="{% url 'products' %}?category=pizza" class="order-now-btn btn btn-lg rounded-0 text-uppercase py-3">Order Now</a>
+    </div>
+{% endif %}

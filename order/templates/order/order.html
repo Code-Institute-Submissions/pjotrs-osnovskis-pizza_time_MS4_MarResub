@@ -14,66 +14,18 @@
 
 <div class="container">
     <div class="row">
-        <div class="col">
-            <h2>Your Order</h2>
+        <div class="col text-center my-5">
+            <h2 class="display-4">Your Order</h2>
         </div>
     </div>
     <div class="row">
-        <div class="col">
-            {% if order_items %}
-                <div class="table-responsive rounded-0">
-                    <table class="table-borderless">
-                        <thead>
-                            <tr>
-                                <th scope="col">Product Info</th>
-                                <th scope="col"></th>
-                                <th scope="col">Size</th>
-                                <th scope="col">Price</th>
-                                <th scope="col">Qty</th>
-                                <th scope="col">Subtotal</th>
-                            </tr>
-                        </thead>
-                        {% for item in order_items %}
-                            <tr>
-                                <td>
-                                    <img src="{{ item.product.image_path.url }}" alt="{{ item.product.name }}">
-                                </td>
-                                <td>
-                                    <p>{{ item.product.display_name }}</p>
-                                </td>
-                                <td>
-                                    <p>{{ item.price }}</p>
-                                </td>
-                                <td>
-                                    <form class="form update-form" action="{% url 'change_order' item.item_id %}" method="POST">
-                                        {% csrf_token %}
-                                        <input name="size" value="{{ item.size }}">
-
-                                        <input class="item-qty" type="number"
-                                            name="qty" value="{{ item.qty }}" min="1" max="99"
-                                            data-item_id="{{ item.id }}"
-                                            id="id_qty_{{ item.id }}">
-                                    </form>
-
-                                </td>
-                                <td>
-                                    <p>{{ item.total }}</p>
-                                </td>
-                                <td>
-                                    <a class="remove-item float-right" id="remove_{{ item.item_id }}" data-product_size="{{ item.size }}"><small>Remove</small></a>
-                                </td>
-                            </tr>
-                        {% endfor %}
-                    </table>
-                </div>
-            {% else %}
-            <div class="col-12 col-md-6 mobile-bg vert-align text-center ms-5 py-3">
-                <h2>Oops, you didn't order anything yet!</h2>
-                <a href="{% url 'products' %}?category=pizza" class="order-now-btn btn btn-lg rounded-0 text-uppercase py-3">Order Now</a>
+        <div class="product-container col-10 offset-1">
+            <div class="row">
+                {% include 'components/order-item.html' %}
             </div>
-            {% endif %}
         </div>
     </div>
+
 </div>
 
 <script type="text/javascript">
