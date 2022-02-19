@@ -124,6 +124,12 @@ https://www.sliderrevolution.com/resources/styling-radio-buttons/*/
     margin: 1rem 0;
 }
 
+.input-group input::-webkit-outer-spin-button,
+.input-group input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 .dec-product-qty,
 .inc-product-qty,
 .add-to-order-button{
