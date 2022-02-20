@@ -180,7 +180,13 @@ https://www.sliderrevolution.com/resources/styling-radio-buttons/*/
 }
 
 
-/* Product */
+/* Toasts */
+.message-container{
+    position: fixed;
+    top: 72px;
+    right: 15px;
+    z-index: 999999;
+}
 
 /* ======= */
 /* Fixed top navbar only on medium screens */

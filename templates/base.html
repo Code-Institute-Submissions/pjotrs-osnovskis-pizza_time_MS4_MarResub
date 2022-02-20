@@ -8,12 +8,17 @@
 </head>
 
 <body>
+    <div class="message-container">
+        {% for message in messages %}
+            {% include 'includes/toasts/toast_success.html' %}
+        {% endfor %}
+    </div>
+
     <header class="frost-bg px-5">
         {% include 'layout/header.html' %}
         {% include 'layout/nav.html' %}
     </header>
 
-    {% include 'components/messages.html' %}
 
     {% block page_header %}
     {% endblock %}
@@ -22,7 +27,13 @@
     {% endblock %}
 
     {% block postload_js %}
-        <script type="text/javascript" src="{% static 'js/postload_scripts.js' %}"></script> 
+    <script>
+        var toastElList = [].slice.call(document.querySelectorAll('.toast'))
+            var toastList = toastElList.map(function (toastEl) {
+            return new bootstrap.Toast(toastEl, 'show')
+        })
+    </script>
+
     {% endblock %}
 
 </body>
