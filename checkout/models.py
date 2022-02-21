@@ -1,7 +1,7 @@
 import uuid
+from webbrowser import Elinks
 from django.db import models
 from django.db.models import Sum
-from django.conf import settings
 from products.models import Product
 
 
@@ -21,18 +21,21 @@ class CheckoutOrder(models.Model):
     postcode = models.CharField(max_length=20, null=False, blank=False)
 
     date = models.DateTimeField(auto_now_add=True)
-    order_total = models.DecimalField(max_digits=10, decimal_places=2, null=False, default=0)
+    order_total = models.DecimalField(max_digits=10, decimal_places=2, null=False, default=0.00)
 
     def update_total(self):
         """ Update grand total"""
         self.order_total = self.lineitems.aggregate(Sum('lineitem_total'))['lineitem_total__sum']
+        self.save()
+
+
 
     def save(self, *args, **kwargs):
         """ Save method """
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return self.order_id
+        return str(self.order_id)
 
 
 class CheckoutLineItem(models.Model):
@@ -45,8 +48,15 @@ class CheckoutLineItem(models.Model):
 
     def save(self, *args, **kwargs):
         """ Override the original save method, set item total and update order total"""
-        self.lineitem_total = self.product.price * self.qty
+        if self.size == "s":
+            price = self.product.price_s
+        elif self.size == "m":
+            price = self.product.price_m
+        elif self.size == "l":
+            price = self.product.price_l
+
+        self.lineitem_total = price * self.qty
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return f' {self.order.size} {self.product.display_name} on order {self.order.order_id}'
+        return f'{self.size} {self.product.display_name} on order {self.order.order_id}'
