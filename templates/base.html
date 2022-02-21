@@ -8,7 +8,7 @@
 </head>
 
 <body>
-    
+
     {% include 'components/messages.html' %}
 
     <header class="frost-bg px-5">
@@ -25,6 +25,7 @@
 
     {% block postload_js %}
     <script>
+        // Code taken from Bootstrap 5 Documentation
         var toastElList = [].slice.call(document.querySelectorAll('.toast'))
             var toastList = toastElList.map(function (toastEl) {
             return new bootstrap.Toast(toastEl, 'show')

@@ -182,8 +182,8 @@ https://www.sliderrevolution.com/resources/styling-radio-buttons/*/
 /* Toasts */
 .message-container{
     position: fixed;
-    top: 72px;
-    right: 15px;
+    top: 5rem;
+    right: 2rem;
     z-index: 999999;
 }
 
