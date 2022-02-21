@@ -4,6 +4,49 @@
         <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
     </div>
     <div class="toast-body">
-        {{ message }}
+        <div class="row">
+            <div class="col">
+                {{ message }}
+                <hr class="mt-1 mb-2">
+            </div>
+        </div>
+        {% if grand_total %}
+            <p class="my-1">You have {{ item_count }} items in your order so far.</p>
+            <div class="item-toast-wrapper">
+                {% for item in order_items %}
+                    <div class="row d-flex align-items-center">
+                        <div class="col-4 my-1">
+                            <img src="{{ item.product.image_path.url }}" alt="{{ item.product.name }}"
+                            class="card-img-top img-fluid">
+                        </div>
+                        <div class="col-4 ">
+                            <p class="my-0"><strong>{{ item.product.display_name }}</strong></p>
+                            <p class="my-0"><small>Size: 
+                                {% if item.size == "s" %}Small
+                                {% elif item.size == "m" %}Medium
+                                {% elif item.size == "l" %}Large
+                                {% else %}No Size Available
+                                {% endif %}
+                            </small></p>
+                        </div>
+                        <div class="col-4">
+                            <p class="my-0"><small>Qty: {{ item.qty }}</small></p>
+                            <p class="my-0"><small>Item Price: {{ item.price }}</small></p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+        <div class="row">
+            <div class="col mt-1">
+                <a href="{% url 'order' %}" class="btn w-100 text-center text-white bg-success bg-opacity-75 rounded-0">
+                    <span class="text-uppercase">Go To Checkout</span>
+                    <span class="icon">
+                        <i class="fas fa-lock"></i>
+                    </span>
+                </a>
+            </div>
+        </div>
+        
     </div>
 </div>

@@ -179,7 +179,6 @@ https://www.sliderrevolution.com/resources/styling-radio-buttons/*/
     border: 1px solid #000;
 }
 
-
 /* Toasts */
 .message-container{
     position: fixed;
@@ -187,6 +186,14 @@ https://www.sliderrevolution.com/resources/styling-radio-buttons/*/
     right: 15px;
     z-index: 999999;
 }
+
+.item-toast-wrapper{
+    max-height: 11rem;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+
 
 /* ======= */
 /* Fixed top navbar only on medium screens */
