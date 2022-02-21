@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
+from django.contrib.messages import constants as messages
 
 from pathlib import Path
 import os
@@ -89,7 +90,6 @@ TEMPLATES = [
     },
 ]
 
-# MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 
 # Allauth required
 AUTHENTICATION_BACKENDS = [
@@ -177,3 +177,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# MESSAGE_TAGS = {
+#     messages.ERROR: 'error',
+#     messages.INFO: 'info',
+#     messages.WARNING: 'warning',
+# }

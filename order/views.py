@@ -1,4 +1,3 @@
-from unicodedata import category
 from django.shortcuts import redirect, render, reverse, HttpResponse
 from django.http import HttpResponseRedirect
 from django.contrib import messages
@@ -90,7 +89,7 @@ def remove_from_order(request, item_id):
             del order[item_id]['items_by_size'][size]
             if not order[item_id]['items_by_size']:
                 order.pop(item_id)
-                messages.success(request, f'Done! {product.display_name} removed.')
+                messages.warning(request, f'Done! {product.display_name} removed.')
                 
         else:
             order.pop(item_id)
