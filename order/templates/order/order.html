@@ -2,11 +2,12 @@
 {% load static %}
 
 {% block page_header %}
-<div class="container header-container">
-    <div class="row">
-        <div class="col"></div>
+<div class="row">
+    <div class="col text-center my-4">
+        <h2 class="display-4">Your Order</h2>
     </div>
 </div>
+
 {% endblock %}
 
 {% block content %}
@@ -14,15 +15,8 @@
 
 <div class="container">
     <div class="row">
-        <div class="col text-center my-5">
-            <h2 class="display-4">Your Order</h2>
-        </div>
-    </div>
-    <div class="row">
-        <div class="product-container col-10 offset-1">
-            <div class="row ">
-                {% include 'components/order-item.html' %}
-            </div>
+        <div class="col-12 col-lg-8 mx-auto">
+            {% include 'components/order-item.html' %}
         </div>
     </div>
 </div>

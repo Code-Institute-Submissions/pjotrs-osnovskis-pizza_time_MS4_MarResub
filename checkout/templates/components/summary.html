@@ -1,0 +1,39 @@
+<p class="text-muted text-center">Order Summary ({{ item_count }})</p>
+<div class="row">
+    <div class="col-7 offset-2">
+        <p class="mb-1 mt-0 small text-muted">Item</p>
+    </div>
+    <div class="col-3 text-right">
+        <p class="mb-1 mt-0 small text-muted">Subtotal</p>
+    </div>
+</div>
+{% for item in order_items %}
+<div class="row">
+    <div class="col-2 mb-1">
+        <img class="w-100" src="{{ item.product.image_path.url }}" alt="{{ product.name }}">
+    </div>
+    <div class="col-7">
+        <p class="my-0"><strong>{{ item.product.display_name }}</strong></p>
+        <p class="my-0 small">Size:
+            {% if item.size == "s" %}Small
+            {% elif item.size == "m" %}Medium
+            {% elif item.size == "l" %}Large
+            {% else %}No Size Available
+            {% endif %}
+        </p>
+        <p class="my-0 small text-muted">Qty: {{ item.qty }}</p>
+    </div>
+    <div class="col-3 text-right">
+        <p class="my-0 small text-muted">£{{ item.price }}</p>
+    </div>
+</div>
+{% endfor %}
+<hr class="my-0">
+<div class="row text-black text-right">
+    <div class="col-7 offset-2">
+        <p class="my-0">Order Total:</p>
+    </div>
+    <div class="col-3">
+        <p class="my-0"><strong>£{{ grand_total | floatformat:2 }}</strong></p>
+    </div>
+</div>
