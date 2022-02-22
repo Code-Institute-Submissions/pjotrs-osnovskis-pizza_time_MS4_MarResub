@@ -1,42 +1,50 @@
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'checkout/css/checkout.css' %}">
+{% endblock %}
+
 <p class="text-muted">Please fill out the form to proceed with your order.</p>
 
-<form id="chekcout-form" action="{% url 'checkout' %}" method="POST">
+<form id="checkout-form" action="{% url 'checkout' %}" method="POST">
     {% csrf_token %}
     <fieldset class="rounded p-3 my-2">
-        <legend class="fieldset-label small text-black w-auto">Contact Details</legend>
+        <legend class="fieldset-label small text-black w-auto ms-2">Contact Details</legend>
         {{ order_form.f_name | as_crispy_field }}
         {{ order_form.l_name | as_crispy_field }}
         {{ order_form.email | as_crispy_field }}
         {{ order_form.phone_number | as_crispy_field }}
     </fieldset>
     <fieldset class="rounded p-3 my-2">
-        <legend class="fieldset-label small text-black w-auto">Delivery Details</legend>
+        <legend class="fieldset-label small text-black w-auto  ms-2">Delivery Details</legend>
         {{ order_form.street_address1 | as_crispy_field }}
         {{ order_form.street_address2 | as_crispy_field }}
         {{ order_form.postcode | as_crispy_field }}
         {{ order_form.city | as_crispy_field }}
         <div class="form-check form-check-inline float-right mr-0">
             {% if user.is_authenticated %}
-                <label class="form-check-label" for="id-save-info">Save this delivery information to my profile</label>
-                <input class="form-check-input ml-2 mr-0" type="checkbox" id="id-save-info" name="save-info" checked>
+            <label class="form-check-label" for="id-save-info">Save this delivery information to my profile</label>
+            <input class="form-check-input ml-2 mr-0" type="checkbox" id="id-save-info" name="save-info" checked>
             {% else %}
-                <label class="form-check-label" for="id-save-info">
-                    <a class="text-info" href="{% url 'account_signup' %}">Create an account</a> or 
-                    <a class="text-info" href="{% url 'account_login' %}">login</a> to save this information
-                </label>
+            <label class="form-check-label" for="id-save-info">
+                <a class="text-info" href="{% url 'account_signup' %}">Create an account</a> or
+                <a class="text-info" href="{% url 'account_login' %}">login</a> to save this information
+            </label>
             {% endif %}
         </div>
     </fieldset>
     <fieldset class="rounded p-3 my-2">
-        <legend class="fieldset-label small text-black w-auto">Payment Details</legend>
+        <legend class="fieldset-label small text-black w-auto ms-2">Payment Details</legend>
+
         <!-- Stripe card element goes here -->
-        <div class="mb-3" id="card-element"></div>
+        <div class="mb-3" id="payment-element"></div>
 
         <!-- Error display -->
         <div class="mb-3 text-danger" id="card-errors" role="alert"></div>
+
     </fieldset>
 
-    <div class="submit-button text-right mt-5 mb-2">                    
+    <div class="submit-button text-right mt-5 mb-2">
         <a href="{% url 'order' %}" class="btn btn-outline-black rounded-0">
             <span class="icon">
                 <i class="fas fa-chevron-left"></i>

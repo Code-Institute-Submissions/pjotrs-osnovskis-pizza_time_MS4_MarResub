@@ -1,14 +1,10 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block extra_css %}
-    <link rel="stylesheet" href="{% static 'checkout/css/checkout.css' %}">
-{% endblock %}
-
 {% block page_header %}
 <div class="row">
     <div class="col text-center m-5">
-        <h2 class="display-4">Checkout</h2>
+        <h2 class="">Checkout</h2>
     </div>
 </div>
 {% endblock %}
@@ -27,4 +23,11 @@
     </div>
 </div>
 
+{% endblock %}
+
+{% block postload_js %}
+    {{ block.super }}
+    {{ stripe_public_key|json_script:"id_stripe_public_key" }}
+    {{ client_secret|json_script:"id_client_secret" }}
+    <script src="{% static 'checkout/js/checkout.js' %}"></script>
 {% endblock %}
