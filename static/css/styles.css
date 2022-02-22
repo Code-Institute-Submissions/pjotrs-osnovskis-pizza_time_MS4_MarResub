@@ -193,6 +193,13 @@ https://www.sliderrevolution.com/resources/styling-radio-buttons/*/
     overflow-y: auto;
 }
 
+/* Checkout */
+
+.order-confirm-border{
+    border: 2px solid #20df80;
+    border-radius: 15px;
+    box-shadow: 0px 0px 20px #00ff80bf;
+}
 
 
 /* ======= */
