@@ -1,5 +1,4 @@
 import uuid
-from webbrowser import Elinks
 from django.db import models
 from django.db.models import Sum
 from products.models import Product
@@ -25,7 +24,7 @@ class CheckoutOrder(models.Model):
 
     def update_total(self):
         """ Update grand total"""
-        self.order_total = self.lineitems.aggregate(Sum('lineitem_total'))['lineitem_total__sum']
+        self.order_total = self.lineitems.aggregate(Sum('lineitem_total'))['lineitem_total__sum'] or 0
         self.save()
 
 
