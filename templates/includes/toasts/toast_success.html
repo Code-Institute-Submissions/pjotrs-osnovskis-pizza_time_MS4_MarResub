@@ -1,4 +1,4 @@
-<div class="toast show" role="alert" aria-live="assertive" aria-atomic="true" data-autohide="false">
+<div class="toast show" data-autohide="false">
     <div class="toast-header bg-success bg-opacity-50">
         <strong class="me-auto">Success</strong>
         <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
@@ -7,10 +7,10 @@
         <div class="row">
             <div class="col">
                 {{ message }}
-                <hr class="mt-1 mb-2">
             </div>
         </div>
         {% if grand_total %}
+            <hr class="mt-2 mb-2">
             <p class="my-1">You have {{ item_count }} items in your order so far.</p>
             <div class="item-toast-wrapper">
                 {% for item in order_items %}
@@ -36,17 +36,16 @@
                     </div>
                 {% endfor %}
             </div>
-        {% endif %}
-        <div class="row">
-            <div class="col mt-1">
-                <a href="{% url 'checkout' %}" class="btn w-100 text-center text-white bg-success bg-opacity-75 rounded-0">
-                    <span class="text-uppercase">Go To Checkout</span>
-                    <span class="icon">
-                        <i class="fas fa-lock"></i>
-                    </span>
-                </a>
+            <div class="row">
+                <div class="col mt-1">
+                    <a href="{% url 'checkout' %}" class="btn w-100 text-center text-white bg-success bg-opacity-75 rounded-0">
+                        <span class="text-uppercase">Go To Checkout</span>
+                        <span class="icon">
+                            <i class="fas fa-lock"></i>
+                        </span>
+                    </a>
+                </div>
             </div>
-        </div>
-        
+        {% endif %}
     </div>
 </div>

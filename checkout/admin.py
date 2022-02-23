@@ -10,12 +10,13 @@ class CheckoutLineItemAdminInline(admin.TabularInline):
 class CheckoutAdmin(admin.ModelAdmin):
     inlines = (CheckoutLineItemAdminInline,)
 
-    readonly_fields = ('order_id', 'date', 'order_total',)
+    readonly_fields = ('order_id', 'date', 'order_total',
+                        'original_order', 'stripe_pid',)
 
     fields = ('order_id', 'date', 'f_name', 'l_name',
               'email', 'phone_number', 'street_address1',
               'street_address2', 'postcode', 'city',
-              'order_total',)
+              'order_total', 'original_order', 'stripe_pid',)
 
     list_display = ('order_id', 'date', 'f_name', 'l_name',
                     'order_total',)

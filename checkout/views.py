@@ -55,7 +55,11 @@ def checkout(request):
 
         order_form = CheckoutForm(form_data)
         if order_form.is_valid():
-            order = order_form.save()
+            order = order_form.save(commit=False)
+            pid = request.POST.get('client_secret').split('_secret')[0]
+            order.stripe_pid = pid
+            order.original_order = json.dumps(checkout_order)
+            order.save()
             
             for item_id, item_data in checkout_order.items():
                 try:
