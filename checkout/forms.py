@@ -8,7 +8,7 @@ class CheckoutForm(forms.ModelForm):
         model = CheckoutOrder
         fields = ('f_name', 'l_name', 'email', 'phone_number',
                   'street_address1', 'street_address2',
-                  'postcode', 'city')
+                  'postcode', 'city',)
 
     def __init__(self, *args, **kwargs):
         """
@@ -23,7 +23,7 @@ class CheckoutForm(forms.ModelForm):
             'phone_number': 'Phone Number',
             'street_address1': 'Street Address 1',
             'street_address2': 'Street Address 2',
-            'postcode': 'Postal Code',
+            'postcode': 'Postcode',
             'city': 'Town or City',
         }
 

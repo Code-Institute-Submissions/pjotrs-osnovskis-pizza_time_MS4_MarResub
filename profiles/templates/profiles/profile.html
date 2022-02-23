@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+    <!-- <link rel="stylesheet" href="{% static 'profiles/css/profiles.css' %}"> -->
+{% endblock %}
+
+{% block page_header %}
+<div class="row">
+    <div class="col text-center my-4">
+        <h2 class="display-4">My Profile</h2>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="overlay"></div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12 col-lg-8 mx-auto">
+            {% include 'components/my_profile.html' %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

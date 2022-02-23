@@ -1,7 +1,9 @@
 import uuid
 from django.db import models
 from django.db.models import Sum
+
 from products.models import Product
+from profiles.models import UserProfile
 
 
 class CheckoutOrder(models.Model):
@@ -9,6 +11,8 @@ class CheckoutOrder(models.Model):
     # Found other way to use UUID here:
     # https://stackoverflow.com/questions/32528224/how-to-use-uuid
     order_id = models.UUIDField(default=uuid.uuid4, max_length=32, editable=False, unique=True)
+    user_profile = models.ForeignKey(UserProfile, on_delete=models.SET_NULL,
+                                     null=True, blank=True, related_name='orders')
     f_name = models.CharField(max_length=50, null=False, blank=False)
     l_name = models.CharField(max_length=50, null=False, blank=False)
     email = models.EmailField(max_length=254, null=False, blank=False)
