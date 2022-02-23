@@ -1,7 +1,7 @@
 /* Google fonts */
 @import url('https://fonts.googleapis.com/css2?family=Bungee+Shade&display=swap');
 
-/* Main styling */
+/* ================ =============== GENERAL STYLING =============== ================ */
 html{
     height: 100%;
     width: 100%;
@@ -11,6 +11,23 @@ html{
 body{
     background: url('../../media/index-image1.jpg') no-repeat right center fixed;
     background-size: cover;
+}
+
+/* 
+    Remove arrows on input type=number
+    https://www.w3schools.com/howto/howto_css_hide_arrow_number.asp 
+*/
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+.input-group span{
+    font-size: .75rem;
 }
 
 .remove-input-formatting{
@@ -24,7 +41,7 @@ body{
     display: none;
 }
 
-/* Overlay */
+/* ================ =============== OVERLAY =============== ================ */
 
 .overlay{
     height: 100%;
@@ -36,15 +53,7 @@ body{
     z-index: -1;
 }
 
-/* Navigation */
-.frost-bg{
-    background: rgba( 255, 255, 255, 0.50 );
-    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
-    backdrop-filter: blur( 2.5px );
-    -webkit-backdrop-filter: blur( 2.5px );
-    border: 1px solid rgba( 255, 255, 255, 0.25 );
-}
-
+/* ================ =============== NAVIGATION =============== ================ */
 .logo-font{
     font-family: 'Bungee Shade', serif;
 }
@@ -72,7 +81,7 @@ body{
 }
 
 
-/* =========== Product =========== */
+/* ================ =============== PRODUCT =============== ================ */
 /* Product Name */
 .display-name{
     font-size: 2.5rem;
@@ -97,6 +106,9 @@ https://www.sliderrevolution.com/resources/styling-radio-buttons/*/
     box-shadow: 0px 3px 10px -2px #a1aaa680;
     position: relative;
 
+    /* standard bootstrap btn transitions */
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+
     /* This idea was taken from here: 
     https://stackoverflow.com/questions/8957443/prevent-copying-text-in-web-page */
     /* Remove text selection for users convenience */
@@ -118,27 +130,39 @@ https://www.sliderrevolution.com/resources/styling-radio-buttons/*/
     font-size: 2rem;
 }
 
-
-/* Quantity selection */
-.input-group{
-    margin: 1rem 0;
-}
-
-.input-group input::-webkit-outer-spin-button,
-.input-group input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
 .dec-product-qty,
 .inc-product-qty,
-.add-to-order-button{
+.add-to-order-button,
+.order-now-btn{
+	display: inline-block;
+    font-weight: 400;
+    color: #000;
+    text-align: center;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
     border: 2px solid #20df80;
     border-radius: 15px;
-    padding: .5rem;
+    padding: .5rem 1rem;
     text-align: center;
-    background-color: #20df80;
+    background-color: #fff;
     box-shadow: 0px 0px 20px #00ff80bf;
+    line-height: 1.5;
+
+    /* standard bootstrap btn transitions */
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.dec-product-qty:hover,
+.inc-product-qty:hover,
+.add-to-order-button:hover,
+#size-selection label:hover,
+.order-now-btn:hover{
+    background-color: #20df80;
+    border-color: #20df80;
+    box-shadow: 0px 3px 10px -2px #a1aaa680;
 }
 
 .dec-product-qty,
@@ -146,22 +170,13 @@ https://www.sliderrevolution.com/resources/styling-radio-buttons/*/
     width: 3rem;
 }
 
-.add-to-order-button{
-    background: #ffffff;
-    border: 2px solid #20df80;
-}
-
 .product-qty{
     width: 5rem;
     font-size: 1.5rem;
-    background: #ffffffbd;
+    background: #fff;
 }
 
-.input-group span{
-    font-size: .75rem;
-}
-
-/* Home page */
+/* ================ =============== HOME PAGE =============== ================ */
 .container-welcome{
     height: calc(100vh - 127px);;
     position: relative;
@@ -175,11 +190,7 @@ https://www.sliderrevolution.com/resources/styling-radio-buttons/*/
     transform: translateY(-50%);
 }
 
-.order-now-btn{
-    border: 1px solid #000;
-}
-
-/* Toasts */
+/* ================ =============== TOASTS =============== ================ */
 .message-container{
     position: fixed;
     top: 5rem;
@@ -193,20 +204,84 @@ https://www.sliderrevolution.com/resources/styling-radio-buttons/*/
     overflow-y: auto;
 }
 
-/* Checkout */
-
+/* ================ =============== CHECKOUT =============== ================ */
 .order-confirm-border{
     border: 2px solid #20df80;
     border-radius: 15px;
+}
+
+/* ================ =============== ALLAUTH =============== ================ */
+
+.allauth-form-content {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    width: 30rem;
+}
+.allauth-form-content p {
+    margin-top: 1.5rem; /* mt-4 */
+    color: #6c757d; /* text-secondary */
+}
+
+.allauth-form-content input {
+    border: 2px solid #20df80;
+    border-radius: 15px;
+}
+
+.allauth-form-content label:not([for='id_remember']) {
+    display: none;
+}
+
+.allauth-form-content input::placeholder {
+    color: #aab7c4;
+}
+
+.allauth-form-content button,
+.allauth-form-content input[type='submit'] {
+	/* btn */
+	display: inline-block;
+    font-weight: 400;
+    color: #000;
+    text-align: center;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 2px solid #20df80;
+    border-radius: 15px;
+    padding: .5rem 1rem;
+    text-align: center;
+    background-color: #fff;
     box-shadow: 0px 0px 20px #00ff80bf;
+    line-height: 1.5;
+
+    /* standard bootstrap btn transitions */
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.allauth-form-content button:hover,
+.allauth-form-content input[type='submit']:hover {	
+    background-color: #20df80;
+    border-color: #20df80;
+}
+
+.allauth-form-content a {
+	color: #17a2b8; /* text-info */
 }
 
 
-/* ======= */
-/* Fixed top navbar only on medium screens */
+/* ================ =============== MEDIA QUERIES =============== ================ */
 @media (max-width: 768px) {
     .overlay{
         background: #ffffff;
+    }
+    .allauth-form-content {
+        top: 60%;
+        width: 100%;
+        padding: 0 1rem;
     }
     
 }
