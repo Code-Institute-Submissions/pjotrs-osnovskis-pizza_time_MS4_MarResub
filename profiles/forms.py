@@ -14,11 +14,13 @@ class UserProfileForm(forms.ModelForm):
         """
         super().__init__(*args, **kwargs)
         placeholders = {
+            'default_f_name': 'First Name',
+            'default_l_name': 'Last Name',
             'default_phone_number': 'Phone Number',
             'default_street_address1': 'Street Address 1',
             'default_street_address2': 'Street Address 2',
             'default_postcode': 'Postcode',
-            'default_city': 'Town or City',
+            'default_city': 'City',
         }
 
         self.fields['default_phone_number'].widget.attrs['autofocus'] = True

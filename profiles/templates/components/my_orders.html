@@ -1,2 +1,42 @@
 <p class="text-muted">My Order History</p>
-{{ orders }}
+<div class="order-history table-responsive">
+    <table class="table table-sm table-borderless">
+        <thead>
+            <tr>
+                <th>Order Number</th>
+                <th>Date</th>
+                <th>Items</th>
+                <th>Order Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in orders reversed %}
+                <tr>
+                    <td>
+                        <a href="{% url 'order_history' order.order_id %}"
+                        title="{{ order.order_id }}">
+                            {{ order.order_id|truncatechars:6 }}
+                        </a>
+                    </td>
+                    <td>{{ order.date }}</td>
+                    <td>
+                        <ul class="list-unstyled">
+                            {% for item in order.lineitems.all %}
+                                <li class="small">
+                                    {{ item.qty }}
+                                    {% if item.size == "s" %}Small
+                                    {% elif item.size == "m" %}Medium
+                                    {% elif item.size == "l" %}Large
+                                    {% else %}
+                                    {% endif %}
+                                    {{ item.product.display_name }}{% if item.qty == "1" %}{% else %}'s{% endif %}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                    <td><strong>£{{ order.order_total }}</strong></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
