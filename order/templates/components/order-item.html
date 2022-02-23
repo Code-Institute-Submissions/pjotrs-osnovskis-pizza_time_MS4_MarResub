@@ -3,7 +3,6 @@
     <iv class="col-12 ">
         <div class="card bg-transparent border-0 text-center ">
             <div class="row d-flex align-items-center">
-
                 <div class="col-12 col-md-4">
                     <img src="{{ item.product.image_path.url }}" alt="{{ item.product.name }}"
                         class="card-img-top img-fluid">
@@ -57,13 +56,19 @@
                     
                 </div>
             </div>
+            <div class="row">
+                <div class="col-12">
+                    <hr>
+                    <h2 class="display-6 text-end" >Order total: <strong>£{{ grand_total }}</strong></h2>
+                    <a class="order-now-btn float-end mt-3" href="{% url 'checkout' %}?category=pizza" >Go to checkout</a>
+                </div>
+            </div>
+
         </div>
 {% endfor %}
 {% else %}
-    <div class="text-center">
-        <h2>Oops, you didn't order anything yet!</h2>
-        <a href="{% url 'products' %}?category=pizza" class="order-now-btn btn btn-lg rounded-0 text-uppercase py-3">
-            Order Now
-        </a>
+    <div class="text-center mt-3">
+        <h2 class="display-6" >Oops, you didn't order anything yet!</h2>
+        <a href="{% url 'products' %}?category=pizza" class="order-now-btn mt-3">Order Now</a>
     </div>
 {% endif %}

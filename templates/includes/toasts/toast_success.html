@@ -9,7 +9,7 @@
                 {{ message }}
             </div>
         </div>
-        {% if grand_total %}
+        {% if grand_total and not on_profile_page %}
             <hr class="mt-2 mb-2">
             <p class="my-1">You have {{ item_count }} items in your order so far.</p>
             <div class="item-toast-wrapper">

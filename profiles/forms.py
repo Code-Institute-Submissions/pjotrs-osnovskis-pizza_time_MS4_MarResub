@@ -1,13 +1,11 @@
 from dataclasses import fields
 from django import forms
-from .models import CheckoutOrder
+from .models import UserProfile
 
-class CheckoutForm(forms.ModelForm):
+class UserProfileForm(forms.ModelForm):
     class Meta:
-        model = CheckoutOrder
-        fields = ('f_name', 'l_name', 'email', 'phone_number',
-                  'street_address1', 'street_address2',
-                  'postcode', 'city',)
+        model = UserProfile
+        exclude = ('user',)
 
     def __init__(self, *args, **kwargs):
         """
@@ -16,17 +14,14 @@ class CheckoutForm(forms.ModelForm):
         """
         super().__init__(*args, **kwargs)
         placeholders = {
-            'f_name': 'First Name',
-            'l_name': 'Last Name',
-            'email': 'Email Address',
-            'phone_number': 'Phone Number',
-            'street_address1': 'Street Address 1',
-            'street_address2': 'Street Address 2',
-            'postcode': 'Postcode',
-            'city': 'Town or City',
+            'default_phone_number': 'Phone Number',
+            'default_street_address1': 'Street Address 1',
+            'default_street_address2': 'Street Address 2',
+            'default_postcode': 'Postcode',
+            'default_city': 'Town or City',
         }
 
-        self.fields['f_name'].widget.attrs['autofocus'] = True
+        self.fields['default_phone_number'].widget.attrs['autofocus'] = True
         for field in self.fields:
             if self.fields[field].required:
                 placeholder = f'{placeholders[field]} *'

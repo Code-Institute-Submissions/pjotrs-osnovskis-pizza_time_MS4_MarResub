@@ -163,6 +163,12 @@ https://www.sliderrevolution.com/resources/styling-radio-buttons/*/
     background-color: #20df80;
     border-color: #20df80;
     box-shadow: 0px 3px 10px -2px #a1aaa680;
+    color: #000;
+}
+
+.order-now-btn{
+    text-decoration: none;
+    text-transform: uppercase;
 }
 
 .dec-product-qty,
@@ -225,7 +231,8 @@ https://www.sliderrevolution.com/resources/styling-radio-buttons/*/
     color: #6c757d; /* text-secondary */
 }
 
-.allauth-form-content input {
+.allauth-form-content input,
+#profile-update-form input {
     border: 2px solid #20df80;
     border-radius: 15px;
 }
@@ -239,7 +246,9 @@ https://www.sliderrevolution.com/resources/styling-radio-buttons/*/
 }
 
 .allauth-form-content button,
-.allauth-form-content input[type='submit'] {
+.allauth-form-content input[type='submit'],
+#profile-update-form button,
+#profile-update-form input[type='submit']{
 	/* btn */
 	display: inline-block;
     font-weight: 400;
@@ -263,7 +272,9 @@ https://www.sliderrevolution.com/resources/styling-radio-buttons/*/
 }
 
 .allauth-form-content button:hover,
-.allauth-form-content input[type='submit']:hover {	
+.allauth-form-content input[type='submit']:hover,
+#profile-update-form button:hover,
+#profile-update-form input[type='submit']:hover{
     background-color: #20df80;
     border-color: #20df80;
 }
@@ -282,6 +293,9 @@ https://www.sliderrevolution.com/resources/styling-radio-buttons/*/
         top: 60%;
         width: 100%;
         padding: 0 1rem;
+    }
+    .my-orders{
+        padding-top: 3rem;
     }
     
 }
