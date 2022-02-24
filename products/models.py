@@ -26,6 +26,9 @@ class Topping(models.Model):
     display_name = models.CharField(max_length=32)
     price = models.DecimalField(max_digits=4, decimal_places=2, default='0.99')
 
+    class Meta:
+        ordering = ['name']
+
     def save(self, *args, **kwargs):
         self.name = self.display_name.lower().replace(' ', '_')
         self.display_name = self.display_name.title()
@@ -39,15 +42,23 @@ class Product(models.Model):
     """
     Product model - to add Products to DB
     """
-    category = models.ForeignKey(Category, null=True, on_delete=models.SET_NULL)
+    # Verbose names were found in Django Docs
+    # https://docs.djangoproject.com/en/4.0/topics/db/models/#verbose-field-names
+
+    category = models.ForeignKey(Category, null=True, on_delete=models.SET_NULL, verbose_name="Product Category")
     name = models.CharField(max_length=254)
-    display_name = models.CharField(max_length=254, null=True)
+    display_name = models.CharField(max_length=254, null=True, verbose_name="Product Name")
     toppings = models.ManyToManyField(Topping, blank=True)
-    price_s = models.DecimalField(max_digits=4, decimal_places=2)
-    price_m = models.DecimalField(max_digits=4, decimal_places=2)
-    price_l = models.DecimalField(max_digits=4, decimal_places=2)
-    image_path = models.ImageField(null=True, blank=True)
+    price_s = models.DecimalField(max_digits=4, decimal_places=2, null=False, blank=False, verbose_name="Price for Small")
+    price_m = models.DecimalField(max_digits=4, decimal_places=2, null=False, blank=False, verbose_name="Price for Medium")
+    price_l = models.DecimalField(max_digits=4, decimal_places=2, null=False, blank=False, verbose_name="Price for Large")
+    image_path = models.ImageField(null=False, blank=False, verbose_name="Product Image")
     date_added = models.DateTimeField(auto_now_add=True)
+
+    def save(self, *args, **kwargs):
+        self.name = self.display_name.lower().replace(' ', '_')
+        self.display_name = self.display_name.title()
+        return super(Product, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.display_name

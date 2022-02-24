@@ -9,7 +9,15 @@ class ToppingAdmin(admin.ModelAdmin):
         'name',
     )
 
+class ProductAdmin(admin.ModelAdmin):
+    list_display = (
+        'display_name',
+    )
+    exclude = (
+        'name',
+    )
 
-admin.site.register(Product)
+
+admin.site.register(Product, ProductAdmin)
 admin.site.register(Category)
 admin.site.register(Topping, ToppingAdmin)
