@@ -286,7 +286,28 @@ https://www.sliderrevolution.com/resources/styling-radio-buttons/*/
 	color: #17a2b8; /* text-info */
 }
 
-/* ================ =============== PRODUCT ADMIN =============== ================ */
+/* ================ =============== PRODUCT MANAGEMENT =============== ================ */
+
+#div_id_image_path .input-group .form-control,
+#div_id_image_path span{
+    border: none;
+    z-index: -1;
+    line-height: 1.5rem;
+}
+#div_id_image_path span{
+    width: 6.5rem;
+    font-size: 1rem;
+}
+#div_id_image_path .input-group-text{
+    border-right: 2px solid #20df80;
+}
+
+#div_id_image_path .input-group,
+#id_image_path{
+    border: 2px solid #20df80;
+    border-radius: 15px;
+}
+
 
 
 
