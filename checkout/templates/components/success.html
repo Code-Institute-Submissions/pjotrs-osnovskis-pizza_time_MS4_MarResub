@@ -141,10 +141,14 @@
     </div>
 </div>
 
-<div class="row">
-    <div class="col-12 d-flex justify-content-center mt-3">
-        <h4 class="">
+<div class="row ">
+    <div class="col-12 text-center">
+        {% if request.user.is_authenticated %}
+            <p class="small text-muted mb-3 mt-5"> You can see all your orders in your profile page.</p>
             <a href="{% url 'profile' %}" class="order-now-btn">My Profile</a>
-        </h4>
+        {% else %}
+            <p class="small text-muted mb-3 mt-5"> You can <a href="{% url 'account_signup' %}">sign up</a> to save your delivery details for next time.</p>
+            <a href="{% url 'home' %}" class="order-now-btn">Home</a>
+        {% endif %}
     </div>
 </div>
