@@ -26,8 +26,9 @@ def products(request):
 
 
 def add_product(request):
-
     """ Add a product to the list """
+    products = Product.objects.all()
+
     if request.method == 'POST':
         form = ProductForm(request.POST, request.FILES)
         if form.is_valid():
@@ -41,6 +42,7 @@ def add_product(request):
 
     template = 'products/add_product.html'
     context = {
+        'products': products,
         'form': form,
     }
 
@@ -49,7 +51,9 @@ def add_product(request):
 
 def edit_product(request, product_id):
     """ Edit a product in the list """
+    products = Product.objects.all()
     product = get_object_or_404(Product, pk=product_id)
+
     if request.method == 'POST':
         form = ProductForm(request.POST, request.FILES, instance=product)
         if form.is_valid():
@@ -66,6 +70,14 @@ def edit_product(request, product_id):
     context = {
         'form': form,
         'product': product,
+        'products': products,
     }
 
     return render(request, template, context)
+
+def delete_product(request, product_id):
+    """ Delete a product """
+    product = get_object_or_404(Product, pk=product_id)
+    product.delete()
+    messages.success(request, f'Product {product.display_name} deleted!')
+    return redirect(reverse('products'))

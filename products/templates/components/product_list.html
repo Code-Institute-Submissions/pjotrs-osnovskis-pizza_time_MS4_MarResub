@@ -1,0 +1,28 @@
+<table class="table table-sm table-borderless">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Small</th>
+            <th>Medium</th>
+            <th>Large</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for product in products %}
+            <tr>
+                <td>{{ product.id }}</td>
+                <td>{{ product.display_name }}</td>
+                <td>£{{ product.price_s }}</td>
+                <td>£{{ product.price_m }}</td>
+                <td>£{{ product.price_l }}</td>
+                <td>
+                    <small>
+                        <a href="{% url 'edit_product' product.id %}">Edit</a>
+                        <a class="text-danger" href="{% url 'delete_product' product.id %}">Delete</a>
+                    </small>
+                </td>
+        {% endfor %}
+    </tbody>
+</table>

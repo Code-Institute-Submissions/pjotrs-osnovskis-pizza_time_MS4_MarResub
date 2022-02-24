@@ -6,6 +6,16 @@
             <div class="row">
                 <h4 class="my-2 display-name">{{ product.display_name }}</h4>
             </div>
+            {% if request.user.is_superuser %}
+            <small>
+                <a href="{% url 'edit_product' product.id %}">Edit</a>
+                <a class="text-danger" href="{% url 'delete_product' product.id %}">Delete</a>
+            </small>
+            <small>
+                <p>Product id: {{ product.id }}</p>
+            </small>
+            {% endif %}
+
             {% if product.toppings %}
             <div class="toppings-list my-2">
                 {% for topping in product.toppings.all|dictsort:"display_name" %}
