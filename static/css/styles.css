@@ -233,7 +233,8 @@ https://www.sliderrevolution.com/resources/styling-radio-buttons/*/
 
 .allauth-form-content input,
 #profile-update-form input,
-.product-admin-inputs input {
+.product-admin-form input,
+.product-admin-form select{
     border: 2px solid #20df80;
     border-radius: 15px;
 }
@@ -275,7 +276,8 @@ https://www.sliderrevolution.com/resources/styling-radio-buttons/*/
 .allauth-form-content button:hover,
 .allauth-form-content input[type='submit']:hover,
 #profile-update-form button:hover,
-#profile-update-form input[type='submit']:hover{
+#profile-update-form input[type='submit']:hover,
+.form-check input:checked{
     background-color: #20df80;
     border-color: #20df80;
 }
@@ -283,6 +285,8 @@ https://www.sliderrevolution.com/resources/styling-radio-buttons/*/
 .allauth-form-content a {
 	color: #17a2b8; /* text-info */
 }
+
+/* ================ =============== PRODUCT ADMIN =============== ================ */
 
 
 /* ================ =============== MEDIA QUERIES =============== ================ */
