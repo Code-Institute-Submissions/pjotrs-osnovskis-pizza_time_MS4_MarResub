@@ -46,6 +46,7 @@
                             {{ item.product.display_name }}{% if item.qty == "1" %}{% else %}'s{% endif %}
                         </p>
                     </div>
+
                     <div class="col-12 col-md-4 text-md-end">
                         <p class="mb-0">
                             {% if item.size == "s" %}£{{ item.product.price_s }}
@@ -54,7 +55,6 @@
                             {% endif %}
                         </p>
                     </div>
-
                 </div>
                 {% endfor %}
 
@@ -144,10 +144,10 @@
 <div class="row ">
     <div class="col-12 text-center">
         {% if request.user.is_authenticated %}
-            <p class="small text-muted mb-3 mt-5"> You can see all your orders in your profile page.</p>
+            <p class="small text-muted mb-3 mt-5">You can see all your orders in your profile page.</p>
             <a href="{% url 'profile' %}" class="order-now-btn">My Profile</a>
         {% else %}
-            <p class="small text-muted mb-3 mt-5"> You can <a href="{% url 'account_signup' %}">sign up</a> to save your delivery details for next time.</p>
+            <p class="small text-muted mb-3 mt-5">You can <a href="{% url 'account_signup' %}">sign up</a> to save your delivery details for next time.</p>
             <a href="{% url 'home' %}" class="order-now-btn">Home</a>
         {% endif %}
     </div>

@@ -232,7 +232,8 @@ https://www.sliderrevolution.com/resources/styling-radio-buttons/*/
 }
 
 .allauth-form-content input,
-#profile-update-form input {
+#profile-update-form input,
+.product-admin-inputs input {
     border: 2px solid #20df80;
     border-radius: 15px;
 }
