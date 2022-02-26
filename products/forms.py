@@ -1,12 +1,16 @@
 from django import forms
 from .models import Category, Product, Topping
 from django.forms.widgets import CheckboxSelectMultiple
+from .widgets import CustomClearableFileInput
+
 
 class ProductForm(forms.ModelForm):
     class Meta:
         model = Product
         fields = '__all__'
         exclude = ('name',)
+
+    image_path = forms.ImageField(label='Product Image', required=False, widget=CustomClearableFileInput)
 
     def __init__(self, *args, **kwargs):
 

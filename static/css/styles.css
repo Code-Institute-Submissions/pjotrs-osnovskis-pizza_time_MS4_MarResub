@@ -288,10 +288,8 @@ https://www.sliderrevolution.com/resources/styling-radio-buttons/*/
 
 /* ================ =============== PRODUCT MANAGEMENT =============== ================ */
 
-#div_id_image_path .input-group .form-control,
+/* #div_id_image_path .input-group,
 #div_id_image_path span{
-    border: none;
-    z-index: -1;
     line-height: 1.5rem;
 }
 #div_id_image_path span{
@@ -306,7 +304,7 @@ https://www.sliderrevolution.com/resources/styling-radio-buttons/*/
 #id_image_path{
     border: 2px solid #20df80;
     border-radius: 15px;
-}
+} */
 
 
 
