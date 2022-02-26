@@ -67,8 +67,11 @@
                 </button>
             </div>
 
-            <div class="product-price row my-2">
-                <input type="number" class="m-0 p-0 product-price remove-input-formatting" id="{{ product.name }}" name="price" value="{{ product.price_s }}" readonly>
+            <div class="row product-price my-2">
+                <div class="col-5 text-end m-0 p-0">
+                    <p class="m-0 p-0" >£</p>
+                </div>
+                <input type="number" class="remove-input-formatting col-7 text-start m-0 p-0" id="{{ product.name }}" name="price" value="{{ product.price_s }}" readonly>
             </div>
 
             <div class="card-footer bg-transparent border-0 py-0 my-2">
