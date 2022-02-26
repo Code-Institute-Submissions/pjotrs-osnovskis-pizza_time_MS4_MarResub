@@ -188,14 +188,6 @@ https://www.sliderrevolution.com/resources/styling-radio-buttons/*/
     position: relative;
 }
 
-.vert-align{
-    margin: 0;
-    position: absolute;
-    top: 40%;
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
-}
-
 /* ================ =============== TOASTS =============== ================ */
 .message-container{
     position: fixed;
@@ -219,13 +211,8 @@ https://www.sliderrevolution.com/resources/styling-radio-buttons/*/
 /* ================ =============== ALLAUTH =============== ================ */
 
 .allauth-form-content {
-    margin: 0;
-    position: absolute;
-    top: 50%;
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
-    width: 30rem;
 }
+
 .allauth-form-content p {
     margin-top: 1.5rem; /* mt-4 */
     color: #6c757d; /* text-secondary */
@@ -321,6 +308,14 @@ https://www.sliderrevolution.com/resources/styling-radio-buttons/*/
     }
     .my-orders{
         padding-top: 3rem;
+    }
+    .message-container{
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%);
+        width: 100%;
     }
     
 }

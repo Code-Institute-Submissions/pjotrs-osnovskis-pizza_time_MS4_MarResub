@@ -11,9 +11,13 @@
 
     {% include 'components/messages.html' %}
 
-    <header class="frost-bg px-5">
-        {% include 'layout/header.html' %}
-        {% include 'layout/nav.html' %}
+    <header class="">
+        <div class="d-lg-none">
+            {% include 'layout/mobile_view.html' %}
+        </div>
+        <div class="d-none d-lg-block">
+            {% include 'layout/desktop_view.html' %}
+        </div>
     </header>
 
 
