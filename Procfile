@@ -1,1 +1,1 @@
-web: guniocorn pizzatime.wsgi:application
+web: gunicorn pizzatime.wsgi:application
