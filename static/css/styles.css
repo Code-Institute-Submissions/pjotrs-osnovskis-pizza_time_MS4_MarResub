@@ -209,6 +209,9 @@ https://www.sliderrevolution.com/resources/styling-radio-buttons/*/
 }
 
 /* ================ =============== ALLAUTH =============== ================ */
+.width-50-100{
+    width: 50%;
+}
 
 .allauth-container {
     height: 80vh;
@@ -296,7 +299,6 @@ https://www.sliderrevolution.com/resources/styling-radio-buttons/*/
 
 
 
-
 /* ================ =============== MEDIA QUERIES =============== ================ */
 @media (max-width: 768px) {
     .overlay{
@@ -310,6 +312,11 @@ https://www.sliderrevolution.com/resources/styling-radio-buttons/*/
     .my-orders{
         padding-top: 3rem;
     }
+
+    .width-50-100{
+        width: 100%;
+    }
+
     .message-container{
         margin: 0;
         position: absolute;
@@ -317,6 +324,10 @@ https://www.sliderrevolution.com/resources/styling-radio-buttons/*/
         -ms-transform: translateY(-50%);
         transform: translateY(-50%);
         width: 100%;
+    }
+
+    .custom-width {
+        width: 100vw;
     }
     
 }
