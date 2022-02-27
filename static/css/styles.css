@@ -210,7 +210,8 @@ https://www.sliderrevolution.com/resources/styling-radio-buttons/*/
 
 /* ================ =============== ALLAUTH =============== ================ */
 
-.allauth-form-content {
+.allauth-container {
+    height: 80vh;
 }
 
 .allauth-form-content p {
