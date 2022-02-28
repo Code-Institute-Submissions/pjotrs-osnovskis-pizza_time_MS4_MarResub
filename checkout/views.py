@@ -44,6 +44,7 @@ def checkout(request):
     
     if request.method == 'POST':
         checkout_order = request.session.get('order', {})
+        print('>>>>>>>>>>>> CHECKOUT ORDER: {checkout_order}')
         form_data = {
             'f_name': request.POST['f_name'],
             'l_name': request.POST['l_name'],
@@ -56,6 +57,8 @@ def checkout(request):
         }
 
         order_form = CheckoutForm(form_data)
+        print('>>>>>>>>>>>> ORDER FORM: {order_form}')
+
         if order_form.is_valid():
             order = order_form.save(commit=False)
             pid = request.POST.get('client_secret').split('_secret')[0]

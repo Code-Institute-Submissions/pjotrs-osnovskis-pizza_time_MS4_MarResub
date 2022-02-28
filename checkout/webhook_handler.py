@@ -70,6 +70,7 @@ class StripeWH_Handler:
                 profile.f_name = shipping_details.f_name
                 profile.l_name = shipping_details.l_name
                 profile.default_phone_number = shipping_details.phone
+                profile.default_email = billing_details.email
                 profile.default_postcode = shipping_details.address.postal_code
                 profile.default_city = shipping_details.address.city
                 profile.default_street_address1 = shipping_details.address.line1
