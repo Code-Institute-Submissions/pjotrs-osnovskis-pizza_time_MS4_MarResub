@@ -7,7 +7,6 @@ from profiles.models import UserProfile
 from django.conf import settings
 
 from django.core.mail import send_mail
-from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
 
 import json
@@ -50,7 +49,7 @@ class StripeWH_Handler:
         """
         intent = event.data.object
         pid = intent.id
-        order = intent.metadata.order
+        order = intent.metadata.checkout_order
         save_info = intent.metadata.save_info
 
         billing_details = intent.charges.data[0].billing_details

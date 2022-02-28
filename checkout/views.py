@@ -35,8 +35,7 @@ def cache_checkout_data(request):
     except Exception as e:
         message.error(request, 'Your payment cannot be processed right now. \
             Please try again later.')
-        print(e)
-        return HttpResponse(content=3, status=400)
+        return HttpResponse(content=e, status=400)
 
 
 def checkout(request):
@@ -98,9 +97,9 @@ def checkout(request):
             messages.error(request, 'There was an error, please check your details and try again.')
 
     else:
-        order = request.session.get('order', {})
+        checkout_order = request.session.get('order', {})
 
-        if not order:
+        if not checkout_order:
             messages.error(request, "There is nothing in your order just yet.")
             return redirect(reverse('products'))
         
@@ -113,7 +112,6 @@ def checkout(request):
             currency = settings.STRIPE_CURRENCY,
         )
 
-        order_form = CheckoutForm()
 
         # Try to automatically fill in the checkout form with 
         # any info the user has in their profile
