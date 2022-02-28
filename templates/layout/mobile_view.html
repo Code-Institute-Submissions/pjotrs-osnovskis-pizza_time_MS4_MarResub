@@ -30,6 +30,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <div class="navbar-nav text-center">
+                    <a class="nav-link" href="{% url 'home' %}">Home</a>
                     {% if request.user.is_authenticated %}
                     {% if request.user.is_superuser %}
                     <a class="nav-link" href="{% url 'admin:index' %}">Admin</a>
@@ -41,7 +42,6 @@
                     <a class="nav-link" href="{% url 'account_signup' %}">Register</a>
                     <a class="nav-link" href="{% url 'account_login' %}">Login</a>
                     {% endif %}
-                    <a class="nav-link" href="{% url 'home' %}">Home</a>
                     <a class="nav-link" href="{% url 'products' %}?category=pizza">Pizzas</a>
                     <a class="nav-link" href="{% url 'products' %}?category=drink">Drinks</a>
                     <a class="nav-link" href="#">Delivery</a>

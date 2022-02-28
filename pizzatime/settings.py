@@ -9,9 +9,7 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-from django.contrib.messages import constants as messages
 
-from pathlib import Path
 import os
 import dj_database_url
 
@@ -20,8 +18,7 @@ if os.path.exists("env.py"):
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
-
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
@@ -35,7 +32,7 @@ DEBUG = os.environ.get('DEBUG')
 ### CRITICAL ###
 
 
-ALLOWED_HOSTS = ['pizza-time-ms4-po.herokuapp.com', '127.0.0.1']
+ALLOWED_HOSTS = ['pizza-time-ms4-po.herokuapp.com', '127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -229,8 +226,8 @@ if 'DEVELOPMENT' in os.environ:
 else:
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
     EMAIL_USE_TLS = True
-    EMAIL_PORT = 587
     EMAIL_SMTP = 'smtp.gmail.com'
+    EMAIL_PORT = 587
     EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
     EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
     DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_HOST_USER')
