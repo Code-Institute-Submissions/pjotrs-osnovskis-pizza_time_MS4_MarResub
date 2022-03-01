@@ -49,7 +49,7 @@ class StripeWH_Handler:
         """
         intent = event.data.object
         pid = intent.id
-        order = intent.metadata.checkout_order
+        order = intent.metadata.order
         save_info = intent.metadata.save_info
 
         billing_details = intent.charges.data[0].billing_details
