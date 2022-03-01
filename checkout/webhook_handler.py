@@ -80,8 +80,6 @@ class StripeWH_Handler:
         while attempt <= 5:
             try:
                 single_order = CheckoutOrder.objects.get(
-                    f_name__iexact = shipping_details.f_name,
-                    l_name__iexact = shipping_details.l_name,
                     email__iexact = billing_details.email,
                     phone_number__iexact = shipping_details.phone_number,
                     street_address1__iexact = shipping_details.address.line1,
