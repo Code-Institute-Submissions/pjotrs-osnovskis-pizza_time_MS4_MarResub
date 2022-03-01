@@ -54,7 +54,7 @@ class StripeWH_Handler:
 
         billing_details = intent.charges.data[0].billing_details
         shipping_details = intent.shipping
-        grand_total = round(intent.data.charges[0].amount / 100, 2)
+        grand_total = round(intent.charges.data[0].amount / 100, 2)
 
         # Remove Address field if empty, i.e. street_address2
         for field, value in shipping_details.address.items():
@@ -81,7 +81,7 @@ class StripeWH_Handler:
         attempt = 1
         while attempt <= 5:
             try:
-                single_order = CheckoutOrder.object.get(
+                single_order = CheckoutOrder.objects.get(
                     f_name__iexact = shipping_details.f_name,
                     l_name__iexact = shipping_details.l_name,
                     email__iexact = billing_details.email,
@@ -127,7 +127,7 @@ class StripeWH_Handler:
 
                 )
                 for item_id, item_data in json.loads(order).items():
-                    product = Product.objects.get(pk=item_id)
+                    product = Product.objects.get(id=item_id)
                     if isinstance(item_data, int):
                         checkout_line_item = CheckoutLineItem(
                             order=order,
