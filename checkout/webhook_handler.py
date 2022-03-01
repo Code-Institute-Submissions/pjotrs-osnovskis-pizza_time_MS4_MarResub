@@ -54,7 +54,7 @@ class StripeWH_Handler:
 
         billing_details = intent.charges.data[0].billing_details
         shipping_details = intent.shipping
-        grand_total = round(intent.charges.data[0].amount / 100, 2)
+        grand_total = int(round(intent.charges.data[0].amount / 100, 2))
 
         # Remove Address field if empty, i.e. street_address2
         for field, value in shipping_details.address.items():
@@ -108,16 +108,14 @@ class StripeWH_Handler:
             single_order = None
             try:
                 single_order = CheckoutOrder.objects.create(
-                    f_name__iexact = shipping_details.f_name,
-                    l_name__iexact = shipping_details.l_name,
                     user_profile = profile,
                     email = billing_details.email,
-                    phone_number = shipping_details.phone_number,
+                    phone_number = shipping_details.phone,
                     street_address1 = shipping_details.address.line1,
                     street_address2__iexact = shipping_details.address.line2,
                     city = shipping_details.address.city,
                     postcode = shipping_details.address.postal_code,
-                    grand_total = grand_total,
+                    order_total = grand_total,
                     original_order = order,
                     stripe_pid = pid,
 
