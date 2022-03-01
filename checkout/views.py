@@ -1,6 +1,4 @@
-from email import message
-from django.http import HttpResponse
-from django.shortcuts import get_object_or_404, redirect, render, reverse
+from django.shortcuts import get_object_or_404, redirect, render, reverse, HttpResponse
 from django.views.decorators.http import require_POST
 from django.contrib import messages
 from django.conf import settings
@@ -33,7 +31,7 @@ def cache_checkout_data(request):
         })
         return HttpResponse(status=200)
     except Exception as e:
-        message.error(request, 'Your payment cannot be processed right now. \
+        messages.error(request, 'Your payment cannot be processed right now. \
             Please try again later.')
         return HttpResponse(content=e, status=400)
 
@@ -44,7 +42,6 @@ def checkout(request):
     
     if request.method == 'POST':
         checkout_order = request.session.get('order', {})
-        print('>>>>>>>>>>>> CHECKOUT ORDER: {checkout_order}')
         form_data = {
             'f_name': request.POST['f_name'],
             'l_name': request.POST['l_name'],
@@ -57,7 +54,6 @@ def checkout(request):
         }
 
         order_form = CheckoutForm(form_data)
-        print('>>>>>>>>>>>> ORDER FORM: {order_form}')
 
         if order_form.is_valid():
             order = order_form.save(commit=False)
@@ -68,7 +64,7 @@ def checkout(request):
             
             for item_id, item_data in checkout_order.items():
                 try:
-                    product = Product.objects.get(pk=item_id)
+                    product = Product.objects.get(id=item_id)
                     if isinstance(item_data, int):
                         checkout_line_item = CheckoutLineItem(
                             order=order,
@@ -138,7 +134,7 @@ def checkout(request):
 
 
     if not stripe_public_key:
-        messages.error(request, ("Public key not found. \
+        messages.warning(request, ("Public key not found. \
             Did you set it up in environment?"))
 
     template = 'checkout/checkout.html'
