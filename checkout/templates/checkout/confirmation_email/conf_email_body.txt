@@ -3,12 +3,12 @@ Dear {{ order.f_name }} {{ order.l_name }}!
 This is an automated confirmation email of your order at PizzaTime. 
 Your order information:
 
-Order Number: {{ order.order_number }}
+Order Number: {{ order.order_id }}
 Order Date: {{ order.date }}
 
 Order Total: £{{ order.order_total }}
 
-Your order will be delivered to {{ order.street_address1 }}, {{ order.street_address2 }} in {{ order.city }}.
+Your order will be delivered to {{ order.street_address1 }}, {% if order.street_address2 %} {{ order.street_address2 }} {% else %}{% endif %} in {{ order.city }}.
 
 Driver will call you on {{ order.phone_number }} when outside.
 
