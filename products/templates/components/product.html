@@ -4,20 +4,18 @@
         <img src="{{ product.image_path.url }}" alt="{{ product.name }}" class="card-img-top img-fluid">
         <div class="card-body py-0">
             <div class="row">
-                <h4 class="my-2 display-name">{{ product.display_name }}</h4>
+                <h4 class="display-name m-0 p-0">
+                    {{ product.display_name }}
+                </h4>
+                {% if request.user.is_superuser %}
+                <p class="p-0 m-0">(ID:{{ product.id }})</p> 
             </div>
-            {% if request.user.is_superuser %}
-            <small>
                 <a href="{% url 'edit_product' product.id %}">Edit</a>
                 <a class="text-danger" href="{% url 'delete_product' product.id %}">Delete</a>
-            </small>
-            <small>
-                <p>Product id: {{ product.id }}</p>
-            </small>
             {% endif %}
 
             {% if product.toppings %}
-            <div class="toppings-list my-2">
+            <div class="toppings-list my-1 p-0">
                 {% for topping in product.toppings.all|dictsort:"display_name" %}
                     {{ topping.display_name }}{% if not forloop.last %}, {% else %}.{% endif %}
                 {% endfor %}
@@ -67,11 +65,9 @@
                 </button>
             </div>
 
-            <div class="row product-price my-2">
-                <div class="col-5 text-end m-0 p-0">
-                    <p class="m-0 p-0" >£</p>
-                </div>
-                <input type="number" class="remove-input-formatting col-7 text-start m-0 p-0" id="{{ product.name }}" name="price" value="{{ product.price_s }}" readonly>
+            <div class="product-price my-2">
+                <input type="hidden" id="{{ product.name }}" name="price" value="{{ product.price_s }}" readonly>
+                <p id="size_{{ product.name }}">£{{ product.price_s }}</p>
             </div>
 
             <div class="card-footer bg-transparent border-0 py-0 my-2">
@@ -87,19 +83,22 @@
         $('input[class={{ product.name }}]').on('change', function () {
             if (this.value == 's') {
                 $('#{{ product.name }}').val("{{ product.price_s }}");
+                $('#size_{{ product.name }}').html("£{{ product.price_s }}");
             } else if (this.value == 'm') {
                 $('#{{ product.name }}').val("{{ product.price_m }}");
+                $('#size_{{ product.name }}').html("£{{ product.price_m }}");
             } else if (this.value == 'l') {
                 $('#{{ product.name }}').val("{{ product.price_l }}");
+                $('#size_{{ product.name }}').html("£{{ product.price_l }}");
             }
         });
     });
 
     // Disable +/- buttons outside 1-99 range
     function handleEnableDisable(itemId) {
-        var currentValue = parseInt($(`#id_qty_${itemId}`).val());
-        var minusDisabled = currentValue < 2;
-        var plusDisabled = currentValue > 98;
+        const currentValue = parseInt($(`#id_qty_${itemId}`).val());
+        const minusDisabled = currentValue < 2;
+        const plusDisabled = currentValue > 98;
         $(`#dec_${itemId}`).prop('disabled', minusDisabled);
         $(`#inc__${itemId}`).prop('disabled', plusDisabled);
     }
@@ -113,7 +112,7 @@
 
     // Check enable/disable every time the input is changed
     $('.product-qty').change(function() {
-        var itemId = $(this).data('item_id');
+        let itemId = $(this).data('item_id');
         handleEnableDisable(itemId);
     });
 
@@ -121,20 +120,20 @@
 
     $('.inc_{{ product.id }}').click(function(e) {
        e.preventDefault();
-       var closestInput = $(this).closest('.input-group').find('.product-qty')[0];
-       var currentValue = parseInt($(closestInput).val());
+       let closestInput = $(this).closest('.input-group').find('.product-qty')[0];
+       let currentValue = parseInt($(closestInput).val());
        $(closestInput).val(currentValue + 1);
-       var itemId = $(this).data('item_id');
+       let itemId = $(this).data('item_id');
        handleEnableDisable(itemId);
     });
 
     // Decrement quantity
     $('.dec_{{ product.id }}').click(function(e) {
        e.preventDefault();
-       var closestInput = $(this).closest('.input-group').find('.product-qty')[0];
-       var currentValue = parseInt($(closestInput).val());
+       let closestInput = $(this).closest('.input-group').find('.product-qty')[0];
+       let currentValue = parseInt($(closestInput).val());
        $(closestInput).val(currentValue - 1);
-       var itemId = $(this).data('item_id');
+       let itemId = $(this).data('item_id');
        handleEnableDisable(itemId);
     });
 </script>
