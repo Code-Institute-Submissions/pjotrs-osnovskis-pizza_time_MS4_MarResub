@@ -257,7 +257,7 @@ https://www.sliderrevolution.com/resources/styling-radio-buttons/*/
     padding: .5rem 1rem;
     text-align: center;
     background-color: #fff;
-    box-shadow: 0px 0px 20px #00ff80bf;
+    box-shadow: 0px 0px 10px #00ff80bf;
     line-height: 1.5;
 
     /* standard bootstrap btn transitions */
@@ -297,12 +297,18 @@ https://www.sliderrevolution.com/resources/styling-radio-buttons/*/
     border-radius: 15px;
 } */
 
+/* Toppings grouping */
+#div_id_toppings .form-check{
+    display: inline-block;
+    width: 12rem;
+}
+
 
 
 /* ================ =============== MEDIA QUERIES =============== ================ */
 @media (max-width: 768px) {
     .overlay{
-        background: #ffffff;
+        background: #ffffffe7;
     }
     .allauth-form-content {
         top: 60%;
