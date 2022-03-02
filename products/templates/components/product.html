@@ -4,20 +4,22 @@
         <img src="{{ product.image_path.url }}" alt="{{ product.name }}" class="card-img-top img-fluid">
         <div class="card-body py-0">
             <div class="row">
-                <h4 class="display-name m-0 p-0">
+                <h4 class="display-name">
                     {{ product.display_name }}
                 </h4>
                 {% if request.user.is_superuser %}
-                <p class="p-0 m-0">(ID:{{ product.id }})</p> 
+                <p class="p-0 m-0">(ID:{{ product.id }})</p>
+                {% endif %}
             </div>
-                <a href="{% url 'edit_product' product.id %}">Edit</a>
-                <a class="text-danger" href="{% url 'delete_product' product.id %}">Delete</a>
+            {% if request.user.is_superuser %}
+            <a href="{% url 'edit_product' product.id %}">Edit</a>
+            <a class="text-danger" href="{% url 'delete_product' product.id %}">Delete</a>
             {% endif %}
 
             {% if product.toppings %}
             <div class="toppings-list my-1 p-0">
                 {% for topping in product.toppings.all|dictsort:"display_name" %}
-                    {{ topping.display_name }}{% if not forloop.last %}, {% else %}.{% endif %}
+                {{ topping.display_name }}{% if not forloop.last %}, {% else %}.{% endif %}
                 {% endfor %}
             </div>
             {% endif %}
@@ -26,7 +28,8 @@
             {% csrf_token %}
             <div class="row justify-content-center my-2">
                 <div class="col-3 p-0 ms-1">
-                    <input type="radio" id="{{ product.name }}_s" class="{{ product.name }}" name="size" value="s" checked />
+                    <input type="radio" id="{{ product.name }}_s" class="{{ product.name }}" name="size" value="s"
+                        checked />
                     <label class="size-label px-0" for="{{ product.name }}_s">
                         {% if product.category.name == 'pizza' %}22cm
                         {% elif product.category.name == 'drink' %}0.5 Litre
@@ -52,19 +55,21 @@
             </div>
 
             <div class="input-group justify-content-center my-2">
-                <button class="dec_{{ product.id }} dec-product-qty" data-item_id="{{ product.id }}" id="dec_{{ product.id }}">
+                <button class="dec_{{ product.id }} dec-product-qty" data-item_id="{{ product.id }}"
+                    id="dec_{{ product.id }}">
                     <span class="icon">
                         <i class="fas fa-minus"></i>
                     </span>
                 </button>
-                    <input class="remove-input-formatting product-qty" type="number" name="qty" value="1" min="1" max="99" data-item_id="{{ product.id }}" id="id_qty_{{ product.id }}">
-                <button class="inc_{{ product.id }} inc-product-qty" data-item_id="{{ product.id }}" id="inc_{{ product.id }}">
+                <input class="remove-input-formatting product-qty" type="number" name="qty" value="1" min="1" max="99"
+                    data-item_id="{{ product.id }}" id="id_qty_{{ product.id }}">
+                <button class="inc_{{ product.id }} inc-product-qty" data-item_id="{{ product.id }}"
+                    id="inc_{{ product.id }}">
                     <span class="icon">
                         <i class="fas fa-plus"></i>
                     </span>
                 </button>
             </div>
-
             <div class="product-price my-2">
                 <input type="hidden" id="{{ product.name }}" name="price" value="{{ product.price_s }}" readonly>
                 <p id="size_{{ product.name }}">£{{ product.price_s }}</p>
@@ -105,36 +110,36 @@
 
     // Ensure proper enabling/disabling of all inputs on page load
     var allQtyInputs = $('.product-qty');
-    for(var i = 0; i < allQtyInputs.length; i++){
+    for (var i = 0; i < allQtyInputs.length; i++) {
         var itemId = $(allQtyInputs[i]).data('item_id');
         handleEnableDisable(itemId);
     }
 
     // Check enable/disable every time the input is changed
-    $('.product-qty').change(function() {
+    $('.product-qty').change(function () {
         let itemId = $(this).data('item_id');
         handleEnableDisable(itemId);
     });
 
     // Increment quantity
 
-    $('.inc_{{ product.id }}').click(function(e) {
-       e.preventDefault();
-       let closestInput = $(this).closest('.input-group').find('.product-qty')[0];
-       let currentValue = parseInt($(closestInput).val());
-       $(closestInput).val(currentValue + 1);
-       let itemId = $(this).data('item_id');
-       handleEnableDisable(itemId);
+    $('.inc_{{ product.id }}').click(function (e) {
+        e.preventDefault();
+        let closestInput = $(this).closest('.input-group').find('.product-qty')[0];
+        let currentValue = parseInt($(closestInput).val());
+        $(closestInput).val(currentValue + 1);
+        let itemId = $(this).data('item_id');
+        handleEnableDisable(itemId);
     });
 
     // Decrement quantity
-    $('.dec_{{ product.id }}').click(function(e) {
-       e.preventDefault();
-       let closestInput = $(this).closest('.input-group').find('.product-qty')[0];
-       let currentValue = parseInt($(closestInput).val());
-       $(closestInput).val(currentValue - 1);
-       let itemId = $(this).data('item_id');
-       handleEnableDisable(itemId);
+    $('.dec_{{ product.id }}').click(function (e) {
+        e.preventDefault();
+        let closestInput = $(this).closest('.input-group').find('.product-qty')[0];
+        let currentValue = parseInt($(closestInput).val());
+        $(closestInput).val(currentValue - 1);
+        let itemId = $(this).data('item_id');
+        handleEnableDisable(itemId);
     });
 </script>
 {% endfor %}
