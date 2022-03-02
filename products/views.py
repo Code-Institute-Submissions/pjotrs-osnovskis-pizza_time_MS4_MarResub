@@ -61,7 +61,7 @@ def edit_product(request, product_id):
     """ Edit a product in the list """
     if not request.user.is_superuser:
         messages.error(request, 'Access denied.')
-        return(reverse('home'))
+        return redirect(reverse('home'))
 
     else:
         products = Product.objects.all()
@@ -72,7 +72,7 @@ def edit_product(request, product_id):
             if form.is_valid():
                 form.save()
                 messages.success(request, 'Product successfully updated!')
-                return redirect(reverse('products'))
+                return redirect(request.META['HTTP_REFERER'])
             else:
                 messages.error(request, 'Failed to update product. Please check the form and try again.')
         else:
@@ -94,10 +94,10 @@ def delete_product(request, product_id):
     """ Delete a product """
     if not request.user.is_superuser:
         messages.error(request, 'Access denied.')
-        return(reverse('home'))
+        return redirect(reverse('home'))
 
     else:
         product = get_object_or_404(Product, pk=product_id)
         product.delete()
         messages.success(request, f'Product {product.display_name} deleted!')
-        return redirect(reverse('products'))
+        return redirect(request.META['HTTP_REFERER'])
