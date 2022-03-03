@@ -1,12 +1,33 @@
 {% for product in products %}
 <div class="col-12 col-md-6 col-lg-4">
     <div class="card bg-transparent h-100 border-0 text-center">
-        <img src="{{ product.image_path.url }}" alt="{{ product.name }}" class="card-img-top img-fluid">
-        <div class="card-body py-0">
-            <div class="row">
-                <h4 class="display-name m-0 p-0">
+        <div class="product-hero">
+            <img src="{{ product.image_path.url }}" alt="{{ product.name }}" class="card-img-top img-fluid">
+            <div id="likes">
+                <h4 class="product-name">
                     {{ product.display_name }}
                 </h4>
+                {% if request.user in product.likes.all %}
+                <form id="dislike_form" class="p-0" action="{% url 'remove_like' product.id %}" method="POST">
+                    {{ product.likes.count }} likes
+                    {% csrf_token %}
+                    <button type="submit" name="liked_product_id" id="dislike_btn" value="{{ product.id }}" class="add-to-order-button p-2">
+                        <i class="fas fa-thumbs-down"></i>
+                    </button>
+                </form>
+                {% else %}
+                <form id="like_form" class="p-0" action="{% url 'like_id' product.id %}" method="POST">
+                    {{ product.likes.count }} likes
+                    {% csrf_token %}
+                    <button type="submit" name="liked_product_id" id="like_btn" value="{{ product.id }}" class="add-to-order-button p-2">
+                        <i class="fas fa-thumbs-up"></i>
+                    </button>
+                </form>
+                {% endif %}
+            </div>
+        </div>
+        <div class="card-body py-0">
+            <div class="row">
                 {% if request.user.is_superuser %}
                 <p class="p-0 m-0">(ID:{{ product.id }})</p>
                 {% endif %}
@@ -79,26 +100,6 @@
                 <input class="add-to-order-button" type="submit" value="Add to Order">
             </div>
         </form>
-        {% if request.user in product.likes.all %}
-        <form id="dislike_form" action="{% url 'remove_like' product.id %}" method="POST">
-            {% csrf_token %}
-            <button type="submit" name="liked_product_id" id="dislike_btn" value="{{ product.id }}" class="add-to-order-button">
-                <i class="fas fa-thumbs-down"></i>
-            </button>
-            {{ product.likes.count }} likes
-        </form>
-        {% else %}
-        <form id="like_form" action="{% url 'like_id' product.id %}" method="POST">
-            {% csrf_token %}
-            <button type="submit" name="liked_product_id" id="like_btn"  value="{{ product.id }}" class="add-to-order-button">
-                <i class="fas fa-thumbs-up"></i>
-            </button>
-            {{ product.likes.count }} likes
-        </form>
-
-        {% endif %}
-
-
     </div>
 </div>
 
