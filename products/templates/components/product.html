@@ -4,24 +4,31 @@
         <div class="product-hero">
             <img src="{{ product.image_path.url }}" alt="{{ product.name }}" class="card-img-top img-fluid">
             <div id="likes">
-                <h4 class="product-name">
-                    {{ product.display_name }}
+                <h4 class="product-name p-0 m-0">
+                    {{ product.display_name|upper }}
                 </h4>
+
+                
+
                 {% if request.user in product.likes.all %}
-                <form id="dislike_form" class="p-0" action="{% url 'remove_like' product.id %}" method="POST">
-                    {{ product.likes.count }} likes
+                <form id="dislike_form" class="p-0 d-flex align-items-center" action="{% url 'remove_like' product.id %}" method="POST">
+                    <p class="p-0 pe-2 m-0">{{ product.likes.count }} likes</p>
                     {% csrf_token %}
-                    <button type="submit" name="liked_product_id" id="dislike_btn" value="{{ product.id }}" class="add-to-order-button p-2">
-                        <i class="fas fa-thumbs-down"></i>
-                    </button>
-                </form>
-                {% else %}
-                <form id="like_form" class="p-0" action="{% url 'like_id' product.id %}" method="POST">
-                    {{ product.likes.count }} likes
-                    {% csrf_token %}
-                    <button type="submit" name="liked_product_id" id="like_btn" value="{{ product.id }}" class="add-to-order-button p-2">
+                    {% if request.user.is_authenticated %}
+                    <button type="submit" name="liked_product_id" id="dislike_btn" value="{{ product.id }}">
                         <i class="fas fa-thumbs-up"></i>
                     </button>
+                    {% endif %}
+                </form>
+                {% else %}
+                <form id="like_form" class="p-0 d-flex align-items-center" action="{% url 'like_id' product.id %}" method="POST">
+                    <p class="p-0 pe-2 m-0">{{ product.likes.count }} likes</p>
+                    {% csrf_token %}
+                    {% if request.user.is_authenticated %}
+                    <button type="submit" name="liked_product_id" id="like_btn" value="{{ product.id }}">
+                        <i class="fas fa-thumbs-up"></i>
+                    </button>
+                    {% endif %}
                 </form>
                 {% endif %}
             </div>
