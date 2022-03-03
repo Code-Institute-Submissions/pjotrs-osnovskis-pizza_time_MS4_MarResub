@@ -4,7 +4,7 @@
         <img src="{{ product.image_path.url }}" alt="{{ product.name }}" class="card-img-top img-fluid">
         <div class="card-body py-0">
             <div class="row">
-                <h4 class="display-name">
+                <h4 class="display-name m-0 p-0">
                     {{ product.display_name }}
                 </h4>
                 {% if request.user.is_superuser %}
@@ -79,6 +79,26 @@
                 <input class="add-to-order-button" type="submit" value="Add to Order">
             </div>
         </form>
+        {% if request.user in product.likes.all %}
+        <form id="dislike_form" action="{% url 'remove_like' product.id %}" method="POST">
+            {% csrf_token %}
+            <button type="submit" name="liked_product_id" id="dislike_btn" value="{{ product.id }}" class="add-to-order-button">
+                <i class="fas fa-thumbs-down"></i>
+            </button>
+            {{ product.likes.count }} likes
+        </form>
+        {% else %}
+        <form id="like_form" action="{% url 'like_id' product.id %}" method="POST">
+            {% csrf_token %}
+            <button type="submit" name="liked_product_id" id="like_btn"  value="{{ product.id }}" class="add-to-order-button">
+                <i class="fas fa-thumbs-up"></i>
+            </button>
+            {{ product.likes.count }} likes
+        </form>
+
+        {% endif %}
+
+
     </div>
 </div>
 

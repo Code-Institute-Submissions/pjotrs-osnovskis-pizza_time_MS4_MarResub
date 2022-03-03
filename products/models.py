@@ -1,4 +1,6 @@
 from django.db import models
+from django.contrib.auth.models import User
+
 
 class Category(models.Model):
     """ 
@@ -54,6 +56,10 @@ class Product(models.Model):
     price_l = models.DecimalField(max_digits=4, decimal_places=2, null=False, blank=False, verbose_name="Price for Large")
     image_path = models.ImageField(null=False, blank=False, verbose_name="Product Image")
     date_added = models.DateTimeField(auto_now_add=True)
+    likes = models.ManyToManyField(User, related_name='product_item')
+
+    def total_likes(self):
+        return self.likes.count()
 
     def save(self, *args, **kwargs):
         self.name = self.display_name.lower().replace(' ', '_')

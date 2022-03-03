@@ -11,7 +11,6 @@ def products(request):
 
     all_products = Product.objects.all()
     categories = None
-
     if request.GET:
         if 'category' in request.GET:
             categories = request.GET['category']
@@ -101,3 +100,18 @@ def delete_product(request, product_id):
         product.delete()
         messages.success(request, f'Product {product.display_name} deleted!')
         return redirect(request.META['HTTP_REFERER'])
+
+
+@login_required
+def like_view(request, pk):
+    product = get_object_or_404(Product, id=request.POST.get('liked_product_id'))
+    product.likes.add(request.user)
+
+    return redirect(request.META['HTTP_REFERER'])
+
+@login_required
+def remove_like(request, pk):
+    product = get_object_or_404(Product, id=request.POST.get('liked_product_id'))
+    product.likes.remove(request.user)
+    return redirect(request.META['HTTP_REFERER'])
+
