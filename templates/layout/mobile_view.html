@@ -1,54 +1,55 @@
-<div class="row p-0 m-0 d-flex align-items-center">
-    <div class="col-12 text-center">
-        <a href="{% url 'home' %}" class="nav-link main-header-link">
-            <h2 class="logo-font my-0 text-uppercase">Pizza Time</h2>
-        </a>
-    </div>
-    <div class="col-12 text-center">
-        <a href="#" class="main-header-link">
+<div class="row p-0 m-0 text-center">
+    <a href="{% url 'home' %}" class="nav-link main-header-link p-0 m-0">
+        <h2 class="logo-font m-0 p-0 text-uppercase">Pizza Time</h2>
+    </a>
+</div>
+<div class="row p-0 m-0 d-flex align-items-center main-nav">
+    <div class="col-7">
+        <p class="main-header-link m-0 p-0">
             <i class="fas fa-map-marker-alt address-icon me-1"></i>
             Street Name 123, City, P057 C0D3, Country
-        </a>
+        </p>    
     </div>
-    <div class="col-12">
+    <div class="col-5">
         <nav class="navbar navbar-expand-lg navbar-light justify-content-end">
             <a href="{% url 'order' %}" class="text-black position-relative grand-total me-2">
                 <i class="fas fa-shopping-basket menu-icon"></i>
-                <span class="position-absolute top-50 end-50 translate-middle badge rounded-pill bg-success">
-                    {% if grand_total %}
+                {% if grand_total %}
+                <span class="position-absolute top-50 end-0 translate-middle badge rounded-pill main-bg-color text-black">
                     £ {{ grand_total|floatformat:2 }}
-                    {% else %}
-                    £
-                    {% endif %}
                     <span class="visually-hidden">unread messages</span>
                 </span>
+                {% else %}
+                {% endif %}
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <div class="navbar-nav text-center">
-                    <a class="nav-link" href="{% url 'home' %}">Home</a>
-                    {% if request.user.is_authenticated %}
-                    {% if request.user.is_superuser %}
-                    <a class="nav-link" href="{% url 'admin:index' %}">Admin</a>
-                    <a class="nav-link" href="{% url 'add_product' %}">Product Management</a>
-                    {% endif %}
-                    <a class="nav-link" href="{% url 'profile' %}">My Profile</a>
-                    <a class="nav-link" href="{% url 'account_logout' %}">Logout</a>
-                    {% else %}
-                    <a class="nav-link" href="{% url 'account_signup' %}">Register</a>
-                    <a class="nav-link" href="{% url 'account_login' %}">Login</a>
-                    {% endif %}
-                    <a class="nav-link" href="{% url 'products' %}?category=pizza">Pizzas</a>
-                    <a class="nav-link" href="{% url 'products' %}?category=drink">Drinks</a>
-                    <a class="nav-link" href="#">Delivery</a>
-                    <a class="nav-link" href="#">About</a>
-                    <a class="nav-link" href="#">Contact Us</a>
-                </div>
-            </div>
         </nav>
+    </div>
+    <div class="col-12 collapse navbar-collapse " id="navbarSupportedContent">
+        <div class="navbar-nav text-center ">
+            <a class="nav-link text-black" href="{% url 'home' %}">Home</a>
+            <hr class="w-50 mx-auto">
+            {% if request.user.is_authenticated %}
+            {% if request.user.is_superuser %}
+            <a class="nav-link text-black" href="{% url 'admin:index' %}">Admin</a>
+            <a class="nav-link text-black" href="{% url 'add_product' %}">Product Management</a>
+            {% endif %}
+            <a class="nav-link text-black" href="{% url 'profile' %}">My Profile</a>
+            <a class="nav-link text-black" href="{% url 'account_logout' %}">Logout</a>
+            {% else %}
+            <a class="nav-link text-black" href="{% url 'account_signup' %}">Register</a>
+            <a class="nav-link text-black" href="{% url 'account_login' %}">Login</a>
+            {% endif %}
+            <hr class="w-50 mx-auto">
+            <a class="nav-link text-black" href="{% url 'products' %}?category=pizza">Pizzas</a>
+            <a class="nav-link text-black" href="{% url 'products' %}?category=drink">Drinks</a>
+            <a class="nav-link text-black" href="#">Delivery</a>
+            <a class="nav-link text-black" href="#">About</a>
+            <a class="nav-link text-black" href="#">Contact Us</a>
+        </div>
     </div>
 </div>

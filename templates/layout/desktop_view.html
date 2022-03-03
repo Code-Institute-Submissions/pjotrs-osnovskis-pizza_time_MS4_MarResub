@@ -1,4 +1,4 @@
-<div class="row d-flex align-items-center px-5 m-0">
+<div class="row d-flex align-items-center px-5 m-0 main-nav">
     <div class="col-lg-3">
         <a href="{% url 'home' %}" class="nav-link main-header-link">
             <h2 class="logo-font my-0 text-uppercase">Pizza Time</h2>
@@ -57,14 +57,13 @@
                 <li class="list-inline-item main-header-link ">
                     <a class="nav-link position-relative grand-total" href="{% url 'order' %}">
                         <i class="fas fa-shopping-basket menu-icon"></i>
-                        <span class="position-absolute top-100 start-50 translate-middle badge rounded-pill bg-success">
-                            {% if grand_total %}
+                        {% if grand_total %}
+                        <span class="position-absolute top-100 start-50 translate-middle badge rounded-pill main-bg-color text-black">
                             £ {{ grand_total|floatformat:2 }}
-                            {% else %}
-                            £
-                            {% endif %}
                             <span class="visually-hidden"></span>
                         </span>
+                        {% else %
+                        {% endif %}
                     </a>
                 </li>
             </ul>

@@ -5,6 +5,11 @@
     --main-color: #50C878;
     --secondary-color: #00A36C
 }
+
+.main-bg-color{
+    background-color: var(--main-color);
+}
+
 /* ================ =============== GENERAL STYLING =============== ================ */
 html{
     height: 100%;
@@ -61,6 +66,9 @@ input[type=number] {
 .logo-font{
     font-family: 'Bungee Shade', serif;
 }
+.main-nav{
+    box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
+}
 
 .main-header-link,
 .main-header-link h2,
@@ -82,6 +90,7 @@ input[type=number] {
 
 .grand-total span{
     font-size: .85rem;
+    font-weight: 500;
 }
 
 
@@ -90,6 +99,8 @@ input[type=number] {
 
 .product-hero{
     position: relative;
+    box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
+
 }
 
 #likes{
