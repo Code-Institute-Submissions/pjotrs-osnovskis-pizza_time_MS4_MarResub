@@ -1,0 +1,24 @@
+<h4 class="display-5 mb-4">Free Delivery in Towyn</h4>
+<h4>Order Enquiries</h4>
+<p>If your order is late, incorrect , or if you're not happy with the food, please contact us directly on 
+    {% for a in address %}
+    <strong>{{ a.phone_number }}</strong>
+    {% endfor %}
+</p>
+
+<h4>Other Issues</h4>
+<p>If you have any other issues, please use our <a href="#">contact form</a>, and we will come back yo tou as soon as we can.</p>
+
+<h4>Collection Address</h4>
+<p>
+    <strong>
+        {% for a in address %}
+            {{ a.street_name1 }},
+            {% if a.street_name2 %}
+            {{ a.street_name2 }},
+            {% endif %}
+            {{ a.city }},
+            {{ a.postcode }}
+        {% endfor %}
+    </strong>
+</p>
