@@ -8,7 +8,7 @@ class ProductForm(forms.ModelForm):
     class Meta:
         model = Product
         fields = '__all__'
-        exclude = ('name',)
+        exclude = ('name', 'likes',)
 
     image_path = forms.ImageField(label='Product Image', required=False, widget=CustomClearableFileInput)
 

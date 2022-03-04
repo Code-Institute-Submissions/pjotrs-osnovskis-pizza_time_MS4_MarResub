@@ -3,12 +3,12 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
 from .models import Category, Product
+from home.models import Address
 from .forms import ProductForm
-
 
 def products(request):
     """ A view to return a products page, including sorting and searching """
-
+    address = Address.objects.all()
     all_products = Product.objects.all()
     categories = None
     if request.GET:
@@ -20,6 +20,7 @@ def products(request):
     context = {
         'products': all_products,
         'current_category': categories,
+        'address': address,
     }
 
     return render(request, 'products/products.html', context)

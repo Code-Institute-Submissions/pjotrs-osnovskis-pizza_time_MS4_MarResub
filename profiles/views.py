@@ -5,11 +5,15 @@ from django.contrib.auth.decorators import login_required
 from .models import UserProfile
 from .forms import UserProfileForm
 from checkout.models import CheckoutOrder
+from home.models import Address
+
 
 
 @login_required
 def user_profile(request):
     """ Display users profile. """
+    address = Address.objects.all()
+
     profile = get_object_or_404(UserProfile, user=request.user)
     if request.POST:
         form = UserProfileForm(request.POST, instance=profile)
@@ -27,7 +31,9 @@ def user_profile(request):
     context = {
         'form': form,
         'orders': orders,
-        'on_profile_page': True
+        'on_profile_page': True,
+        'address': address,
+
     }
 
     return render(request, template, context)
