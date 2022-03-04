@@ -4,6 +4,7 @@ class Address(models.Model):
     class Meta:
         """ Spelling correction for admin page """
         verbose_name_plural = 'Address'
+        unique_together = (('street_name1', 'street_name2', 'city', 'postcode', 'phone_number'),)
 
     street_name1 = models.CharField(max_length=254)
     street_name2 = models.CharField(max_length=254, blank=True)

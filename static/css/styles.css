@@ -10,6 +10,10 @@
     background-color: var(--main-color);
 }
 
+.main-color{
+    color: var(--main-color);
+}
+
 /* ================ =============== GENERAL STYLING =============== ================ */
 html{
     height: 100%;
@@ -376,6 +380,12 @@ https://www.sliderrevolution.com/resources/styling-radio-buttons/*/
     border-radius: 0;
 }
 
+/* ================ =============== BUSINESS INFO =============== ================ */
+
+#map{
+    height: 25rem;
+    width: 25rem;
+}
 
 
 /* ================ =============== MEDIA QUERIES =============== ================ */
@@ -408,5 +418,12 @@ https://www.sliderrevolution.com/resources/styling-radio-buttons/*/
     .custom-width {
         width: 100vw;
     }
+
+    #map{
+        height: 25rem; 
+        width: 22rem; 
+        margin: 0 auto;
+    }
+    
     
 }

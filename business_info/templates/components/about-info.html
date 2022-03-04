@@ -1,8 +1,10 @@
-<h4 class="display-5 mb-4">Free Delivery in Towyn</h4>
+<h4 class="display-5 text-center text-lg-start mb-4">Free Delivery in Towyn</h4>
 <h4>Order Enquiries</h4>
-<p>If your order is late, incorrect , or if you're not happy with the food, please contact us directly on 
+<p>If your order is late, incorrect or if you're not happy with the food, please contact us directly on 
     {% for a in address %}
-    <strong>{{ a.phone_number }}</strong>
+        <strong>
+            <a href="tel:{{ a.phone_number }}" class="text-black">{{ a.phone_number }}</a>
+        </strong>
     {% endfor %}
 </p>
 
@@ -13,12 +15,15 @@
 <p>
     <strong>
         {% for a in address %}
+        <a href="http://maps.google.com/?q={{ a.street_name1 }}, {% if a.street_name2 %}{{ a.street_name2 }}, {% endif %}{{ a.city }}, {{ a.postcode }}" 
+           target="_blank" rel="noopener" class="text-black">
             {{ a.street_name1 }},
             {% if a.street_name2 %}
             {{ a.street_name2 }},
             {% endif %}
             {{ a.city }},
-            {{ a.postcode }}
+            {{ a.postcode|upper }}
+        </a>
         {% endfor %}
     </strong>
 </p>
