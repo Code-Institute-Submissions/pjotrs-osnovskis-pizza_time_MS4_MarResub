@@ -1,0 +1,26 @@
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script>
+    const EmailJSUserID = "user_DoOnYBoOadoZVbGED61tp";
+    const EmailJSAccessToken = "{{ email_js_access_token }}";
+
+    function sendMail(contactForm) {
+        emailjs.init(EmailJSUserID); // Please see README.md file how to get own user id for it to work
+        emailjs.send("pizzatime.ms-4", "pizzatime-ms4", {
+                "from_name": contactForm.user_name.value,
+                "from_email": contactForm.user_email.value,
+                "message": contactForm.message.value
+            })
+            .then(
+                function () {
+                    alert("Your message was sent successfully!")
+                    $("#contactForm")[0].reset();
+                },
+                function (error) {
+                    alert("There was an error, please try again! Please check console for error.")
+                    console.log("FAILED", error);
+                }
+            );
+
+        return false; // To block from loading a new page
+    }
+</script>

@@ -1,0 +1,37 @@
+<p class="mb-4">
+    If your order is late, incorrect or if you're not happy with the food,
+    please contact us directly on 
+    {% for a in address %}
+        <a href="tel:{{ a.phone_number }}" class="text-black">
+            <strong>{{ a.phone_number }}</strong>
+        </a>
+    {% endfor %}
+</p>
+
+<form name="contactForm" id="contactForm" onsubmit="return sendMail(this); this.reset();">
+    <div class="row m-0">
+        <div class="col-12 col-md-6 m-0 p-0">
+            <!-- Contact name field -->
+            <input class="ps-2" id="user_name" name="user_name" type="text" minlength="2" maxlength="25" placeholder="Full Name*" required>
+        </div>    
+        <div class="col-12 col-md-6 m-0 p-0 text-end" >
+            <!-- user email field -->
+            <input class="ps-2" id="user_email" name="user_email" type="email" placeholder="Email Address*" required>
+        </div>    
+    </div>
+    <div class="row m-0">
+        <div class="col-12 m-0 p-0">
+            <!-- Contact Message -->
+            <textarea class="w-100 pt-2 ps-2" name="message" id="message" rows="7"  placeholder="Message*" required></textarea>
+        </div>
+    </div>
+    <div class="row my-2 mx-0">
+        <div class="col-2 mx-auto p-0">
+            <button type="submit" class="order-now-btn m-0" id="contactSend">
+                Send
+            </button>
+        </div>
+    </div>
+</form>
+
+{% include 'includes/email-js.html' %}

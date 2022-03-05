@@ -54,6 +54,10 @@ input[type=number] {
     display: none;
 }
 
+textarea:focus, input:focus{
+    outline: none;
+}
+
 /* ================ =============== OVERLAY =============== ================ */
 
 .overlay{
@@ -276,14 +280,25 @@ https://www.sliderrevolution.com/resources/styling-radio-buttons/*/
     border-radius: 15px;
 }
 
-/* ================ =============== ALLAUTH =============== ================ */
-.width-50-100{
-    width: 50%;
-}
 
+/* ================ =============== ALLAUTH =============== ================ */
 .allauth-container {
     height: 80vh;
 }
+
+.allauth-form-content label:not([for='id_remember']) {
+    display: none;
+}
+
+.allauth-form-content input::placeholder {
+    color: #aab7c4;
+}
+
+.allauth-form-content a {
+	color: #17a2b8; /* text-info */
+}
+
+/* ================ =============== FORMS =============== ================ */
 
 .allauth-form-content p {
     margin-top: 1.5rem; /* mt-4 */
@@ -293,17 +308,11 @@ https://www.sliderrevolution.com/resources/styling-radio-buttons/*/
 .allauth-form-content input,
 #profile-update-form input,
 .product-admin-form input,
-.product-admin-form select{
+.product-admin-form select,
+#contactForm input,
+#contactForm textarea{
     border: 2px solid var(--main-color);
     border-radius: 15px;
-}
-
-.allauth-form-content label:not([for='id_remember']) {
-    display: none;
-}
-
-.allauth-form-content input::placeholder {
-    color: #aab7c4;
 }
 
 .allauth-form-content button,
@@ -340,9 +349,6 @@ https://www.sliderrevolution.com/resources/styling-radio-buttons/*/
     border-color: var(--main-color);
 }
 
-.allauth-form-content a {
-	color: #17a2b8; /* text-info */
-}
 
 /* ================ =============== PRODUCT MANAGEMENT =============== ================ */
 
@@ -387,6 +393,14 @@ https://www.sliderrevolution.com/resources/styling-radio-buttons/*/
     width: 25rem;
 }
 
+#contactForm input{
+    line-height: 2rem;
+    margin-bottom: 1rem;
+    width: 95%;
+    outline: none;
+}
+
+
 
 /* ================ =============== MEDIA QUERIES =============== ================ */
 @media (max-width: 768px) {
@@ -401,11 +415,6 @@ https://www.sliderrevolution.com/resources/styling-radio-buttons/*/
     .my-orders{
         padding-top: 3rem;
     }
-
-    .width-50-100{
-        width: 100%;
-    }
-
     .message-container{
         margin: 0;
         position: absolute;
@@ -414,15 +423,15 @@ https://www.sliderrevolution.com/resources/styling-radio-buttons/*/
         transform: translateY(-50%);
         width: 100%;
     }
-
-    .custom-width {
-        width: 100vw;
-    }
-
     #map{
         height: 25rem; 
         width: 22rem; 
         margin: 0 auto;
+    }
+
+    #contactForm input{
+        width: 100%;
+
     }
     
     
