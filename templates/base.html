@@ -8,36 +8,47 @@
 </head>
 
 <body>
+    <div class="content">
+        {% include 'components/messages.html' %}
 
-    {% include 'components/messages.html' %}
+        <header>
+            <div class="d-lg-none">
+                {% include 'layout/mobile_view.html' %}
+            </div>
+            <div class="d-none d-lg-block">
+                {% include 'layout/desktop_view.html' %}
+            </div>
+        </header>
 
-    <header>
-        <div class="d-lg-none">
-            {% include 'layout/mobile_view.html' %}
-        </div>
-        <div class="d-none d-lg-block">
-            {% include 'layout/desktop_view.html' %}
-        </div>
-    </header>
+        
+        {% block page_header %}
+        {% endblock %}
+        
+        {% block content %}
+        {% endblock %}
 
-
-    {% block page_header %}
-    {% endblock %}
-
-    {% block content %}
-    {% endblock %}
-
+    </div>
     {% block postload_js %}
     <script>
         // Code taken from Bootstrap 5 Documentation
         var toastElList = [].slice.call(document.querySelectorAll('.toast'))
-            var toastList = toastElList.map(function (toastEl) {
+        var toastList = toastElList.map(function (toastEl) {
             return new bootstrap.Toast(toastEl, 'show')
         })
-    </script>
+        </script>
 
-    {% endblock %}
-
+{% endblock %}
 </body>
+
+<footer>
+    <div class="row m-0" id="footer">
+        {% include 'layout/footer.html' %}
+    </div>
+    <div class="row m-0">
+        <div class="col-12 text-center">
+            <p>All rights reserved. PizzaTime Ltd. 2022</p>
+        </div>
+    </div>
+</footer>
 
 </html>

@@ -1,0 +1,41 @@
+<div class="footer-start col-12 col-lg-4 text-center text-lg-start ">
+    <a href="{% url 'home' %}" class="text-black">
+        <h2 class="logo-font m-0 p-0 mb-2 text-uppercase">Pizza Time</h2>
+    </a>
+{% for a in address %}
+    <a href="http://maps.google.com/?q={{ a.street_name1 }}, {% if a.street_name2 %}{{ a.street_name2 }}, {% endif %}{{ a.city }}, {{ a.postcode }}" 
+        target="_blank" rel="noopener" class="text-black">
+        {{ a.street_name1 }},
+        {% if a.street_name2 %}
+        {{ a.street_name2 }},
+        {% endif %}
+        {{ a.city }},
+        {{ a.postcode|upper }}
+    </a>
+    <br>
+    <a href="tel:{{ a.phone_number }}" class="text-black">
+        <strong>{{ a.phone_number }}</strong>
+    </a>
+    {% endfor %}
+
+</div>
+<div class="footer-center col-12 col-lg-4 text-center ">
+    <a class="main-color" href="https://www.facebook.com" target="_blank" rel="noopener" aria-label="Facebook">
+        <i class="fab fa-facebook-square"></i>
+    </a>
+    <a class="main-color" href="https://www.instagram.com" target="_blank" rel="noopener" aria-label="Instagram">
+        <i class="fab fa-instagram-square"></i>
+    </a>
+    <a class="main-color" href="https://www.pinterest.com" target="_blank" rel="noopener" aria-label="Pinterest">
+        <i class="fab fa-pinterest-square"></i>
+    </a>
+</div>
+<div class="footer-end col-12 col-lg-4 text-center text-lg-end ">   
+    <ul class="m-0 p-0">
+        <li><a class="text-black" href="{% url 'home' %}">Home</a></li>
+        <li><a class="text-black" href="{% url 'products' %}?category=pizza">Pizzas</a></li>
+        <li><a class="text-black" href="{% url 'products' %}?category=drink">Drinks</a></li>
+        <li><a class="text-black" href="{% url 'info' %}">About</a></li>
+        <li><a class="text-black" href="{% url 'contact_us' %}">Contact Us</a></li>
+    </ul>
+</div>

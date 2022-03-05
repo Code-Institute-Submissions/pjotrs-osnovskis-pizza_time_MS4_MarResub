@@ -3,7 +3,8 @@
 
 :root{
     --main-color: #50C878;
-    --secondary-color: #00A36C
+    --secondary-color: #00A36C;
+    --btn-transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
 
 .main-bg-color{
@@ -15,16 +16,16 @@
 }
 
 /* ================ =============== GENERAL STYLING =============== ================ */
-html{
+html, body {
     height: 100%;
-    width: 100%;
-    margin: 0 auto;
-}
+    margin: 0;
+  }
 
 body{
     background: url('../../media/index-image1.png') no-repeat right center fixed;
     background-size: cover;
 }
+
 
 /* 
     Remove arrows on input type=number
@@ -76,6 +77,11 @@ textarea:focus, input:focus{
 }
 .main-nav{
     box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
+}
+
+.navigation-links a:hover{
+    padding: 0;
+    border-bottom: 2px solid var(--main-color);
 }
 
 .main-header-link,
@@ -175,12 +181,7 @@ https://www.sliderrevolution.com/resources/styling-radio-buttons/*/
     border: 2px solid var(--main-color);
     border-radius: 15px;
     padding: .5rem;
-    text-align: center;
-    box-shadow: 0px 3px 10px -2px #a1aaa680;
-    position: relative;
-
-    /* standard bootstrap btn transitions */
-    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    transition: var(--btn-transition)
 
     /* This idea was taken from here: 
     https://stackoverflow.com/questions/8957443/prevent-copying-text-in-web-page */
@@ -224,7 +225,7 @@ https://www.sliderrevolution.com/resources/styling-radio-buttons/*/
     line-height: 1.5;
 
     /* standard bootstrap btn transitions */
-    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    transition: var(--btn-transition)
 }
 
 .dec-product-qty:hover,
@@ -337,7 +338,7 @@ https://www.sliderrevolution.com/resources/styling-radio-buttons/*/
     line-height: 1.5;
 
     /* standard bootstrap btn transitions */
-    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    transition: var(--btn-transition)
 }
 
 .allauth-form-content button:hover,
@@ -400,6 +401,41 @@ https://www.sliderrevolution.com/resources/styling-radio-buttons/*/
     outline: none;
 }
 
+/* ================ =============== FOOTER =============== ================ */
+.content {
+    min-height: 100%;
+}
+footer{
+    height: 50px;
+    margin-top: 1rem;
+    box-shadow: rgba(0, 0, 0, 0.45) 0px -25px 20px -20px;
+}
+#footer{
+    padding: 1rem 10rem;
+}
+
+#footer li{
+    list-style: none;
+}
+
+#footer a{
+    text-decoration: none;
+}
+
+.footer-center{
+    font-size: 2.5rem;
+}
+
+.footer-center a:hover{
+    color: #fff;
+    text-shadow: -1px -1px 0 var(--main-color), 1px -1px 0 var(--main-color), -1px 1px 0 var(--main-color), 1px 1px 0 var(--main-color);
+    transition: var(--btn-transition)
+}
+
+.footer-end a:hover{
+    border-bottom: 2px solid var(--main-color);
+}
+
 
 
 /* ================ =============== MEDIA QUERIES =============== ================ */
@@ -428,10 +464,23 @@ https://www.sliderrevolution.com/resources/styling-radio-buttons/*/
         width: 22rem; 
         margin: 0 auto;
     }
-
     #contactForm input{
         width: 100%;
 
+    }
+    #footer{
+        padding: 1rem;
+    }
+
+    .footer-start{
+        margin-bottom: 1rem;
+    }
+    .footer-center{
+        margin: 1rem 0;
+        font-size: 2.5rem;
+    }
+    .footer-end{
+        margin-top: 1rem;
     }
     
     
