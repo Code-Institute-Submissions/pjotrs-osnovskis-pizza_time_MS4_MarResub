@@ -7,9 +7,6 @@
                 <h4 class="product-name p-0 m-0">
                     {{ product.display_name|upper }}
                 </h4>
-
-                
-
                 {% if request.user in product.likes.all %}
                 <form id="dislike_form" class="p-0 d-flex align-items-center" action="{% url 'remove_like' product.id %}" method="POST">
                     <p class="p-0 pe-2 m-0">{{ product.likes.count }} likes</p>
@@ -110,64 +107,5 @@
     </div>
 </div>
 
-<script>
-    // This script stays inside the html file for django templating to work.
-    $(document).ready(function () {
-        $('input[class={{ product.name }}]').on('change', function () {
-            if (this.value == 's') {
-                $('#{{ product.name }}').val("{{ product.price_s }}");
-                $('#size_{{ product.name }}').html("£{{ product.price_s }}");
-            } else if (this.value == 'm') {
-                $('#{{ product.name }}').val("{{ product.price_m }}");
-                $('#size_{{ product.name }}').html("£{{ product.price_m }}");
-            } else if (this.value == 'l') {
-                $('#{{ product.name }}').val("{{ product.price_l }}");
-                $('#size_{{ product.name }}').html("£{{ product.price_l }}");
-            }
-        });
-    });
-
-    // Disable +/- buttons outside 1-99 range
-    function handleEnableDisable(itemId) {
-        const currentValue = parseInt($(`#id_qty_${itemId}`).val());
-        const minusDisabled = currentValue < 2;
-        const plusDisabled = currentValue > 98;
-        $(`#dec_${itemId}`).prop('disabled', minusDisabled);
-        $(`#inc__${itemId}`).prop('disabled', plusDisabled);
-    }
-
-    // Ensure proper enabling/disabling of all inputs on page load
-    var allQtyInputs = $('.product-qty');
-    for (var i = 0; i < allQtyInputs.length; i++) {
-        var itemId = $(allQtyInputs[i]).data('item_id');
-        handleEnableDisable(itemId);
-    }
-
-    // Check enable/disable every time the input is changed
-    $('.product-qty').change(function () {
-        let itemId = $(this).data('item_id');
-        handleEnableDisable(itemId);
-    });
-
-    // Increment quantity
-
-    $('.inc_{{ product.id }}').click(function (e) {
-        e.preventDefault();
-        let closestInput = $(this).closest('.input-group').find('.product-qty')[0];
-        let currentValue = parseInt($(closestInput).val());
-        $(closestInput).val(currentValue + 1);
-        let itemId = $(this).data('item_id');
-        handleEnableDisable(itemId);
-    });
-
-    // Decrement quantity
-    $('.dec_{{ product.id }}').click(function (e) {
-        e.preventDefault();
-        let closestInput = $(this).closest('.input-group').find('.product-qty')[0];
-        let currentValue = parseInt($(closestInput).val());
-        $(closestInput).val(currentValue - 1);
-        let itemId = $(this).data('item_id');
-        handleEnableDisable(itemId);
-    });
-</script>
+{% include 'includes/scripts.html' %}
 {% endfor %}

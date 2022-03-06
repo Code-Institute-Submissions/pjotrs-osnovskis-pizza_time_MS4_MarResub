@@ -29,6 +29,8 @@ def products(request):
 @login_required
 def add_product(request):
     """ Add a product to the list """
+    address = Address.objects.all()
+
     if not request.user.is_superuser:
         messages.error(request, 'Access denied.')
         return(reverse('home'))
@@ -51,6 +53,8 @@ def add_product(request):
         context = {
             'products': products,
             'form': form,
+            'address': address,
+
         }
 
         return render(request, template, context)
@@ -59,6 +63,7 @@ def add_product(request):
 @login_required
 def edit_product(request, product_id):
     """ Edit a product in the list """
+    address = Address.objects.all()
     if not request.user.is_superuser:
         messages.error(request, 'Access denied.')
         return redirect(reverse('home'))
@@ -84,6 +89,8 @@ def edit_product(request, product_id):
             'form': form,
             'product': product,
             'products': products,
+            'address': address,
+
         }
 
         return render(request, template, context)
@@ -107,7 +114,6 @@ def delete_product(request, product_id):
 def like_view(request, pk):
     product = get_object_or_404(Product, id=request.POST.get('liked_product_id'))
     product.likes.add(request.user)
-
     return redirect(request.META['HTTP_REFERER'])
 
 @login_required

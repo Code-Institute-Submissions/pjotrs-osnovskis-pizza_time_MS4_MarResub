@@ -1,26 +1,10 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block page_header %}
-<div class="row m-0">
-    <div class="col text-center my-5">
-        <h2 class="display-4">Contact Us</h2>
-    </div>
-</div>
-{% endblock %}
-
 {% block content %}
-<div class="overlay"></div>
-
-<div class="container">
-    <div class="row m-0">
-        <div class="col-12 col-lg-6 my-2 mx-auto">
-            {% include 'components/contact-form.html' %}
-        </div>
+    <h2 class="display-4 text-center mb-5">Contact Us</h2>
+    <div class="col-12 col-md-6 mx-auto">
+        {% include 'components/contact-form.html' %}
     </div>
-</div>
-
-</div>
-
 {% endblock %}
 

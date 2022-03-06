@@ -1,15 +1,11 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="overlay"></div>
-
-<div class="container">
-    <div class="row allauth-container d-flex align-items-center justify-content-center">
-        <div class="col-12 col-md-5 custom-width allauth-form-content px-4">
+    <div class="col-12 d-flex align-items-center my-5">
+        <div class="allauth-form-content">
             {% block inner_content %}
             {% endblock %}
         </div>
     </div>
 </div>
-
 {% endblock %}

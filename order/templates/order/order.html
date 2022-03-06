@@ -1,24 +1,10 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block page_header %}
-<div class="row">
-    <div class="col text-center my-4">
-        <h2 class="display-4">Your Order</h2>
-    </div>
-</div>
-
-{% endblock %}
-
 {% block content %}
-<div class="overlay"></div>
-
-<div class="container">
-    <div class="row">
-        <div class="col-12 col-lg-8 mx-auto">
-            {% include 'components/order-item.html' %}
-        </div>
-    </div>
+<h2 class="display-4 text-center mt-5">My Order</h2>
+<div class="col-12 mx-auto mb-5">
+    {% include 'components/order-item.html' %}
 </div>
 
 {% include 'includes/scripts.html' %}

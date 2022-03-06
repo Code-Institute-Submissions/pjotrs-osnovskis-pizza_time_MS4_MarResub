@@ -1,52 +1,38 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block page_header %}
-<div class="row">
-    <div class="col"></div>
-</div>
-{% endblock %}
-
 {% block content %}
-<div class="overlay"></div>
-
-<div class="container">
-    <div class="row">
-        <div class="col-12 col-md-6">
-            <h2 class="">Product Management</h2>
-            <h5 class="text-muted" >Change Product</h5>
+<div class="mt-5"></div>
+<h2 >Product Management</h2>
+<h5 class="text-muted">Change Product: {{ product.display_name }}</h5>
+<div class="col-12 col-md-6">
+    <form class="product-admin-form" action="{% url 'edit_product' product.id %}" method="POST"
+        enctype="multipart/form-data">
+        {% csrf_token %}
+        {% for field in form %}
+        {% if field.name != 'image_path' %}
+        {{ field | as_crispy_field }}
+        {% else %}
+        {{ field }}
+        {% endif %}
+        {% endfor %}
+        <div class="text-center my-3">
+            <a href="#" onclick="window.history.go(-1); return false;"
+                class="back-button text-black me-3 text-decoration-none text-uppercase">
+                <i class="fas fa-angle-left"></i>
+                Back
+            </a>
+            <button class="order-now-btn" type="submit">Update</button>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-12 col-md-6">
-            <form class="product-admin-form"  action="{% url 'edit_product' product.id %}" method="POST" enctype="multipart/form-data">
-                {% csrf_token %}
-                {% for field in form %}
-                    {% if field.name != 'image_path' %}
-                        {{ field | as_crispy_field }}
-                    {% else %}
-                        {{ field }}
-                    {% endif %}
-                {% endfor %}
-                <div class="text-center my-3">
-                    <a href="{% url 'products' %}">Products</a>
-                    <button class="order-now-btn" type="submit">Update</button>
-                </div>
-            </form>
-        </div>
-        <div class="col-12 col-md-6">
-            {% include 'components/product_list.html' %}
-        </div>
-    </div>
+    </form>
 </div>
+<div class="col-12 col-md-6">
+    {% include 'components/product_list.html' %}
+</div>
+<div class="mb-5" ></div>
 {% endblock %}
 
 {% block postload_js %}
-    {{ block.super }}
-    <script type="text/javascript">
-        $('#new-image').change(function() {
-            var file = $('#new-image')[0].files[0];
-            $('#filename').text(`New image: ${file.name}`);
-        });
-    </script>
+{{ block.super }}
+{% include 'includes/scripts.html' %}
 {% endblock %}

@@ -46,20 +46,20 @@
         <input type="hidden" value="{{ client_secret }}" name="client_secret">
     </fieldset>
 
-    <div class="submit-button text-right mt-5 mb-2">
+    <div class="submit-button text-right my-3">
         <a href="{% url 'order' %}" class="btn btn-outline-black rounded-0">
             <span class="icon">
                 <i class="fas fa-chevron-left"></i>
             </span>
-            <span class="font-weight-bold">Adjust Order</span>
+            <span >Adjust Order</span>
         </a>
-        <button id="submit-button" class="btn btn-black rounded-0">
-            <span class="font-weight-bold">Complete Order</span>
+        <button id="submit-button" class="order-now-btn">
+            <span >Complete Order</span>
             <span class="icon">
                 <i class="fas fa-lock"></i>
             </span>
         </button>
-        <p class="small text-danger my-0">
+        <p class="small text-danger my-3">
             <span class="icon">
                 <i class="fas fa-exclamation-circle"></i>
             </span>

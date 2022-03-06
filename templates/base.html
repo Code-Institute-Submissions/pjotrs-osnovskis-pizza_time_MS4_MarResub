@@ -8,26 +8,29 @@
 </head>
 
 <body>
-    <div class="content">
-        {% include 'components/messages.html' %}
 
-        <header>
-            <div class="d-lg-none">
-                {% include 'layout/mobile_view.html' %}
-            </div>
-            <div class="d-none d-lg-block">
-                {% include 'layout/desktop_view.html' %}
-            </div>
-        </header>
+    {% include 'components/messages.html' %}
 
-        
-        {% block page_header %}
-        {% endblock %}
-        
-        {% block content %}
-        {% endblock %}
+    <header>
+        <div class="d-lg-none">
+            {% include 'layout/mobile_view.html' %}
+        </div>
+        <div class="d-none d-lg-block">
+            {% include 'layout/desktop_view.html' %}
+        </div>
+    </header>
 
+    <div class="overlay"></div>
+
+    <div class="container d-flex align-items-center ">
+        <div class="row m-0 mx-auto">
+            {% block content %}
+            {% endblock %}            
+        </div>
     </div>
+
+
+
     {% block postload_js %}
     <script>
         // Code taken from Bootstrap 5 Documentation
@@ -35,9 +38,9 @@
         var toastList = toastElList.map(function (toastEl) {
             return new bootstrap.Toast(toastEl, 'show')
         })
-        </script>
+    </script>
 
-{% endblock %}
+    {% endblock %}
 </body>
 
 <footer>

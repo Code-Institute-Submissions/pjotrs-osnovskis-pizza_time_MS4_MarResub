@@ -1,7 +1,5 @@
 {% load static %}
-<div class="row d-flex justify-content-center">
-    <div class="col-12 col-md-6">
-        <div class="order-confirm-border bg-white bg-opacity-50 p-3">
+        <div class="order-confirm-border bg-white bg-opacity-50 p-3 mt-5">
             <div class="p-2">
                 <div class="row mt-1">
                     <div class="col">
@@ -138,17 +136,13 @@
                 </div>
             </div>
         </div>
-    </div>
-</div>
 
-<div class="row ">
-    <div class="col-12 text-center">
+    <div class="col-12 text-center mb-5">
         {% if request.user.is_authenticated %}
-            <p class="small text-muted mb-3 mt-5">You can see all your orders in your profile page.</p>
+            <p class="small text-muted my-3">You can see all your orders in your profile page.</p>
             <a href="{% url 'profile' %}" class="order-now-btn">My Profile</a>
         {% else %}
-            <p class="small text-muted mb-3 mt-5">You can <a href="{% url 'account_signup' %}">sign up</a> to save your delivery details for next time.</p>
+            <p class="small text-muted my-3">You can <a href="{% url 'account_signup' %}">sign up</a> to save your delivery details for next time.</p>
             <a href="{% url 'home' %}" class="order-now-btn">Home</a>
         {% endif %}
     </div>
-</div>

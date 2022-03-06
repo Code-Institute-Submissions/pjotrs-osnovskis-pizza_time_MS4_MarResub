@@ -1,73 +1,81 @@
 {% if order_items %}
 {% for item in order_items %}
-        <div class="card bg-transparent border-0 text-center ">
-            <div class="row d-flex align-items-center">
-                <div class="col-12 col-md-4">
-                    <img src="{{ item.product.image_path.url }}" alt="{{ item.product.name }}"
-                        class="card-img-top img-fluid">
-                </div>
-
-                <div class="col-12 col-md-4">
-                    <p class="my-2">{{ item.product.display_name }}</p>
-                    {% if item.product.toppings %}
-                    <div class="toppings-list">
-                        {% for topping in item.product.toppings.all|dictsort:"display_name" %}
-                            {{ topping.display_name }}{% if not forloop.last %}, {% else %}.{% endif %}
-                        {% endfor %}
-                    </div>
-                    {% endif %}
-                    <p class="my-2">Size:
-                        {% if item.size == "s" %}Small
-                        {% elif item.size == "m" %}Medium
-                        {% elif item.size == "l" %}Large
-                        {% else %}No Size Available
-                        {% endif %}
-                    </p>
-
-                    <p class="my-2">Price: {{ item.price }}</p>
-                </div>
-
-                <div class="col-12 col-md-4">
-                    <form class="form update-form" action="{% url 'change_order' item.item_id %}" method="POST">
-                        {% csrf_token %}
-                        <input class="display-none" name="size" value="{{ item.size }}">
-                        <div class="input-group justify-content-center my-2">
-                            <button type="submit" class="dec_{{ item.id }} dec-product-qty"
-                                data-item_id="{{ item.product.id }}" id="dec_{{ item.product.id }}">
-                                <span class="icon">
-                                    <i class="fas fa-minus"></i>
-                                </span>
-                            </button>
-                            <input class="item-qty remove-input-formatting" type="number" name="qty" min="1" max="99"
-                                value="{{ item.qty }}" data-item_id="{{ item.product.id }}"
-                                id="id_qty_{{ item.product.id }}">
-                            <button type="submit" class="inc_{{ item.id }} inc-product-qty"
-                                data-item_id="{{ item.product.id }}" id="inc_{{ item.product.id }}">
-                                <span class="icon">
-                                    <i class="fas fa-plus"></i>
-                                </span>
-                            </button>
-                        </div>
-                    </form>
-                    <a class="update-link">Update</a>
-                    <p class="my-2">Total Price: {{ item.total }}</p>
-                    <a class="remove-item" id="remove_{{ item.item_id }}" data-product_size="{{ item.size }}" data-product_qty="{{ item.qty }}">Remove</a>
-                    
+<div class="card bg-transparent border-0 text-center">
+    <div class="row d-flex align-items-center">
+        <div class="col-12 col-md-4">
+            <div class="product-hero">
+                <img src="{{ item.product.image_path.url }}" alt="{{ item.product.name }}"
+                    class="card-img-top img-fluid">
+                <div id="likes">
+                    <h4 class="product-name p-0 m-0">
+                        {{ item.product.display_name|upper }}
+                    </h4>
                 </div>
             </div>
         </div>
-        
-        {% endfor %}
-        <div class="row">
-            <div class="col-12">
-                <hr>
-                <h2 class="display-6 text-end" >Order total: <strong>£{{ grand_total }}</strong></h2>
-                <a class="order-now-btn float-end mt-3" href="{% url 'checkout' %}?category=pizza" >Go to checkout</a>
+
+        <div class="col-12 col-md-4">
+            <p class="my-2"><strong>Toppings:</strong></p>
+            {% if item.product.toppings %}
+            <div class="toppings-list">
+                {% for topping in item.product.toppings.all|dictsort:"display_name" %}
+                {{ topping.display_name }}{% if not forloop.last %}, {% else %}.{% endif %}
+                {% endfor %}
             </div>
+            {% endif %}
+            <p class="my-2"><strong>Size: </strong>
+                {% if item.size == "s" %}Small
+                {% elif item.size == "m" %}Medium
+                {% elif item.size == "l" %}Large
+                {% else %}No Size Available
+                {% endif %}
+            </p>
+            <p class="my-2"><strong>Price: </strong>{{ item.price }}</p>
         </div>
-        {% else %}
-    <div class="text-center mt-3">
-        <h2 class="display-6" >Oops, you didn't order anything yet!</h2>
-        <a href="{% url 'products' %}?category=pizza" class="order-now-btn mt-3">Order Now</a>
+
+        <div class="col-12 col-md-4">
+            <form class="form update-form mb-3" action="{% url 'change_order' item.item_id %}" method="POST">
+                {% csrf_token %}
+                <input class="display-none" name="size" value="{{ item.size }}">
+                <div class="input-group justify-content-center my-2">
+                    <button type="submit" class="dec_{{ item.id }} dec-product-qty" data-item_id="{{ item.product.id }}"
+                        id="dec_{{ item.product.id }}">
+                        <span class="icon">
+                            <i class="fas fa-minus"></i>
+                        </span>
+                    </button>
+                    <input class="item-qty remove-input-formatting" type="number" name="qty" min="1" max="99"
+                        value="{{ item.qty }}" data-item_id="{{ item.product.id }}" id="id_qty_{{ item.product.id }}">
+                    <button type="submit" class="inc_{{ item.id }} inc-product-qty" data-item_id="{{ item.product.id }}"
+                        id="inc_{{ item.product.id }}">
+                        <span class="icon">
+                            <i class="fas fa-plus"></i>
+                        </span>
+                    </button>
+                </div>
+            </form>
+            <a class="update-link text-decoration-none text-info" href="#">
+                <strong>Update</strong>
+            </a>
+            <p class="my-3"><strong>Total Price: </strong>{{ item.total }}</p>
+            <a class="remove-item text-decoration-none text-danger my-3" href="#" id="remove_{{ item.item_id }}"
+                data-product_size="{{ item.size }}" data-product_qty="{{ item.qty }}">
+                <strong>Remove</strong>
+            </a>
+        </div>
     </div>
+</div>
+{% endfor %}
+<div class="row">
+    <div class="col-12">
+        <hr>
+        <h2 class="display-6 text-end">Order total: <strong>£{{ grand_total }}</strong></h2>
+        <a class="order-now-btn float-end mt-3" href="{% url 'checkout' %}?category=pizza">Go to checkout</a>
+    </div>
+</div>
+{% else %}
+<div class="text-center mt-3">
+    <h2 class="display-6">Oops, you didn't order anything yet!</h2>
+    <a href="{% url 'products' %}?category=pizza" class="order-now-btn mt-3">Order Now</a>
+</div>
 {% endif %}

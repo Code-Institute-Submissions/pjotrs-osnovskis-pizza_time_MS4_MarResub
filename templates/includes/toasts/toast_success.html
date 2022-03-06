@@ -1,5 +1,7 @@
+{% load static %}
+
 <div class="toast show" data-autohide="false">
-    <div class="toast-header bg-success bg-opacity-50">
+    <div class="toast-header main-bg-color">
         <strong class="me-auto">Success</strong>
         <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
     </div>
@@ -38,7 +40,7 @@
             </div>
             <div class="row">
                 <div class="col mt-1">
-                    <a href="{% url 'checkout' %}" class="btn w-100 text-center text-white bg-success bg-opacity-75 rounded-0">
+                    <a href="{% url 'checkout' %}" class="order-now-btn text-center text-black main-bg-color rounded-0">
                         <span class="text-uppercase">Go To Checkout</span>
                         <span class="icon">
                             <i class="fas fa-lock"></i>

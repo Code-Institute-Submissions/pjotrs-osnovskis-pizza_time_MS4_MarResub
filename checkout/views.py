@@ -180,10 +180,12 @@ def checkout_success(request, order_number):
     
     if 'order' in request.session:
         del request.session['order']
-    
+
+    address = Address.objects.all()
     template = 'checkout/checkout_success.html'
     context = {
         'order': order,
+        'address': address,
     }
 
     return render(request, template, context)
