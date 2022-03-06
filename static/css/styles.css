@@ -488,7 +488,7 @@ footer{
         margin-top: 1rem;
     }
 }
-@media (max-width: 396px) {
+@media (max-width: 480px) {
     .message-container{
         justify-content: center;
     }
