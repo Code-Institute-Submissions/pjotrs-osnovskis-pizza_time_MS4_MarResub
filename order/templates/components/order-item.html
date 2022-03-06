@@ -79,3 +79,72 @@
     <a href="{% url 'products' %}?category=pizza" class="order-now-btn mt-3">Order Now</a>
 </div>
 {% endif %}
+
+<script>
+    // Update quantity on click
+    $('.update-link').click(function (e) {
+        let form = $(this).prev('.update-form');
+        form.submit();
+    })
+
+    // Remove item and reload on click
+    $('.remove-item').click(function (e) {
+        let csrfToken = "{{ csrf_token }}";
+        let itemId = $(this).attr('id').split('remove_')[1];
+        let size = $(this).data('product_size');
+        let qty = $(this).data('product_qty');
+        let url = `/order/remove/${itemId}/`;
+        let data = {
+            'csrfmiddlewaretoken': csrfToken,
+            'product_size': size,
+            'product_qty': qty
+        };
+
+        $.post(url, data)
+            .done(function () {
+                location.reload();
+            });
+    })
+
+    // Disable +/- buttons outside 1-99 range
+    function handleEnableDisable(itemId) {
+        let currentValue = parseInt($(`#id_qty_${itemId}`).val());
+        let minusDisabled = currentValue < 2;
+        let plusDisabled = currentValue > 98;
+        $(`#dec_${itemId}`).prop('disabled', minusDisabled);
+        $(`#inc__${itemId}`).prop('disabled', plusDisabled);
+    }
+
+    // Ensure proper enabling/disabling of all inputs on page load
+    let allQtyInputs = $('.item-qty');
+    for (let i = 0; i < allQtyInputs.length; i++) {
+        let itemId = $(allQtyInputs[i]).data('item_id');
+        handleEnableDisable(itemId);
+    }
+
+    // Check enable/disable every time the input is changed
+    $('.item-qty').change(function () {
+        let itemId = $(this).data('item_id');
+        handleEnableDisable(itemId);
+    });
+
+    // Increment quantity
+    $('.inc_{{ item.product.id }}').click(function (e) {
+        e.preventDefault();
+        let closestInput = $(this).closest('.input-group').find('.item-qty')[0];
+        let currentValue = parseInt($(closestInput).val());
+        $(closestInput).val(currentValue + 1);
+        let itemId = $(this).data('item_id');
+        handleEnableDisable(itemId);
+    });
+
+    // Decrement quantity
+    $('.dec_{{ item.product.id }}').click(function (e) {
+        e.preventDefault();
+        let closestInput = $(this).closest('.input-group').find('.item-qty')[0];
+        let currentValue = parseInt($(closestInput).val());
+        $(closestInput).val(currentValue - 1);
+        let itemId = $(this).data('item_id');
+        handleEnableDisable(itemId);
+    });
+</script>
