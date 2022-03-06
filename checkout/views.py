@@ -137,6 +137,7 @@ def checkout(request):
         messages.warning(request, ("Public key not found. \
             Did you set it up in environment?"))
 
+
     template = 'checkout/checkout.html'
     address = Address.objects.all()
 

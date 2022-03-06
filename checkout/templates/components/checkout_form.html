@@ -1,7 +1,7 @@
 {% load static %}
 
 {% block extra_css %}
-    <link rel="stylesheet" href="{% static 'checkout/css/checkout.css' %}">
+<link rel="stylesheet" href="{% static 'checkout/css/checkout.css' %}">
 {% endblock %}
 
 <p class="text-muted">Please fill out the form to proceed with your order.</p>
@@ -51,10 +51,10 @@
             <span class="icon">
                 <i class="fas fa-chevron-left"></i>
             </span>
-            <span >Adjust Order</span>
+            <span>Adjust Order</span>
         </a>
-        <button id="submit-button" class="order-now-btn">
-            <span >Complete Order</span>
+        <button id="submit-button" class="order-now-btn checkout-submit-button">
+            <span>Complete Order</span>
             <span class="icon">
                 <i class="fas fa-lock"></i>
             </span>
@@ -67,3 +67,63 @@
         </p>
     </div>
 </form>
+
+<!-- Validation error fix found here:
+https://stackoverflow.com/questions/21636850/jquery-validation-plugin-typeerror-validate-is-not-a-function -->
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#id_postcode').keyup(function(){
+            $(this).val($(this).val().toUpperCase());
+        });
+
+        $("#checkout-form").validate();
+        $.validator.addMethod(
+            "postcode",
+            function (value, element, regexp) {
+                var check = false;
+                var re = new RegExp(regexp);
+                return this.optional(element) || re.test(value);
+            },
+            `<span class="text-danger"> Please enter a valid postcode! Example: AB12 3CD</span>`
+
+        );
+        $("#id_postcode").rules("add", {
+            postcode: "^([a-zA-Z]){1}([0-9][0-9]|[0-9]|[a-zA-Z][0-9][a-zA-Z]|[a-zA-Z][0-9][0-9]|[a-zA-Z][0-9]){1}([        ])([0-9][a-zA-z][a-zA-z]){1}$"
+        });
+    });
+
+    $(document).ready(function () {
+
+        // Code idea taken from here:
+        // https://www.techiedelight.com/conditionally-enable-disable-button-javascript/#:~:text=Using%20jQuery,element%20is%20enabled%20or%20disabled.
+
+        let postcode_list = [
+            'L22 9EL', 'LL22 9EN', 'LL22 9EP', 'LL22 9ER', 'LL22 9ES', 'LL22 9ET',
+            'LL22 9EU', 'LL22 9EW', 'LL22 9EY', 'LL22 9HA', 'LL22 9HB', 'LL22 9HD',
+            'LL22 9HE', 'LL22 9HF', 'LL22 9HG', 'LL22 9HH', 'LL22 9HL', 'LL22 9HN',
+            'LL22 9HP', 'LL22 9HQ', 'LL22 9HR', 'LL22 9HS', 'LL22 9HT', 'LL22 9HU',
+            'LL22 9HW', 'LL22 9HY', 'LL22 9JA', 'LL22 9LA', 'LL22 9LB', 'LL22 9LD',
+            'LL22 9LE', 'LL22 9LF', 'LL22 9LG', 'LL22 9LH', 'LL22 9LJ', 'LL22 9LL',
+            'LL22 9LN', 'LL22 9LP', 'LL22 9LQ', 'LL22 9LR', 'LL22 9LS', 'LL22 9LT',
+            'LL22 9LU', 'LL22 9LW', 'LL22 9LX', 'LL22 9LY', 'LL22 9LZ', 'LL22 9NA',
+            'LL22 9NB', 'LL22 9ND', 'LL22 9NE', 'LL22 9NF', 'LL22 9NG', 'LL22 9NH',
+            'LL22 9NJ', 'LL22 9NL', 'LL22 9NN', 'LL22 9NP', 'LL22 9NQ', 'LL22 9NR',
+            'LL22 9NS', 'LL22 9NT', 'LL22 9NU', 'LL22 9NW', 'LL22 9NX', 'LL22 9NY',
+            'LL22 9NZ', 'LL22 9PA', 'LL22 9PB', 'LL22 9PD', 'LL22 9PE', 'LL22 9PF',
+            'LL22 9PG', 'LL22 9PH', 'LL22 9PJ', 'LL22 9SE', 'LL22 9WA', 'LL22 9WB',
+            'LL22 9WG', 'LL22 9WP', 'LL22 9WR', 'LL22 9WS', 'LL22 9WT', 'LL22 9WU',
+            'LL22 9YT', 'LL22 9YX'
+        ];
+
+        $('.checkout-submit-button').attr('disabled', 'disabled');
+
+        $('input[id=id_postcode]').on('input', function () {
+            if (postcode_list.indexOf($(this).val()) > -1) {
+                $('.checkout-submit-button').removeAttr("disabled");
+            } else {
+                $('.checkout-submit-button').attr('disabled', 'disabled');
+            }
+        });
+    });
+</script>
