@@ -85,8 +85,7 @@ https://stackoverflow.com/questions/21636850/jquery-validation-plugin-typeerror-
                 var re = new RegExp(regexp);
                 return this.optional(element) || re.test(value);
             },
-            `<span class="text-danger"> Please enter a valid postcode! Example: AB12 3CD</span>`
-
+            'Please enter a valid postcode! Example: AB12 3CD'
         );
         $("#id_postcode").rules("add", {
             postcode: "^([a-zA-Z]){1}([0-9][0-9]|[0-9]|[a-zA-Z][0-9][a-zA-Z]|[a-zA-Z][0-9][0-9]|[a-zA-Z][0-9]){1}([        ])([0-9][a-zA-z][a-zA-z]){1}$"

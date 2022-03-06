@@ -13,9 +13,12 @@
 <h4>Other Issues</h4>
 <p>If you have any other issues, please use our <a href="{% url 'contact_us' %}">contact form</a>, and we will come back yo tou as soon as we can.</p>
 
-<h4>Collection Address</h4>
+<h4>Our Postal Address</h4>
+<p>In case you need to contact us over the post or visit us for any reason, please use this address.</p>
 <p>
     <strong>
+        Pizzatime LTD.
+        <br>
         {% for a in address %}
         <a href="http://maps.google.com/?q={{ a.street_name1 }}, {% if a.street_name2 %}{{ a.street_name2 }}, {% endif %}{{ a.city }}, {{ a.postcode }}" 
             target="_blank" rel="noopener" class="text-black">
@@ -25,6 +28,10 @@
             {% endif %}
             {{ a.city }},
             {{ a.postcode|upper }}
+        </a>
+        <br>
+        <a href="tel:{{ a.phone_number }}" class="text-black">
+            <strong>{{ a.phone_number }}</strong>
         </a>
         {% endfor %}
     </strong>
