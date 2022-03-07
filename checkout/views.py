@@ -10,7 +10,6 @@ from .models import CheckoutOrder, CheckoutLineItem
 from products.models import Product
 from profiles.models import UserProfile
 from profiles.forms import UserProfileForm
-from home.models import Address
 
 import stripe
 import json
@@ -139,13 +138,11 @@ def checkout(request):
 
 
     template = 'checkout/checkout.html'
-    address = Address.objects.all()
 
     context = {
         'order_form': order_form,
         'stripe_public_key': stripe_public_key,
         'client_secret': intent.client_secret,
-        'address': address,
     }
 
     return render(request, template, context)
@@ -182,11 +179,9 @@ def checkout_success(request, order_number):
     if 'order' in request.session:
         del request.session['order']
 
-    address = Address.objects.all()
     template = 'checkout/checkout_success.html'
     context = {
         'order': order,
-        'address': address,
     }
 
     return render(request, template, context)

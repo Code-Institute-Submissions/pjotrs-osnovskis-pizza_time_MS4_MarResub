@@ -8,7 +8,6 @@
 </head>
 
 <body>
-
     {% include 'components/messages.html' %}
 
     <header>
@@ -21,7 +20,6 @@
     </header>
 
     <div class="overlay"></div>
-
     <div class="container d-flex align-items-center ">
         <div class="row m-0 mx-auto">
             {% block content %}
@@ -29,17 +27,14 @@
         </div>
     </div>
 
-
-
     {% block postload_js %}
-    <script>
-        // Code taken from Bootstrap 5 Documentation
-        var toastElList = [].slice.call(document.querySelectorAll('.toast'))
-        var toastList = toastElList.map(function (toastEl) {
-            return new bootstrap.Toast(toastEl, 'show')
-        })
-    </script>
-
+        <script>
+            // Code taken from Bootstrap 5 Documentation
+            var toastElList = [].slice.call(document.querySelectorAll('.toast'))
+            var toastList = toastElList.map(function (toastEl) {
+                return new bootstrap.Toast(toastEl, 'show')
+            })
+        </script>
     {% endblock %}
 </body>
 

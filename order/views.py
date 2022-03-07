@@ -2,17 +2,11 @@ from django.shortcuts import get_object_or_404, redirect, render, reverse, HttpR
 from django.contrib import messages
 
 from products.models import Product
-from home.models import Address
 
 
 def order(request):
     """ A view for an order """
-    address = Address.objects.all()
-    context = {
-        'address': address,
-    }
-
-    return render(request, 'order/order.html', context)
+    return render(request, 'order/order.html')
 
 
 def add_to_order(request, item_id):

@@ -3,12 +3,10 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
 from .models import Category, Product
-from home.models import Address
 from .forms import ProductForm
 
 def products(request):
     """ A view to return a products page, including sorting and searching """
-    address = Address.objects.all()
     all_products = Product.objects.all()
     categories = None
     if request.GET:
@@ -20,7 +18,6 @@ def products(request):
     context = {
         'products': all_products,
         'current_category': categories,
-        'address': address,
     }
 
     return render(request, 'products/products.html', context)
@@ -29,7 +26,6 @@ def products(request):
 @login_required
 def add_product(request):
     """ Add a product to the list """
-    address = Address.objects.all()
 
     if not request.user.is_superuser:
         messages.error(request, 'Access denied.')
@@ -53,8 +49,6 @@ def add_product(request):
         context = {
             'products': products,
             'form': form,
-            'address': address,
-
         }
 
         return render(request, template, context)
@@ -63,7 +57,6 @@ def add_product(request):
 @login_required
 def edit_product(request, product_id):
     """ Edit a product in the list """
-    address = Address.objects.all()
     if not request.user.is_superuser:
         messages.error(request, 'Access denied.')
         return redirect(reverse('home'))
@@ -89,8 +82,6 @@ def edit_product(request, product_id):
             'form': form,
             'product': product,
             'products': products,
-            'address': address,
-
         }
 
         return render(request, template, context)
