@@ -1,8 +1,10 @@
 {% load static %}
 
 {% block extra_css %}
-<link rel="stylesheet" href="{% static 'checkout/css/checkout.css' %}">
+    <link rel="stylesheet" href="{% static 'checkout/css/checkout.css' %}">
 {% endblock %}
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+
 
 <p class="text-muted">Please fill out the form to proceed with your order.</p>
 
@@ -70,7 +72,6 @@
 
 <!-- Validation error fix found here:
 https://stackoverflow.com/questions/21636850/jquery-validation-plugin-typeerror-validate-is-not-a-function -->
-<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
 <script>
     $(document).ready(function () {
         $('#id_postcode').keyup(function(){
