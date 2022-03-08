@@ -43,7 +43,7 @@ class CheckoutOrder(models.Model):
 
 
 class CheckoutLineItem(models.Model):
-    """ Seapating all orders in the checkout to access them."""
+    """ Separating all orders in the checkout to access them."""
     order = models.ForeignKey(CheckoutOrder, null=False, blank=False, on_delete=models.CASCADE, related_name='lineitems')
     product = models.ForeignKey(Product, null=False, blank=False, on_delete=models.CASCADE)
     size = models.CharField(max_length=2, null=True, blank=True)

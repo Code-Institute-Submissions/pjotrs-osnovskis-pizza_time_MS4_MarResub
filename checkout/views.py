@@ -38,7 +38,7 @@ def cache_checkout_data(request):
 def checkout(request):
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
     stripe_secret_key = settings.STRIPE_SECRET_KEY
-    
+
     if request.method == 'POST':
         checkout_order = request.session.get('order', {})
         form_data = {
@@ -51,9 +51,8 @@ def checkout(request):
             'city': request.POST['city'],
             'postcode': request.POST['postcode'],
         }
-
         order_form = CheckoutForm(form_data)
-
+        
         if order_form.is_valid():
             order = order_form.save(commit=False)
             pid = request.POST.get('client_secret').split('_secret')[0]
@@ -100,7 +99,7 @@ def checkout(request):
         if not checkout_order:
             messages.error(request, "There is nothing in your order just yet.")
             return redirect(reverse('products'))
-        
+
         current_order = order_contents(request)
         total = current_order['grand_total']
         stripe_total = round(total * 100)
@@ -109,7 +108,6 @@ def checkout(request):
             amount = stripe_total,
             currency = settings.STRIPE_CURRENCY,
         )
-
 
         # Try to automatically fill in the checkout form with 
         # any info the user has in their profile
