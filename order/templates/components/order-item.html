@@ -30,34 +30,35 @@
                 {% else %}No Size Available
                 {% endif %}
             </p>
-            <p class="my-2"><strong>Price: </strong>{{ item.price }}</p>
+            <p class="my-2" id="price_{{ item.id }}_{{ item.size }}"><strong>Price: </strong>{{ item.price }}</p>
         </div>
 
         <div class="col-12 col-md-4">
             <form class="form update-form mb-3" action="{% url 'change_order' item.item_id %}" method="POST">
                 {% csrf_token %}
-                <input class="display-none" name="size" value="{{ item.size }}">
-                <div class="input-group justify-content-center my-2">
-                    <button type="submit" class="dec_{{ item.id }} dec-product-qty" data-item_id="{{ item.product.id }}"
+                <input type="hidden" name="size" value="{{ item.size }}">
+                <div class="input-group qty_selector justify-content-center my-2">
+                    <button class="dec_{{ item.product.id }} dec-product-qty" data-item_id="{{ item.product.id }}"
                         id="dec_{{ item.product.id }}">
                         <span class="icon">
                             <i class="fas fa-minus"></i>
                         </span>
                     </button>
-                    <input class="item-qty remove-input-formatting" type="number" name="qty" min="1" max="99"
-                        value="{{ item.qty }}" data-item_id="{{ item.product.id }}" id="id_qty_{{ item.product.id }}">
-                    <button type="submit" class="inc_{{ item.id }} inc-product-qty" data-item_id="{{ item.product.id }}"
+                    <input class="remove-input-formatting product-qty" type="number" name="qty" value="1" min="1"
+                        max="9" data-item_id="{{ item.product.id }}" id="id_qty_{{ item.product.id }}" readonly>
+                    <button class="inc_{{ item.product.id }} inc-product-qty" data-item_id="{{ item.product.id }}"
                         id="inc_{{ item.product.id }}">
                         <span class="icon">
                             <i class="fas fa-plus"></i>
                         </span>
                     </button>
                 </div>
+
             </form>
-            <a class="update-link text-decoration-none text-info" href="#">
-                <strong>Update</strong>
+            <a class="update-link order-now-btn" href="#">
+                Update
             </a>
-            <p class="my-3"><strong>Total Price: </strong>{{ item.total }}</p>
+            <p class="my-3" id="total_price_{{ item.id }}"><strong>Total Price: </strong>{{ item.total }}</p>
             <a class="remove-item text-decoration-none text-danger my-3" href="#" id="remove_{{ item.item_id }}"
                 data-product_size="{{ item.size }}" data-product_qty="{{ item.qty }}">
                 <strong>Remove</strong>
@@ -65,6 +66,9 @@
         </div>
     </div>
 </div>
+
+{% include 'order/includes/scripts.html' %}
+
 {% endfor %}
 <div class="row">
     <div class="col-12">
@@ -79,72 +83,3 @@
     <a href="{% url 'products' %}?category=pizza" class="order-now-btn mt-3">Order Now</a>
 </div>
 {% endif %}
-
-<script>
-    // Update quantity on click
-    $('.update-link').click(function (e) {
-        let form = $(this).prev('.update-form');
-        form.submit();
-    })
-
-    // Remove item and reload on click
-    $('.remove-item').click(function (e) {
-        let csrfToken = "{{ csrf_token }}";
-        let itemId = $(this).attr('id').split('remove_')[1];
-        let size = $(this).data('product_size');
-        let qty = $(this).data('product_qty');
-        let url = `/order/remove/${itemId}/`;
-        let data = {
-            'csrfmiddlewaretoken': csrfToken,
-            'product_size': size,
-            'product_qty': qty
-        };
-
-        $.post(url, data)
-            .done(function () {
-                location.reload();
-            });
-    })
-
-    // Disable +/- buttons outside 1-99 range
-    function handleEnableDisable(itemId) {
-        let currentValue = parseInt($(`#id_qty_${itemId}`).val());
-        let minusDisabled = currentValue < 2;
-        let plusDisabled = currentValue > 98;
-        $(`#dec_${itemId}`).prop('disabled', minusDisabled);
-        $(`#inc__${itemId}`).prop('disabled', plusDisabled);
-    }
-
-    // Ensure proper enabling/disabling of all inputs on page load
-    let allQtyInputs = $('.item-qty');
-    for (let i = 0; i < allQtyInputs.length; i++) {
-        let itemId = $(allQtyInputs[i]).data('item_id');
-        handleEnableDisable(itemId);
-    }
-
-    // Check enable/disable every time the input is changed
-    $('.item-qty').change(function () {
-        let itemId = $(this).data('item_id');
-        handleEnableDisable(itemId);
-    });
-
-    // Increment quantity
-    $('.inc_{{ item.product.id }}').click(function (e) {
-        e.preventDefault();
-        let closestInput = $(this).closest('.input-group').find('.item-qty')[0];
-        let currentValue = parseInt($(closestInput).val());
-        $(closestInput).val(currentValue + 1);
-        let itemId = $(this).data('item_id');
-        handleEnableDisable(itemId);
-    });
-
-    // Decrement quantity
-    $('.dec_{{ item.product.id }}').click(function (e) {
-        e.preventDefault();
-        let closestInput = $(this).closest('.input-group').find('.item-qty')[0];
-        let currentValue = parseInt($(closestInput).val());
-        $(closestInput).val(currentValue - 1);
-        let itemId = $(this).data('item_id');
-        handleEnableDisable(itemId);
-    });
-</script>
