@@ -395,8 +395,9 @@ https://www.sliderrevolution.com/resources/styling-radio-buttons/*/
 /* ================ =============== BUSINESS INFO =============== ================ */
 
 #map{
-    height: 25rem;
-    width: 25rem;
+    min-height: 25rem;
+    width: 100%;
+    margin-bottom: 5rem;
 }
 
 #contactForm input{
@@ -444,7 +445,7 @@ footer{
 /* ================ =============== MEDIA QUERIES =============== ================ */
 @media (max-width: 768px) {
     .overlay{
-        background: #ffffffe7;
+        background: #ffffffbf;
     }
 
     .container{
