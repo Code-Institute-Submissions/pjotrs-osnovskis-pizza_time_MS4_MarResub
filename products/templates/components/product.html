@@ -79,15 +79,15 @@
                 </div>
             </div>
 
-            <div class="input-group justify-content-center my-2">
+            <div class="input-group qty_selector justify-content-center my-2">
                 <button class="dec_{{ product.id }} dec-product-qty" data-item_id="{{ product.id }}"
                     id="dec_{{ product.id }}">
                     <span class="icon">
                         <i class="fas fa-minus"></i>
                     </span>
                 </button>
-                <input class="remove-input-formatting product-qty" type="number" name="qty" value="1" min="1" max="99"
-                    data-item_id="{{ product.id }}" id="id_qty_{{ product.id }}">
+                <input class="remove-input-formatting product-qty" type="number" name="qty" value="1" min="1" max="9"
+                    data-item_id="{{ product.id }}" id="id_qty_{{ product.id }}" readonly>
                 <button class="inc_{{ product.id }} inc-product-qty" data-item_id="{{ product.id }}"
                     id="inc_{{ product.id }}">
                     <span class="icon">
