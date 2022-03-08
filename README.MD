@@ -539,7 +539,7 @@ Pjotrs Osnovskis
 
 ### **Acknowledgements**
 
-I would like to thank my mentor Simen Daehlin for support and help during this project. Also huge "Thank You!" to Code Institute and CyC Slack community for support and all tutors who helped me with difficulties I faced during production of this project and also who worked hard on the study material that got me to this point. And, of course, Assessors who will assess this project.
+I would like to thank my mentor Simen Daehlin for support and help during this project. Also huge "Thank You!" to Code Institute and CyC Slack community for support and all tutors who helped me with difficulties I faced during production of this project and also who worked hard on the study material that got me to this point. And, of course, Assessors who will assess this project. There is always room for improvement but due to time limitations - I consider project finished at this stage and ready for submission.
 
 [Back to Top](#table-of-contents)
 
