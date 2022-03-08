@@ -48,6 +48,7 @@ class StripeWH_Handler:
         Handle the payment_intent.succeeded webhook from Stripe
         """
         intent = event.data.object
+
         pid = intent.id
         order = intent.metadata.order
         save_info = intent.metadata.save_info
@@ -67,6 +68,7 @@ class StripeWH_Handler:
         if username != 'AnonymousUser':
             profile = UserProfile.objects.get(user__username=username)
             if save_info:
+                profile.default_f_name = shipping_details.name
                 profile.default_phone_number = shipping_details.phone
                 profile.default_email = billing_details.email
                 profile.default_postcode = shipping_details.address.postal_code

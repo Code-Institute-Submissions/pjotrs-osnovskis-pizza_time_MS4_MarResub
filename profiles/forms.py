@@ -1,4 +1,3 @@
-from dataclasses import fields
 from django import forms
 from .models import UserProfile
 
@@ -14,6 +13,7 @@ class UserProfileForm(forms.ModelForm):
         """
         super().__init__(*args, **kwargs)
         placeholders = {
+            'default_f_name': 'Full Name',
             'default_phone_number': 'Phone Number',
             'default_street_address1': 'Street Address 1',
             'default_street_address2': 'Street Address 2',
@@ -21,7 +21,7 @@ class UserProfileForm(forms.ModelForm):
             'default_city': 'City',
         }
 
-        self.fields['default_phone_number'].widget.attrs['autofocus'] = True
+        self.fields['default_f_name'].widget.attrs['autofocus'] = True
         for field in self.fields:
             if self.fields[field].required:
                 placeholder = f'{placeholders[field]} *'

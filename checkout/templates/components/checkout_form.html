@@ -11,7 +11,6 @@
     <fieldset class="rounded p-3 my-2">
         <legend class="fieldset-label small text-black w-auto ms-2">Contact Details</legend>
         {{ order_form.f_name | as_crispy_field }}
-        {{ order_form.l_name | as_crispy_field }}
         {{ order_form.email | as_crispy_field }}
         {{ order_form.phone_number | as_crispy_field }}
     </fieldset>
@@ -97,7 +96,7 @@ https://stackoverflow.com/questions/21636850/jquery-validation-plugin-typeerror-
         // Code idea taken from here:
         // https://www.techiedelight.com/conditionally-enable-disable-button-javascript/#:~:text=Using%20jQuery,element%20is%20enabled%20or%20disabled.
 
-        let postcode_list = [
+        const postcode_list = [
             'L22 9EL', 'LL22 9EN', 'LL22 9EP', 'LL22 9ER', 'LL22 9ES', 'LL22 9ET',
             'LL22 9EU', 'LL22 9EW', 'LL22 9EY', 'LL22 9HA', 'LL22 9HB', 'LL22 9HD',
             'LL22 9HE', 'LL22 9HF', 'LL22 9HG', 'LL22 9HH', 'LL22 9HL', 'LL22 9HN',
