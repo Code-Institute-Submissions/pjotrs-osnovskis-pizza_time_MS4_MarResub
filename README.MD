@@ -89,7 +89,6 @@ As an owner I want:
 | 7  | Site User | Password recovery                                                 | Recover access to my personal account                                      |
 | 8  | Site User | Email confirmation after registering                              | Verify successful account registration                                     |
 | 9  | Site User | Personalized user profile                                         | Save delivery and payment preferences, view order history                  |
-| 10 | Site User | Purchase free delivery subscription                               | Pay monthly fee and save in case of frequent orders                        |
 |<br>|           |                                                                   |                                                                            |
 |    |           |**Products**                                                       |                                                                            |
 | 11 | Customer  | Browse available products by category                             | Easily identify products by category                                       |
@@ -98,9 +97,9 @@ As an owner I want:
 |<br>|           |                                                                   |                                                                            |
 |    |           |**Ordering and Checkout**                                          |                                                                            |
 | 14 | Customer  | Select size and quantity of a product I want to order             | Ensure I don’t accidentally select the wrong product, its quantity or size |
-| 15 | Customer  | View products in shopping bag to be ordered                       | Ensure the total cost of my order and all products I will receive          |
-| 16 | Customer  | Adjust the quantity of individual items in my bag                 | Easily make changes to my order before checkout                            |
-| 17 | Customer  | Easily enter/choose payment method                                | Check out quickly and easily                                               |
+| 15 | Customer  | View products in my order to be ordered                           | Ensure the total cost of my order and all products I will receive          |
+| 16 | Customer  | Adjust the quantity of individual items in my order               | Easily make changes to my order before checkout                            |
+| 17 | Customer  | Easily enter payment method                                       | Check out quickly and easily                                               |
 | 18 | Customer  | Ensure that my personal and payment information is safe and secure| Confidently provide the information needed to complete an order            |
 | 19 | Customer  | View an order confirmation after checkout                         | Verify that I haven't made any mistakes in my order                        |
 | 20 | Customer  | Receive an email confirmation after checking out                  | Keep the confirmation of my order details for own records                  |
