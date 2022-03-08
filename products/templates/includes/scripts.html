@@ -18,16 +18,12 @@
     // Disable +/- buttons outside 1-99 range
     // Code snippet taken from here:
     // https://codepen.io/gajusm/pen/aWyzNX
-    let minVal = 1, maxVal = 9; // Set Max and Min values
+    var minVal = 1, maxVal = 9; // Set Max and Min values
     // Increase product quantity on cart page
     $("#inc_{{ product.id }}").on('click', function(e){
         e.preventDefault();
-        let $parentElm = $(this).parents(".qty_selector");
-        $(this).addClass("clicked");
-        setTimeout(function(){
-            $(".clicked").removeClass("clicked");
-        },100);
-        let value = $parentElm.find("#id_qty_{{ product.id }}").val();
+        var $parentElm = $(this).parents(".qty_selector");
+        var value = $parentElm.find("#id_qty_{{ product.id }}").val();
         if (value < maxVal) {
             value++;
         }
@@ -36,12 +32,8 @@
     // Decrease product quantity on cart page
     $("#dec_{{ product.id }}").on('click', function(e){
         e.preventDefault();
-        let $parentElm = $(this).parents(".qty_selector");
-        $(this).addClass("clicked");
-        setTimeout(function(){
-            $(".clicked").removeClass("clicked");
-        },100);
-        let value = $parentElm.find("#id_qty_{{ product.id }}").val();
+        var $parentElm = $(this).parents(".qty_selector");
+        var value = $parentElm.find("#id_qty_{{ product.id }}").val();
         if (value > 1) {
             value--;
         }
