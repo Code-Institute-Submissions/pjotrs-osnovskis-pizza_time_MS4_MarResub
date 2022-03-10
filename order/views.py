@@ -1,4 +1,5 @@
-from django.shortcuts import get_object_or_404, redirect, render, reverse, HttpResponse
+from django.shortcuts import get_object_or_404, redirect, render
+from django.shortcuts import reverse, HttpResponse
 from django.contrib import messages
 
 from products.models import Product
@@ -34,18 +35,27 @@ def add_to_order(request, item_id):
     if item_id in list(order.keys()):
         if size in order[item_id]['items_by_size'].keys():
             order[item_id]['items_by_size'][size] += qty
-            messages.success(request, f'Perfect! {qty} more {size_name} {product.display_name}{ending} added to your order.')
+            messages.success(request, f'Perfect! {qty} more {size_name}\
+                             {product.display_name}{ending}\
+                             added to your order.')
         else:
             order[item_id]['items_by_size'][size] = qty
-            messages.success(request, f'Amazing! {qty} {size_name} {product.display_name}{ending} added to your order.')
+            messages.success(request, f'Amazing! {qty} {size_name}\
+                             {product.display_name}{ending}\
+                             added to your order.')
     else:
         order[item_id] = {'items_by_size': {size: qty}}
-        messages.success(request, f'Great! {qty} {size_name} {product.display_name}{ending} added to your order.')
+        messages.success(request, f'Great! {qty} {size_name}\
+                         {product.display_name}{ending} added to your order.')
 
     request.session['order'] = order
-    # After submitting "Add to order", stays on the same page. Idea taken from here:
-    # https://stackoverflow.com/questions/39560175/redirect-to-same-page-after-post-method-using-class-based-views
-    return redirect(request.META.get('HTTP_REFERER', 'redirect_if_referer_not_found'))
+    # After submitting "Add to order", stays on the same page.
+    # Idea taken from here:
+    # https://stackoverflow.com/questions/39560175/
+    # redirect-to-same-page-after-post-method-using-class-based-views
+    return redirect(request.META.get('HTTP_REFERER',
+                    'redirect_if_referer_not_found'))
+
 
 def change_order(request, item_id):
     """ Change selected product in the order"""
@@ -71,7 +81,8 @@ def change_order(request, item_id):
 
     if qty > 0:
         order[item_id]['items_by_size'][size] = qty
-        messages.success(request, f'Updated! There is {qty} {size_name} {product.display_name}{ending} in your order now.')
+        messages.success(request, f'Updated! There is {qty} {size_name}\
+                         {product.display_name}{ending} in your order now.')
     else:
         del order[item_id]['items_by_size'][size]
         if not order[item_id]['items_by_size']:
@@ -79,6 +90,7 @@ def change_order(request, item_id):
 
     request.session['order'] = order
     return redirect(reverse('order'))
+
 
 def remove_from_order(request, item_id):
     """Remove the item from the shopping order"""
@@ -107,7 +119,8 @@ def remove_from_order(request, item_id):
         del order[item_id]['items_by_size'][size]
         if not order[item_id]['items_by_size']:
             order.pop(item_id)
-            messages.warning(request, f'You have removed {qty} {size_name} {product.display_name}{ending} from your order.')
+            messages.warning(request, f'You have removed {qty} {size_name}\
+                             {product.display_name}{ending} from your order.')
 
         request.session['order'] = order
         return HttpResponse(status=200)

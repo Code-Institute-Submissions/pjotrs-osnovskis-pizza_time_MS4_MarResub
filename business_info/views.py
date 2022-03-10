@@ -9,6 +9,7 @@ def info(request):
     """ A view to return an info page """
     return render(request, 'business_info/about.html')
 
+
 def contact_us(request):
     """ A view to return an info page """
     email_js_access_token = os.environ.get('EMAILJS_API_KEY')

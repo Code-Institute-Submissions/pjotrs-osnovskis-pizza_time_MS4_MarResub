@@ -12,6 +12,7 @@ from django.template.loader import render_to_string
 import json
 import time
 
+
 class StripeWH_Handler:
     """ Handle Stripe Webhooks"""
 
@@ -27,13 +28,13 @@ class StripeWH_Handler:
         body = render_to_string(
             'checkout/confirmation_email/conf_email_body.txt',
             {'order': order, 'contact_email': settings.DEFAULT_FROM_EMAIL})
-        
+
         send_mail(
             subject,
             body,
             settings.DEFAULT_FROM_EMAIL,
             [cust_email]
-        )        
+        )
 
     def handle_event(self, event):
         """
@@ -42,7 +43,7 @@ class StripeWH_Handler:
         return HttpResponse(
             content=f'Webhook received: {event["type"]}',
             status=200)
-    
+
     def handle_payment_intent_succeeded(self, event):
         """
         Handle the payment_intent.succeeded webhook from Stripe
@@ -71,10 +72,13 @@ class StripeWH_Handler:
                 profile.default_f_name = shipping_details.name
                 profile.default_phone_number = shipping_details.phone
                 profile.default_email = billing_details.email
-                profile.default_postcode = shipping_details.address.postal_code
+                profile.default_postcode = (shipping_details.address.
+                                            postal_code)
                 profile.default_city = shipping_details.address.city
-                profile.default_street_address1 = shipping_details.address.line1
-                profile.default_street_address2 = shipping_details.address.line2
+                profile.default_street_address1 = (shipping_details.address.
+                                                   line1)
+                profile.default_street_address2 = (shipping_details.address.
+                                                   line2)
                 profile.save()
 
         order_exists = False
@@ -82,15 +86,15 @@ class StripeWH_Handler:
         while attempt <= 5:
             try:
                 single_order = CheckoutOrder.objects.get(
-                    email__iexact = billing_details.email,
-                    phone_number__iexact = shipping_details.phone,
-                    street_address1__iexact = shipping_details.address.line1,
-                    street_address2__iexact = shipping_details.address.line2,
-                    city__iexact = shipping_details.address.city,
-                    postcode__iexact = shipping_details.address.postal_code,
-                    order_total = grand_total,
-                    original_order = order,
-                    stripe_pid = pid,
+                    email__iexact=billing_details.email,
+                    phone_number__iexact=shipping_details.phone,
+                    street_address1__iexact=shipping_details.address.line1,
+                    street_address2__iexact=shipping_details.address.line2,
+                    city__iexact=shipping_details.address.city,
+                    postcode__iexact=shipping_details.address.postal_code,
+                    order_total=grand_total,
+                    original_order=order,
+                    stripe_pid=pid,
                 )
 
                 order_exists = True
@@ -103,23 +107,24 @@ class StripeWH_Handler:
         if order_exists:
             self._send_confirmation_email(single_order)
             return HttpResponse(
-                content=f'Webhook received: {event["type"]} | SUCCESS: Verified order is already in database.',
+                content=f'Webhook received: {event["type"]} | SUCCESS:\
+                          Verified order is already in database.',
                 status=200)
 
         else:
             single_order = None
             try:
                 single_order = CheckoutOrder.objects.create(
-                    user_profile = profile,
-                    email = billing_details.email,
-                    phone_number = shipping_details.phone,
-                    street_address1 = shipping_details.address.line1,
-                    street_address2__iexact = shipping_details.address.line2,
-                    city = shipping_details.address.city,
-                    postcode = shipping_details.address.postal_code,
-                    order_total = grand_total,
-                    original_order = order,
-                    stripe_pid = pid,
+                    user_profile=profile,
+                    email=billing_details.email,
+                    phone_number=shipping_details.phone,
+                    street_address1=shipping_details.address.line1,
+                    street_address2__iexact=shipping_details.address.line2,
+                    city=shipping_details.address.city,
+                    postcode=shipping_details.address.postal_code,
+                    order_total=grand_total,
+                    original_order=order,
+                    stripe_pid=pid,
 
                 )
                 for item_id, item_data in json.loads(order).items():
@@ -135,9 +140,9 @@ class StripeWH_Handler:
                         for size, qty in item_data['items_by_size'].items():
                             checkout_line_item = CheckoutLineItem(
                                 order=order,
-                                qty = qty,
-                                size = size,
-                                product = product,
+                                qty=qty,
+                                size=size,
+                                product=product,
                             )
                             checkout_line_item.save()
 
@@ -150,7 +155,8 @@ class StripeWH_Handler:
 
         self._send_confirmation_email(single_order)
         return HttpResponse(
-            content=f'Webhook received: {event["type"]} | SUCCESS: Order created in webhook.',
+            content=f'Webhook received: {event["type"]} | SUCCESS:\
+                      Order created in webhook.',
             status=200)
 
     def handle_payment_intent_payment_failed(self, event):

@@ -10,7 +10,8 @@ class ProductForm(forms.ModelForm):
         fields = '__all__'
         exclude = ('name', 'likes',)
 
-    image_path = forms.ImageField(label='Product Image', required=False, widget=CustomClearableFileInput)
+    image_path = forms.ImageField(label='Product Image', required=False,
+                                  widget=CustomClearableFileInput)
 
     def __init__(self, *args, **kwargs):
 
@@ -21,7 +22,8 @@ class ProductForm(forms.ModelForm):
 
         # Giving Toppings a checkboxes instead of list, and pressing a
         # CTRL+"click". Solution was found here:
-        # https://chase-seibert.github.io/blog/2010/05/20/django-manytomanyfield-on-modelform-as-checkbox-widget.html
+        # https://chase-seibert.github.io/blog/2010/05/20/
+        # django-manytomanyfield-on-modelform-as-checkbox-widget.html
 
         self.fields['toppings'].widget = CheckboxSelectMultiple()
         self.fields['toppings'].queryset = toppings

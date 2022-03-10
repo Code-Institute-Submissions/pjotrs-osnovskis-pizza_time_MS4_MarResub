@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from .models import Category, Product
 from .forms import ProductForm
 
+
 def products(request):
     """ A view to return a products page, including sorting and searching """
     all_products = Product.objects.all()
@@ -41,7 +42,8 @@ def add_product(request):
                 messages.success(request, 'Product was added successfully')
                 return redirect(reverse('add_product'))
             else:
-                messages.error(request, 'Failed to add product. Please check the form and try again.')
+                messages.error(request, 'Failed to add product. Please\
+                               check the form and try again.')
         else:
             form = ProductForm()
 
@@ -72,7 +74,8 @@ def edit_product(request, product_id):
                 messages.success(request, 'Product successfully updated!')
                 return redirect(request.META['HTTP_REFERER'])
             else:
-                messages.error(request, 'Failed to update product. Please check the form and try again.')
+                messages.error(request, 'Failed to update product. Please\
+                                         check the form and try again.')
         else:
             form = ProductForm(instance=product)
             messages.info(request, f'You are editing {product.display_name}')
@@ -103,13 +106,15 @@ def delete_product(request, product_id):
 
 @login_required
 def like_view(request, pk):
-    product = get_object_or_404(Product, id=request.POST.get('liked_product_id'))
+    product = get_object_or_404(Product,
+                                id=request.POST.get('liked_product_id'))
     product.likes.add(request.user)
     return redirect(request.META['HTTP_REFERER'])
 
+
 @login_required
 def remove_like(request, pk):
-    product = get_object_or_404(Product, id=request.POST.get('liked_product_id'))
+    product = get_object_or_404(Product,
+                                id=request.POST.get('liked_product_id'))
     product.likes.remove(request.user)
     return redirect(request.META['HTTP_REFERER'])
-

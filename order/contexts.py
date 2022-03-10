@@ -1,6 +1,7 @@
 from django.shortcuts import get_object_or_404
 from products.models import Product
 
+
 def order_contents(request):
 
     order_items = []
@@ -10,8 +11,6 @@ def order_contents(request):
     order = request.session.get('order', {})
     qty = 0
     price = 0.00
-
-
 
     for item_id, item_data in order.items():
         if isinstance(item_data, int):

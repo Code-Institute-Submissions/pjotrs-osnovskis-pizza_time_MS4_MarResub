@@ -27,9 +27,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-### CRITICAL ###
 DEBUG = os.environ.get('DEBUG')
-### CRITICAL ###
 
 
 ALLOWED_HOSTS = ['pizza-time-ms4-po.herokuapp.com', '127.0.0.1', 'localhost']
@@ -45,7 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # Allauth required apps
-    'django.contrib.sites', # Used for social accounts sign up and log in
+    'django.contrib.sites',  # Used for social accounts sign up and log in
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -90,8 +88,9 @@ TEMPLATES = [
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
-                'django.template.context_processors.request', # required by Allauth
-                'django.contrib.auth.context_processors.auth', 
+                # required by Allauth
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'order.contexts.order_contents',
                 'home.contexts.address',
@@ -151,16 +150,21 @@ else:
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'NAME':
+            'django.contrib.auth.password_validation.\
+             UserAttributeSimilarityValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'NAME': 'django.contrib.auth.password_validation.\
+                 MinimumLengthValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        'NAME': 'django.contrib.auth.password_validation.\
+                 CommonPasswordValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        'NAME': 'django.contrib.auth.password_validation.\
+                 NumericPasswordValidator',
     },
 ]
 
@@ -234,6 +238,3 @@ else:
     EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
     EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
     DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_HOST_USER')
-    
-
-

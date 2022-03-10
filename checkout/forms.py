@@ -2,6 +2,7 @@ from dataclasses import fields
 from django import forms
 from .models import CheckoutOrder
 
+
 class CheckoutForm(forms.ModelForm):
     class Meta:
         model = CheckoutOrder

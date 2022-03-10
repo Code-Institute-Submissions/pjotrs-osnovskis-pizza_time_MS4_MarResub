@@ -3,11 +3,13 @@ from django.dispatch import receiver
 
 from .models import CheckoutLineItem
 
+
 @receiver(post_save, sender=CheckoutLineItem)
 def update_on_save(sender, instance, created, **kwargs):
     """ Update order totals on lineitem save/create action """
     instance.order.update_total()
- 
+
+
 @receiver(post_delete, sender=CheckoutLineItem)
 def update_on_delete(sender, instance, **kwargs):
     """ Update order totals on lineitem delete action """
