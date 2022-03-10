@@ -15,4 +15,16 @@ class Address(models.Model):
     phone_number = models.CharField(max_length=12)
 
     def __str__(self):
-            return self.street_name1 + ' ' + self.street_name2
+        return self.street_name1 + ' ' + self.street_name2
+
+class HeroHeader(models.Model):
+    hero_header = models.CharField(max_length=254)
+
+    def __str__(self):
+        return self.hero_header
+
+class HeroText(models.Model):
+    hero_text = models.TextField(max_length=1024)
+
+    def __str__(self):
+        return self.hero_text

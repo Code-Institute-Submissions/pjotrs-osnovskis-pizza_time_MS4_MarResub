@@ -1,11 +1,12 @@
 <div class="row m-0">
     <div class="col-12 col-md-6 offset-md-1 text-center ">
         <h1 class="display-2 logo-font">PIZZA TIME</h1>
-        <h4 class="my-3">It's time for pizza!</h4>
-        <p>Who doesn’t love a pizza? Italy’s most popular export and the world’s favourite slice of hot and melty
-            heaven. From the ovens of Naples to the streets of New York to the delivery bikes of Just Eat, pizza is
-            the King Of The Takeaways. A crowd-pleasing, all-in-one, global sensation. Transformed by an
-            ever-growing choice of toppings to cater for ever-changing tastes.</p>
+        {% for header in hero_header %}
+            <h4 class="my-3">{{ header }}</h4>
+        {% endfor %}
+        {% for text in hero_text %}
+            <p> {{ text }}</p>
+        {% endfor %}
         <div>
             <h4>
                 <a href="{% url 'products' %}?category=pizza" class="order-now-btn">Order Now</a>
