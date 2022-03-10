@@ -37,7 +37,7 @@
 ### User Stories
 
 * Easily view the total amount of my purchases at any time
-    As a user I add product to order and can see total amount of my order by the baket icon
+    As a user I add product to order and can see total amount of my order by the basket icon
 
 
 ---
@@ -61,6 +61,14 @@ Desktop:
 
 ![Desktop](docs/img/lighthouse/desktop-home.png)
 
+
+### HTML Validation
+
+![HTML Validation Image](docs/img/testing/html-valid-home.png)
+
+* Removed `preload` attribute from font awesome link
+* Replaced `spaces` with `%20` in the address anchor tags
+* Placed `<footer>` inside `<body>`
 
 ---
 
@@ -102,6 +110,13 @@ Low Scores mainly due to large product images, decided to leave it to keep pictu
     On products page user can see how many likes product has, if authenticated - user can "Like" desired produce and increase it's popularity
 * Select size and quantity of a product I want to order
     In the products page, on every individual product user can select size and amend quantity of a desired product
+
+### HTML Validator
+
+![HTML Validation Image](docs/img/testing/html-valid-products.png)
+
+* Removed `readonly` attribute
+* Duplicate ID's are present because each product uses HTML template and duplicates it.
 
 ---
 
@@ -147,6 +162,10 @@ Desktop:
 
 Low Scores mainly due map as it contains heavy JS
 
+### HTML Validator
+
+* In map section removed duplicate `class` attribute.
+
 ---
 
 [Back to Top](#table-of-contents)
@@ -173,6 +192,11 @@ Desktop:
 ### User Stories
 * Contact Business in variety of ways
     Once user opens contact us page, they can see and submit a contact form, as well as phone number is provided.
+
+
+### HTML Validator
+
+* No errors found
 
 ---
 
@@ -214,6 +238,10 @@ Desktop:
 * Email confirmation after registering
     Email is sent to validate customers email
 
+### HTML Validator
+
+* Same issue as in [Product Management](#product-management), there is a div hanging in the mess after `Forgot Password` link.
+
 ---
 
 [Back to Top](#table-of-contents)
@@ -243,6 +271,13 @@ Desktop:
 * Edit/Update a product
 * Delete a product
     When authenticated as a superuser they gain access to product management, they can CRUD all products available in database.
+
+### HTML Validator
+
+![HTML Validation Image](docs/img/testing/html-valid-product-management.png)
+
+* I have checked all files for `Stray end tag div.` as error shows, but did not find any in files. Be the look of it, it might be a Django or `crispy form` bug.
+    * After further investigation, for some reason HTML Validator is seeing Allauth form, and there is a mess in the code, but in `page source code`, everything is fine.
 
 ---
 
@@ -278,6 +313,18 @@ Desktop:
 * Receive an email confirmation after checking out
     After checkout user receives an confirmation email with their order details
 
+
+### HTML Validator
+
+![HTML Validation Image](docs/img/testing/html-valid-checkout.png)
+
+* Showing Errors of products page for some reason. Tried to refresh and check source code via dev tools - did not find these errors.
+* Changed jQuery validate link to https.
+* Checkout success - No errors found
+
+### Update
+* Found issue with links not working: Toast's `message container` takes 100% width even tho actual toast is like 35% on desktop view. 
+
 ---
 
 [Back to Top](#table-of-contents)
@@ -308,6 +355,10 @@ Desktop:
 * Adjust the quantity of individual items in my order
     Once User has added product to an order, they can click on a Bascet icon and open their order. On My Order page customer can see all items to be ordered, amend their quantity or remove items from order.
 
+### HTML Validator
+
+* No errors found
+
 ---
 
 [Back to Top](#table-of-contents)
@@ -333,6 +384,12 @@ Desktop:
 ### User Stories
 * Personalized user profile
     Once user is logged in, the can access their profile page and see all orders, update delivery information.
+
+### HTML Validator
+
+![HTML Validation Image](docs/img/testing/html-valid-profile.png)
+
+* Again, strange behavior, showing `Stray end tag div` on line 220, but there is no div tags on that line according to page source in Chrome
 
 ---
 
@@ -366,6 +423,14 @@ Desktop:
 ## Conclusion
 
 Hero image seems to be fine on all sizes, products page in different categories looks good, responsiveness seems to be working everywhere as it should. All links across webapp are working as they should. Dome productivity drops here and there due to high product resolution images. In some cases there is heavy JS, will have to investigate.
+
+
+## Update
+
+![PEP8 Validator Image](docs/img/testing/testing-pep8.png)
+
+* PEP8 standard is now applied in all *.py files. Please see commit messages in the github.
+
 
 ---
 

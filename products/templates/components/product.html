@@ -8,7 +8,8 @@
                     {{ product.display_name|upper }}
                 </h4>
                 {% if request.user in product.likes.all %}
-                <form id="dislike_form" class="p-0 d-flex align-items-center" action="{% url 'remove_like' product.id %}" method="POST">
+                <form id="dislike_form" class="p-0 d-flex align-items-center"
+                    action="{% url 'remove_like' product.id %}" method="POST">
                     <p class="p-0 pe-2 m-0">{{ product.likes.count }} likes</p>
                     {% csrf_token %}
                     {% if request.user.is_authenticated %}
@@ -18,7 +19,8 @@
                     {% endif %}
                 </form>
                 {% else %}
-                <form id="like_form" class="p-0 d-flex align-items-center" action="{% url 'like_id' product.id %}" method="POST">
+                <form id="like_form" class="p-0 d-flex align-items-center" action="{% url 'like_id' product.id %}"
+                    method="POST">
                     <p class="p-0 pe-2 m-0">{{ product.likes.count }} likes</p>
                     {% csrf_token %}
                     {% if request.user.is_authenticated %}
@@ -96,7 +98,7 @@
                 </button>
             </div>
             <div class="product-price my-2">
-                <input type="hidden" id="{{ product.name }}" name="price" value="{{ product.price_s }}" readonly>
+                <input type="hidden" id="{{ product.name }}" name="price" value="{{ product.price_s }}">
                 <p id="size_{{ product.name }}">£{{ product.price_s }}</p>
             </div>
 

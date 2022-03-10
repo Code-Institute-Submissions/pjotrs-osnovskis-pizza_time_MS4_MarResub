@@ -266,8 +266,6 @@ https://www.sliderrevolution.com/resources/styling-radio-buttons/*/
 /* ================ =============== TOASTS =============== ================ */
 .message-container{
     z-index: 999999;
-    display: flex;
-    justify-content: end;
 }
 
 .item-toast-wrapper{

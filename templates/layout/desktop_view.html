@@ -9,7 +9,7 @@
             <div class="col-lg-12 text-center">
                 <i class="fas fa-map-marker-alt main-color"></i>
                 {% for a in address %}
-                <a href="http://maps.google.com/?q={{ a.street_name1 }}, {% if a.street_name2 %}{{ a.street_name2 }}, {% endif %}{{ a.city }}, {{ a.postcode }}" 
+                <a href="https://maps.google.com/?q={{ a.street_name1 }},%20{% if a.street_name2 %}{{ a.street_name2 }},%20{% endif %}{{ a.city }},%20{{ a.postcode }}" 
                    target="_blank" rel="noopener" class="text-black">
                     {{ a.street_name1 }},
                     {% if a.street_name2 %}
