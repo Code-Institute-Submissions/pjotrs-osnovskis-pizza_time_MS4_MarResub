@@ -280,6 +280,13 @@ https://www.sliderrevolution.com/resources/styling-radio-buttons/*/
     border-radius: 15px;
 }
 
+#hidden-p {
+    display: none; 
+}
+
+#submit-button[disabled]:hover + #hiddenDiv {
+    display: block;
+}
 
 /* ================ =============== ALLAUTH =============== ================ */
 .allauth-form-content{
