@@ -33,16 +33,14 @@
             </div>
         </div>
         <div class="card-body py-0">
-            <div class="row">
-                {% if request.user.is_superuser %}
-                <p class="p-0 m-0">(ID:{{ product.id }})</p>
-                {% endif %}
-            </div>
             {% if request.user.is_superuser %}
-            <a href="{% url 'edit_product' product.id %}">Edit</a>
-            <a class="text-danger" href="{% url 'delete_product' product.id %}">Delete</a>
+                <div class="row my-2">
+                    <div class="col-12 d-flex justify-content-center">
+                        <p class="p-0 m-0">(ID:{{ product.id }})</p>
+                        <a href="{% url 'edit_product' product.id %}" class="text-info ms-2"><strong>Edit</strong></a>
+                    </div>
+                </div>
             {% endif %}
-
             {% if product.toppings %}
             <div class="toppings-list my-1 p-0">
                 {% for topping in product.toppings.all|dictsort:"display_name" %}
