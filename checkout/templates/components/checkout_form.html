@@ -117,12 +117,12 @@ https://stackoverflow.com/questions/21636850/jquery-validation-plugin-typeerror-
             'LL22 9YT', 'LL22 9YX'
         ];
 
-        $('.checkout-submit-button').attr('disabled', 'true');
+        $('.checkout-submit-button').attr('disabled', true);
         $('input[id=id_postcode]').keyup(function () {
             if (postcode_list.indexOf($(this).val()) > -1) {
                 $('.checkout-submit-button').removeAttr("disabled");
             } else {
-                $('.checkout-submit-button').attr('disabled', 'true');
+                $('.checkout-submit-button').attr('disabled', true);
             }
         });
     });
