@@ -10,7 +10,7 @@
         </tr>
     </thead>
     <tbody>
-        {% for product in products %}
+        {% for product in products|dictsort:"id" %}
             <tr>
                 <td>{{ product.id }}</td>
                 <td>{{ product.display_name }}</td>
