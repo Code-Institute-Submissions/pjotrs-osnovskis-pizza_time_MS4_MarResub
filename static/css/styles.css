@@ -284,7 +284,7 @@ https://www.sliderrevolution.com/resources/styling-radio-buttons/*/
     display: none; 
 }
 
-#submit-button[disabled]:hover + #hiddenDiv {
+#submit-button[disabled="disabled"]:hover + #hiddenDiv {
     display: block;
 }
 
