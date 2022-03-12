@@ -1,5 +1,11 @@
 # **PizzaTime** Readme
 
+#IMPORTANT UPDATE - HEROKU DB MAINTENANCE
+
+![db-maint](docs/img/heroku-db-update.png)
+
+<br>
+
 ![Pizzatime mockup](docs/img/mockup.png)
 
 
